@@ -1,0 +1,51 @@
+.footer {
+  background-color: #06111b;
+  height: 150px;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-section {
+  margin-top: 20px;
+}
+
+.footer-section h4 {
+  margin-bottom: 18px;
+  font-family: Readex + pro, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 15px;
+  font-family: Readex + pro, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ea6ad;
+}
+
+.footer-section ul li a {
+  margin-bottom: 15px;
+  font-family: Readex Pro, sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+  color: #9ea6ad;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Target the ul directly */
+.footer-section:nth-child(3) ul {
+  margin-top: 30px; /* Adjust the margin as needed to match the position */
+}

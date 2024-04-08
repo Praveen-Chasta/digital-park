@@ -1,0 +1,46 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.container-next {
+  background-image: url("../../assets/girl.png");
+  background-size: cover;
+  background-position: top center;
+  height: 32vh;
+  display: flex;
+  justify-items: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.content-next {
+  color: #ffffffff;
+  line-height: 30px;
+  margin-top: 50px;
+  width: 400px;
+  margin-left: 20vw;
+}
+.content-next p {
+  font-size: 24px;
+  font-family: Readex Pro;
+}
+.content-next h1 {
+  font-size: 3.3em;
+  line-height: 80px;
+  margin-top: 8px;
+  margin-bottom: 1px;
+  margin-left: 5px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .content {
+    width: 80%;
+  }
+
+  .content h1 {
+    font-size: 2em;
+    line-height: 70px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+  }
+}

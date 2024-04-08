@@ -1,0 +1,283 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.hero1 {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  background-color: #00a4d8;
+}
+
+.mhead {
+  margin-top: 18px;
+  font-size: 18px;
+  font-family: Inter, sans-serif;
+  /* font-weight: 100; */
+}
+
+.main1 {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffff;
+  margin-top: 20px;
+  font-size: 20px;
+  font-family: Inter, sans-serif;
+  font-weight: 300;
+}
+
+.row-quiz-search {
+  display: flex;
+  margin-top: 20px;
+  width: 50%;
+  justify-content: space-between;
+}
+.dropdown-container {
+  position: relative;
+  width: 40%;
+  left: -50px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 12px 2px 12px 38px;
+  color: #a0a7aa;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+select:focus {
+  outline: none;
+  border: none;
+}
+.dropdown-container::after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  right: 20px;
+  transform: translateY(-50%) rotate(135deg);
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #a0a7aa;
+  border-right: 2px solid#a0a7aa;
+}
+
+/* Magnify icon */
+.dropdown-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10px; /* Adjust left position for icon */
+  /* right: -10px; */
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url("../../assets/magnify.png");
+  background-size: cover;
+}
+
+.search-bar-quiz-input {
+  background: #fff;
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  border: none;
+  border-color: transparent;
+  padding: 10px 50px 10px 38px;
+  background: url("../../assets/magnify.png") no-repeat 10px center;
+  background-size: 20px;
+  background-color: white;
+  position: absolute;
+  left: 42%;
+  margin-left: 1%;
+  width: 260px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.search-bar-btn {
+  background: #ff4955;
+  color: #fff;
+  border: none;
+  padding: 12px 38px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  left: 70%;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: Inter, sans-serif;
+}
+
+.icon-row1 {
+  display: grid;
+  margin-top: 20px;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  margin-top: 4%;
+}
+
+.icon34 {
+  display: flex;
+  margin-left: 20px;
+}
+
+.icon34 span {
+  margin-left: 10px;
+  font-size: 11px;
+  font-weight: 200;
+  font-family: Inter, sans-serif;
+}
+
+.icon34 img {
+  width: 22px;
+  height: 22px;
+  background-color: #2cbbe8;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+@media (min-width: 760px) and (max-width: 1024px) {
+  .mhead {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .dropdown-container {
+    position: relative;
+    width: 50%;
+    left: -80px;
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  select {
+    padding: 12px 2px 8px 38px;
+  }
+  .dropdown-container::after {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Magnify icon */
+  .dropdown-container::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-bar-quiz-input {
+    background: #fff;
+    font-size: 12px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+
+    padding: 7px 40px 7px 38px;
+    background: url("../../assets/magnify.png") no-repeat 10px center;
+    background-size: 16px;
+    background-color: white;
+
+    width: 150px;
+  }
+
+  .search-bar-btn {
+    padding: 10px 25px;
+    border-radius: 5px;
+    left: 75%;
+  }
+
+  .icon-row1 {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    margin-top: 4%;
+  }
+
+  .icon34 {
+    display: flex;
+    margin-left: 20px;
+  }
+
+  .icon34 span {
+    margin-left: 10px;
+    font-size: 9px;
+    font-weight: 100;
+    font-family: Inter, sans-serif;
+    margin-top: 4px;
+  }
+
+  .icon34 img {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1080px) {
+  .dropdown-container {
+    position: relative;
+    width: 50%;
+    left: -80px;
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  select {
+    padding: 17px 2px 8px 38px;
+  }
+  .dropdown-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Adjust left position for icon */
+    /* right: -10px; */
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url("../../assets/magnify.png");
+    background-size: cover;
+  }
+
+  .search-bar-quiz-input {
+    background: #fff;
+    font-size: 12px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    border: none;
+    border-color: transparent;
+    padding: 10px 50px 10px 38px;
+    background: url("../../assets/magnify.png") no-repeat 10px center;
+    background-size: 20px;
+    background-color: white;
+    position: absolute;
+    left: 42%;
+    margin-left: 1%;
+    width: 200px;
+    height: 20px;
+    border-radius: 5px;
+  }
+
+  .search-bar-btn {
+    background: #ff4955;
+    color: #fff;
+    border: none;
+    padding: 12px 38px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    left: 74%;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: Inter, sans-serif;
+  }
+}

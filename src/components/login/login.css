@@ -1,0 +1,421 @@
+.log-cont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #31303052;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.login-content {
+  position: relative;
+  background-color: white;
+  width: 25%;
+  height: 60%;
+  padding: 18px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  border: none;
+  background-color: #ea366e;
+  color: #ffffff;
+  top: 10px;
+  right: 10px;
+  padding: 0px 7px;
+  padding-bottom: 2px;
+  border-radius: 100%;
+}
+
+.btn-text-close {
+  font-weight: 600;
+}
+
+.close-button:hover {
+  color: rgb(214, 201, 201);
+}
+
+.login-content p {
+  color: #686868;
+  margin-top: 10%;
+  font-family: Readex Pro, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.mob p {
+  text-align: left;
+  margin-left: 15px;
+  margin-top: 40px;
+  font-family: Readex Pro, sans-serif;
+  font-size: 12px;
+  color: #969494;
+}
+
+.phone-input {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.number-prefix {
+  border: 1px solid #9ea6ad;
+  padding: 10px;
+  padding-top: 10px;
+  border-right: none;
+  margin-left: 12px;
+}
+
+.phone-input input {
+  padding: 10px;
+  width: 72%;
+  /* margin-left: 5px; */
+  border: 1px solid #9ea6ad;
+  border-left: none;
+  outline: none;
+}
+
+.submit-button {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 92%;
+  cursor: pointer;
+  margin-top: 7%;
+}
+
+.signup-link {
+  margin-top: 10px;
+}
+
+.signup-link a {
+  color: red;
+  text-decoration: none;
+  font-family: Readex Pro, sans-serif;
+}
+
+.signup-link a:hover {
+  color: red;
+}
+
+.enternum {
+  text-align: left;
+  margin-top: 40px;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #686868;
+}
+
+.countdown-timer {
+  font-family: Readex Pro, sans-serif;
+  font-size: 12px;
+  color: #686868;
+}
+
+.countdown-timer p {
+  color: #686868; /* Color for the rest of the text */
+}
+
+.countdown-timer .countdown-number {
+  color: #ff4955; /* Color for the countdown number */
+}
+.countdown-timer button {
+  background-color: white ;
+  color: black;
+  border: 1px solid black;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.countdown-timer button:hover {
+  background-color: #787373; /* Button background color on hover */
+}
+.continue-btn {
+  background-color: #ff4955;
+  color: white;
+
+  font-size: 14px;
+  padding: 0px 15px;
+  border: none;
+  width: 92%;
+  cursor: pointer;
+}
+
+.otp-container {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid #000000; */
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  height: 70%;
+}
+
+.text-subheading {
+  text-align: center;
+}
+
+.otp-boxes-container {
+  display: flex;
+  justify-content: sapce;
+  margin-top: 20px;
+}
+
+.otp-box {
+  margin: 0 5px;
+}
+
+.otp-input {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px; /* Adjust the gap between input boxes */
+  /* background-color: #ff4955;  */
+}
+
+.otp-input input {
+  width: 40px; /* Adjust the width of each input box */
+  height: 40px;
+  margin: 10px; /* Adjust the margin between input boxes */
+  text-align: center;
+}
+
+.countdown-timer {
+  margin-top: 20px;
+}
+
+.continue-btn {
+  margin-top: 20px;
+  justify-self: end;
+}
+.continue-btn button {
+  background-color: #ff4955;
+  color: #ffffff;
+  padding: 10px 30px;
+  border: none;
+}
+.verification-success img {
+  width: 100px;
+  height: 100px;
+}
+@media (min-width: 760px) and (max-width: 1024px) {
+  .login-content {
+    width: 30%;
+    height: 50%;
+  }
+
+  .close-button {
+    padding: 0px 5px;
+  }
+
+  .login-logo {
+    height: 20%;
+    width: 80%;
+  }
+  .login-content p {
+    margin-top: 10%;
+    font-size: 10px;
+  }
+
+  .mob p {
+    font-size: 10px;
+  }
+
+  .phone-input {
+    margin-top: 4px;
+  }
+
+  .number-prefix {
+    border: 1px solid #9ea6ad;
+    padding: 10px;
+    padding-top: 10px;
+    border-right: none;
+    margin-left: 12px;
+  }
+
+  .phone-input input {
+    width: 60%;
+  }
+
+  .submit-button {
+    padding: 6px;
+    width: 90%;
+    margin-top: 7%;
+  }
+
+  .signup-link {
+    margin-top: 20%;
+  }
+
+  .signup-link a {
+    color: red;
+    text-decoration: none;
+    font-family: Readex Pro, sans-serif;
+  }
+
+  .signup-link a:hover {
+    color: red;
+  }
+
+  .otp-container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 70%;
+  }
+
+  .text-subheading {
+    text-align: center;
+    font-family: Readex Pro, sans-serif;
+    font-size: 12px;
+  }
+
+  .otp-boxes-container {
+    display: flex;
+    justify-content: sapce;
+    margin-top: 12px;
+  }
+
+  .otp-box {
+    margin: 0 5px;
+  }
+
+  .otp-input {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+  }
+  .otp-input input {
+    width: 20px;
+    height: 30px;
+    /* margin: 20px; */
+  }
+
+  .continue-btn {
+    margin-top: 20px;
+    justify-self: end;
+  }
+  .continue-btn button {
+    background-color: #ff4955;
+    color: #ffffff;
+    padding: 10px 30px;
+    border: none;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1080px) {
+  .login-content {
+    width: 30%;
+    height: 50%;
+  }
+
+  .close-button {
+    padding: 0px 5px;
+  }
+
+  .login-logo {
+    height: 20%;
+    width: 80%;
+  }
+  .login-content p {
+    margin-top: 6%;
+    font-size: 14px;
+  }
+
+  .mob p {
+    font-size: 12px;
+    margin-top: 44px;
+  }
+
+  .phone-input {
+    margin-top: 5px;
+  }
+
+  .number-prefix {
+    border: 1px solid #9ea6ad;
+    padding: 10px;
+    padding-top: 10px;
+    border-right: none;
+    margin-left: 12px;
+  }
+
+  .phone-input input {
+    width: 68%;
+  }
+
+  .submit-button {
+    padding: 8px;
+    width: 90%;
+    margin-top: 10%;
+  }
+
+  .signup-link {
+    margin-top: 10px;
+  }
+
+  .otp-container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 50%;
+  }
+
+  .text-subheading {
+    text-align: center;
+    font-family: Readex Pro, sans-serif;
+    font-size: 12px;
+  }
+
+  .otp-boxes-container {
+    display: flex;
+    justify-content: sapce;
+    margin-top: 12px;
+  }
+
+  .otp-box {
+    margin: 0 5px;
+  }
+
+  .otp-input {
+    display: grid;
+    grid-template-columns: repeat(4, 50px);
+    grid-gap: 20px 10px;
+    /* background-color: #ff4955; */
+  }
+  .otp-input input {
+    width: 30px;
+    height: 30px;
+    margin: 20px;
+  }
+  .countdown-timer {
+    margin-top: 10px;
+  }
+
+  .continue-btn {
+    margin-top: 20px;
+    justify-self: end;
+  }
+  .continue-btn button {
+    background-color: #ff4955;
+    color: #ffffff;
+    padding: 10px 30px;
+    border: none;
+  }
+}

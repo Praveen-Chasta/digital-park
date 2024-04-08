@@ -1,0 +1,203 @@
+.subject-quiz {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 90vh;
+  text-align: center;
+  justify-content: center;
+}
+
+.wrapper-quiz-box {
+  margin-right: 4em;
+  width: 27vw;
+}
+
+.wrapper-quiz-box2 {
+  width: 27vw;
+}
+
+.heading-row,
+.heading-row2 {
+  width: 100%;
+  color: #00a4d8;
+  margin-top: 2em;
+  font-family: Readex Pro;
+  font-size: 24px;
+  text-align: left;
+}
+
+.radio-row,
+.radio-row2 {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 14px;
+  text-align: left;
+}
+
+.radio-row p {
+  margin-bottom: 10px;
+  color: #686868;
+}
+
+.radio-row2 p {
+  margin-bottom: 10px;
+  color: #686868;
+}
+
+.checkboxes,
+.checkboxes2 {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.checkbox input[type="radio"] {
+  transform: scale(1);
+  margin-right: 5px;
+  /* Ensure radio button is visible */
+  opacity: 1;
+}
+
+.checkbox {
+  display: flex;
+  margin-right: 10px;
+  font-size: 8px;
+  font-family: Readex Pro, sans-serif;
+  margin-bottom: 20px;
+}
+
+.checkbox label {
+  font-size: 10px;
+}
+
+.accordion-item {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.accordion-button {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.accordion-title-container,
+.accordion-btn-icon {
+  width: max-content;
+  color: #ffffff;
+}
+.accordion-title-container {
+  font-weight: 600;
+}
+.accordion-content {
+  display: flex;
+  padding: 10px;
+  position: relative;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.accordion-item.open .accordion-content {
+  display: block;
+  max-height: 500px;
+  z-index: 1;
+}
+
+.radio-option {
+  display: flex;
+  margin-bottom: 20px;
+}
+.radio-options label {
+  margin-left: 10px;
+  align-self: center;
+}
+
+.accordion-item.open .accordion-button img {
+  transform: rotate(360deg);
+  width: 14px;
+  height: 10px;
+}
+
+.accordion-content button {
+  background-color: #00a4d8;
+  color: white;
+  border: none;
+  padding: 10px 0px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 8px;
+  width: 95%;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+}
+
+@media (min-width: 760px) and (max-width: 1024px) {
+  .checkbox input[type="radio"] {
+    transform: scale(1);
+    margin-right: 5px;
+    opacity: 1;
+  }
+
+  .checkbox {
+    display: flex;
+    margin-right: 10px;
+    font-size: 8px;
+    font-family: Readex Pro, sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .checkbox label {
+    font-size: 8px;
+  }
+
+  .subject-quiz {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 110vh;
+    text-align: center;
+    justify-content: center;
+  }
+  .support-section {
+    width: 90%; /* Adjusted width */
+    margin: 0 auto; /* Centering the section */
+  }
+
+  .support-card {
+    width: 30%; /* Adjusted width for each card */
+    margin: 0 2%; /* Adjusted margin between cards */
+  }
+
+  .support-card .name {
+    margin-top: 20%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1080px) {
+  .support-section {
+    width: 90%; /* Adjusted width */
+    margin: 0 auto; /* Centering the section */
+  }
+
+  .support-card {
+    width: 22%; /* Adjusted width for each card */
+    margin: 0 1%; /* Adjusted margin between cards */
+  }
+
+  .support-card .name {
+    margin-top: 20%; /* Adjusted margin-top for name */
+  }
+}

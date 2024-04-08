@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.container {
+  background-image: url("../../assets/girl.png");
+  background-size: cover;
+  background-position: top center;
+  height: 65vh; /* Adjust height according to your preference */
+  display: flex;
+  justify-items: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.content {
+  color: #ffffffff;
+  line-height: 30px;
+  margin-top: 90px;
+  width: 400px;
+  margin-left: 17vw;
+}
+.content p:nth-child(1) {
+  font-size: 1.5em;
+
+  line-height: 20px;
+  font-family: Readex Pro, sans-serif;
+  margin-left: 2px;
+}
+.content h1 {
+  font-size: 3em;
+  line-height: 80px;
+  margin-top: 2px;
+  margin-bottom: 1px;
+}
+.content p:nth-child(3) {
+  color: rgb(55, 55, 55);
+  font-weight: 400;
+  line-height: 20px;
+}
+.btnClass {
+  display: grid;
+  grid-template-columns: 200px 140px;
+  column-gap: 20px;
+}
+.button {
+  margin-top: 20px; /* Adjust margin as needed */
+  padding: 9px 8px;
+  font-size: 16px;
+  background-color: #ff4955;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.btnClass button:nth-child(2) {
+  background-color: transparent;
+  border: 1px solid #000000;
+  color: #000000;
+  padding: 8px 3px;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .content {
+    width: 80%;
+  }
+  .content p:nth-child(1) {
+    font-size: 1.2em;
+    line-height: 0px;
+  }
+  .content h1 {
+    font-size: 2em;
+    line-height: 70px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+  }
+  .content p:nth-child(3) {
+    color: rgb(55, 55, 55);
+    font-weight: 400;
+    line-height: 20px;
+    font-size: 14px;
+  }
+  .btnClass {
+    display: grid;
+    grid-template-columns: 150px 120px;
+    column-gap: 20px;
+  }
+  .button {
+    margin-top: 28px; /* Adjust margin as needed */
+    padding: 9px 8px;
+    font-size: 12px;
+    background-color: #ff4955;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .btnClass button:nth-child(2) {
+    background-color: transparent;
+    border: 1px solid #000000;
+    color: #000000;
+    padding: 8px 3px;
+    font-weight: 600;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
+}

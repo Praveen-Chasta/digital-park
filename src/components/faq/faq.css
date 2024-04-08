@@ -1,0 +1,58 @@
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.faq-heading {
+  text-align: left;
+  font-family: Inter, sans-serif;
+  color: #00a4d8;
+  font-size: 20px;
+  margin-left: 20%;
+  margin-top: 5%;
+  display: flex;
+}
+
+.accordions {
+  width: 30%;
+  text-align: left;
+  margin-left: 50%;
+  margin-top: -5%;
+}
+
+.accordions .MuiAccordion-root {
+  margin-left: auto;
+  margin-bottom: 0;
+  box-shadow: none !important;
+}
+.accordions .MuiAccordionSummary-root {
+  justify-content: flex-end;
+}
+
+.accordions .MuiAccordionDetails-root {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+}
+
+.accordions .MuiSvgIcon-root {
+  color: #a3b2cf;
+  margin-right: 0px;
+  width: 15px;
+  height: 15px;
+}
+
+.accordions .MuiAccordionDetails-root .MuiTypography-root {
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.accordions .MuiAccordion-root:before {
+  display: none;
+}

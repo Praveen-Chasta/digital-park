@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.hero-board {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    197.73deg,
+    #c8f2f7 16.59%,
+    #ffffff 47.03%,
+    #ffffff 79.53%
+  );
+}
+.notice-board-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.top-board-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+.top-board-container p {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff4955;
+}
+.top-board-container button {
+  background-color: #00a4d8;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+}
+.top-board-container button:hover {
+  background-color: #0281a8;
+}
+.subheading-para-board {
+  font-size: 12px;
+  font-weight: 600;
+  color: #545454;
+  margin-top: 10px;
+  
+}
+.tablet-paragraph {
+  display: none;
+}
+.api-slider {
+  margin: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  transition: transform 0.5s ease-in-out;
+}
+
+.notice-box-container,
+.notice-box-container2 {
+  display: flex;
+  width: 48%;
+  height: 80%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.notice-box-container {
+  background-color: #ebfaff;
+}
+
+.notice-box-container2 {
+  background-color: #fff7dd;
+}
+
+.dateBox,
+.dateBox2 {
+  text-align: center;
+  padding: 20px;
+  font-family: Readex Pro, sans-serif;
+  font-size: 18px;
+  margin: 10px 0px 10px 10px;
+  border: transparent;
+  border-radius: 5px;
+}
+
+.dateBox {
+  background-color: #c7effc;
+}
+
+.dateBox2 {
+  background-color: #ffefb9;
+}
+
+.noticeBox,
+.noticeBox2 {
+  font-size: 12px;
+  margin: 20px;
+  border-radius: 5px;
+}
+.second-box {
+  background-color: #fff7dd;
+}
+.different-color {
+  background-color: #ffefb9;
+}
+@media only screen and (min-width: 760px) and (max-width: 1024px) {
+  .hero-board {
+    height: 70vh; /* Adjusted height for tablet and laptop */
+  }
+  .top-board-container p {
+    font-size: 24px;
+  }
+  .top-board-container button {
+    font-size: 12px;
+    padding: 8px 20px;
+  }
+  .notice-board-container {
+    width: 80%; /* Adjusted width for tablet and laptop */
+  }
+  /* .subheading-para-board {
+    display: none;
+  } */
+  .api-slider {
+    margin: 20px 30px; /* Adjusted margin for tablet and laptop */
+  }
+
+  .notice-box-container,
+  .notice-box-container2 {
+    width: 48%; /* Adjusted width for tablet and laptop */
+  }
+}
+@media only screen and (min-width: 760px) and (max-width: 1024px) {
+  .tablet-paragraph {
+    font-size: 12px;
+  font-weight: 600;
+  color: #545454;
+  display: block;
+  }
+}
