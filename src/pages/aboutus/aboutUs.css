@@ -1,0 +1,150 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .review-section {
+    width: 100%;
+    height: 70vh;
+    background-color: #ebfaff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .review-header h2 {
+    font-size: 28px;
+    color: #00a4d8;
+    text-align: center;
+  }
+  
+  .review-container {
+    width: 60%;
+    overflow: hidden; /* Ensure content doesn't overflow */
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .item {
+    display: flex;
+    flex: 0 0 auto;
+    max-width: 100%;
+    transition: transform 0.9s ease-in-out; /* Add transition for smooth sliding */
+  }
+  
+  .content-review {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 40px;
+  }
+  .main-content-review {
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #545454;
+    display: flex;
+  }
+  .reviewer-name {
+    font-family: Readex Pro;
+    font-size: 16px;
+    color: #000000;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+  
+  .profile-image-review img {
+    margin-top: 40px;
+    height: 200px;
+    width: 200px;
+  }
+  
+  .review-carousel-btn {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    gap: 10px;
+  }
+  
+  .btn {
+    background-color: #ff4955;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    /* margin: 0 0.1rem; */
+    transition: width 0.3s;
+  }
+  
+  .btn.expand {
+    width: 1.5rem; /* Increase width when active */
+  }
+  .rating-review {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  @media screen and (min-width: 760px) {
+    .review-container {
+      width: 80%; /* Adjust width of the review container */
+    }
+  
+    .main-content-review {
+      font-size: 16px; /* Increase font size of main content */
+    }
+  
+    .reviewer-name {
+      font-size: 18px; /* Increase font size of reviewer name */
+      margin-top: 15px; /* Adjust top margin */
+    }
+  
+    .profile-image-review img {
+      height: 250px; /* Increase height of profile image */
+      width: 250px; /* Increase width of profile image */
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .review-container {
+      width: 70%; /* Adjust width of the review container */
+    }
+  
+    .main-content-review {
+      font-size: 18px; /* Increase font size of main content */
+    }
+  
+    .reviewer-name {
+      font-size: 20px; /* Increase font size of reviewer name */
+      margin-top: 10px; /* Adjust top margin */
+    }
+  
+    .profile-image-review img {
+      height: 280px; /* Increase height of profile image */
+      width: 280px; /* Increase width of profile image */
+    }
+  }
+  
+  @media screen and (min-width: 1440px) {
+    .review-container {
+      width: 60%; /* Adjust width of the review container */
+    }
+  
+    .main-content-review {
+      font-size: 18px; /* Increase font size of main content */
+    }
+  
+    .reviewer-name {
+      font-size: 22px; /* Increase font size of reviewer name */
+      margin-top: 5px; /* Adjust top margin */
+    }
+  
+    .profile-image-review img {
+      height: 300px; /* Increase height of profile image */
+      width: 300px; /* Increase width of profile image */
+    }
+  }
+  

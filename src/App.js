@@ -7,6 +7,7 @@ import QuizPage from "./pages/quiz-page/index";
 import Nextpage from "./pages/nextpage/nextpage";
 import '@fortawesome/fontawesome-free/css/all.css';
 import Login from "./components/login/login";
+import AboutUs from "./pages/aboutus/aboutUs";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -21,9 +22,10 @@ function App() {
         <Navbar onLoginClick={() => setShowLogin(true)} />{" "}
         {/* Pass onLoginClick function */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/pages/quiz-page" element={<QuizPage />} />
-          <Route path="/pages/nextpage" element={<Nextpage />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/quiz-page" element={<QuizPage />} />
+          <Route path="/nextpage" element={<Nextpage />} />
+          <Route path="/about" element={<AboutUs />} />
         </Routes>
       </Router>
       {showLogin && <Login onClose={handleLoginClose} />}{" "}
