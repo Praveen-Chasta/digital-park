@@ -1,7 +1,14 @@
 import React from "react";
+import { useState } from "react";
 import "./assessment.css";
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Readex+Pro:wght@100&display=swap" rel="stylesheet"></link>;
 const Assessment = () => {
+
+  const [showVideo, setShowVideo] = useState(false);
+
+  const toggleVideo = () => {
+    setShowVideo(!showVideo);
+  };
   return (
     <div>
       <div className="container">
@@ -14,7 +21,15 @@ const Assessment = () => {
           </p>
           <div className="btnClass">
             <button className="button">Sign Up For Free</button>
-            <button className="button">Watch Video</button>
+            <button className="button" onClick={toggleVideo}>
+              {showVideo ? 'Hide Video' : 'Watch Video'}
+            </button>
+            {showVideo && (
+              <video controls width="640" height="360">
+                <source src="/video/video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
         </div>
       </div>

@@ -5,11 +5,13 @@ import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ onLoginClick }) => {
-  return ( 
+  return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-brand">
-          <img src={Logo} alt="Logo" className="logo" />
+          <Link to="/">
+            <img src={Logo} alt="Logo" className="logo" />
+          </Link>
         </div>
         <div className="navbar-menu">
           <ul>

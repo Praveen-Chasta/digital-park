@@ -22,7 +22,7 @@ const Home = () => {
       <Carousel />
       <Quiz />
       <Quizcard />
-      <Preloaded />
+      {/* <Preloaded /> */}
       <Evaluation />
       <Exsystem />
       <Organisation />
