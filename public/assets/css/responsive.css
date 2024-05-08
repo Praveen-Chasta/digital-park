@@ -1,0 +1,168 @@
+@media (max-width: 1400px) {
+  .header__wrapper .line__one, .header__wrapper .line__two {
+    max-width: 12rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header__wrapper .line__one, .header__wrapper .line__two {
+    max-width: 12rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .header__wrapper .text-white {
+    color: var(--dark) !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .preloaded__quizze__wrapper .info__card .icon__box {
+    width: 8rem;
+    height: 8rem;
+  }
+  .preloaded__quizze__wrapper .info__card .icon__box img {
+    width: 6rem;
+    height: auto;
+  }
+}
+
+@media (max-width: 575px) {
+  .divider__line::after {
+    width: 30%;
+    height: 1px;
+    top: 100%;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+@media (max-width: 992px) {
+  .student__wraper .top__right__line {
+    max-width: 7rem;
+  }
+  .student__wraper .top__img {
+    max-width: 4rem;
+  }
+  .student__wraper .right__img {
+    max-height: 3rem;
+  }
+  .student__wraper .img__box {
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+  .student__wraper .img__box .thumbnail {
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+  .student__wraper .ratings {
+    margin-left: auto;
+    margin-right: auto;
+  }
+	
+.about-banner {
+    padding: 40px 0;
+}	
+.about-banner h1 {
+    font-size: 30px;
+}	
+.about-banner p {
+    display: none;
+}
+.aboutpage {
+    padding: 40px 0;
+}	
+.aboutpage h3 {
+    font-size: 24px;
+}	
+.aboutpage p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 26px;
+}
+.aboutpage li {
+    font-size: 14px;
+    padding: 5px 0 5px 23px;
+    line-height: 22px;
+}	
+.aboutonlineexam {
+    padding: 35px 0;
+}	
+.aboutonlineexam h2 {
+    font-size: 20px;
+    margin-bottom: 25px;
+}	
+.aboutonlineexam .container {
+    max-width: calc(100% - 6px);
+}
+.aboutonlineexam .card-body {
+    padding: 20px;
+    min-height: inherit;
+    margin-bottom: 25px;
+}	
+.aboutonlineexam .card-body h3 {
+    font-size: 18px;
+    margin: 20px 0;
+    line-height: 24px;
+}
+.aboutonlineexam .card-body p {
+    font-size: 14px;
+}	
+.coursecard {
+    border-radius: 10px;
+    padding: 45px 25px 20px;
+    text-align: center;
+}	
+.coursecard h3 span {
+    font-size: 16px;
+}	
+.coursecard h3 {
+    font-size: 28px;
+}	
+.coursecard a {
+    position: inherit;
+    right: inherit;
+    bottom: inherit;
+    width: 100%;
+    margin-top: 15px;
+}
+.inner-banner {
+    padding: 30px 0;
+}	
+.inner-banner h1 {
+    font-size: 32px;
+}	
+.classPage {
+    padding: 35px 0;
+}	
+.SelectLevel li {
+    width: 50%;
+}
+.classPage h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}	
+.classPage h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}	
+	
+}
+@media (max-width: 575px) {
+  .student__wraper .img__box {
+    width: 9rem;
+    height: 9rem;
+  }
+  .student__wraper .img__box .thumbnail {
+    width: 9rem;
+    height: 9rem;
+  }
+  .student__wraper .img__box .img__wraper {
+    width: 3rem;
+    height: 3rem;
+    bottom: 3rem;
+    left: -0.5rem;
+  }
+}
+

@@ -1,0 +1,255 @@
+/*====================================================== Home Page Styles =========================================================================================*/
+.header__wrapper {
+  min-height: 600px;
+}
+.header__wrapper video{
+	width: 100%; 
+	height: auto;
+}
+.header__wrapper .gradient__overlay {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.0392156863), rgba(221, 221, 221, 0.7294117647));
+}
+.notice__card {
+  background-color: var(--card-bg);
+  color: #716F6F;
+  padding: 1rem 0.875rem;
+}
+.notice__card .date {
+  background-color: var(--date-bg);
+  width: 6.25rem;
+  height: 6.25rem;
+}
+.notice__card:hover {
+  background-color: var(--brand-light-bg);
+  color: var(--dark);
+}
+
+.owl-dots {
+  text-align: center;
+}
+.owl-dots .owl-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50% !important;
+  background-color: var(--brand) !important;
+  margin: 0 3px;
+}
+.owl-dots .owl-dot.active {
+  width: 60px;
+  border-radius: 4px !important;
+}
+
+.quizzes__form .form-control, .quizzes__form .form-select {
+  height: 57px;
+  padding: 0.5rem 1rem 0.5rem 3rem;
+  background-repeat: no-repeat;
+  background-size: 1.2rem;
+}
+.quizzes__form .form-control {
+  background-position: center left 0.75rem;
+}
+.quizzes__form .form-select {
+  background-position: center right 0.75rem;
+}
+
+.lh-1_25 {
+  line-height: 1.25;
+}
+
+.quizze__info__card .icon {
+  width: 3.4rem;
+  height: 3.4rem;
+  background-color: #2CBBE8;
+}
+.quizze__info__card .icon img {
+  width: 2rem;
+  height: auto;
+}
+
+.assesment__card {
+  border-color: #EAEEF2;
+}
+.assesment__card .btn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.assesment__card .check__list {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.check__list li {
+  padding-left: 1.75rem;
+  position: relative;
+}
+.check__list li::before {
+  content: "";
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAyMSAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5LjIzMTQgMC41NzA4MDJMMTAuOTY3IDguODM1MTdMMTAuMTA0NyA3Ljk3Mjg2TDE2LjM1NTYgMS43MjIwNkwxNC43NzMxIDAuMTM5NjQ4TDguNTIyMyA2LjM5MDQ5TDYuMDQwNjMgMy45MDg4MUw0LjQ1ODIxIDUuNDkxMjNMNi45Mzk4OSA3Ljk3MjlMNi4wNzc2MiA4LjgzNTE3TDEuNTgyNDIgNC4zNEwwIDUuOTIyNDJMNi4wNzc1OCAxMkw4LjUyMjMgOS41NTUzMkwxMC45NjcgMTJMMjAuODEzOCAyLjE1MzI2TDE5LjIzMTQgMC41NzA4MDJaIiBmaWxsPSIjNjg2ODY4Ii8+Cjwvc3ZnPgo=) no-repeat center center/1rem;
+  position: absolute;
+  top: 0.25rem;
+  left: 0%;
+}
+
+.assesment__gradient {
+  bottom: -48%;
+  left: -22%;
+}
+
+.preloaded__quizze__wrapper {
+  background-color: #EBFAFF;
+}
+.preloaded__quizze__wrapper .info__card .icon__box {
+  width: 10.625rem;
+  height: 10.625rem;
+}
+.preloaded__quizze__wrapper .info__card .icon__box img {
+  width: 9rem;
+  height: auto;
+}
+.preloaded__quizze__wrapper .info__card a {
+  color: #636363;
+}
+.preloaded__quizze__wrapper .info__card a:hover {
+  color: var(--brand);
+}
+.evaluation__card {
+  border: 1px solid #EAEEF2;
+  padding: 0.625rem;
+}
+.evaluation__card .title a {
+  color: var(--blue);
+}
+.evaluation__card .title a:hover, .evaluation__card .title a:focus {
+  color: var(--brand);
+}
+.evaluation__card .description {
+  color: #686868;
+  min-height: 5rem;
+}
+.evaluation__card .btn-outline-primary:hover svg path, .evaluation__card .btn-outline-primary:focus svg path, .evaluation__card .btn-outline-primary:active svg path {
+  fill: var(--white);
+}
+
+.revolutionary__wrapper {
+  background-color: #FFF1C3;
+}
+.revolutionary__wrapper .info__card .icon__box {
+  width: 5.4375rem;
+  height: 5.4375rem;
+}
+.revolutionary__wrapper .info__card .icon__box img {
+  width: auto;
+  height: 2.75rem;
+}
+
+.divider__line::after {
+  content: "";
+  width: 1px;
+  height: 80%;
+  background: var(--dark);
+  opacity: 0.2;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%);
+}
+.student__wraper {
+  background-color: #EBFAFF;
+}
+.student__wraper .right__img {
+  padding-right: 3% !important;
+}
+.student__wraper .top__img {
+  padding-top: 3% !important;
+}
+.student__wraper .img__box {
+  width: 17.5rem;
+  height: 17.5rem;
+}
+.student__wraper .img__box .thumbnail {
+  width: 17.5rem;
+  height: 17.5rem;
+}
+.student__wraper .img__box .img__wraper {
+  background: #FFC9C9;
+  width: 4.5rem;
+  height: 4.5rem;
+  bottom: 7rem;
+  left: -1rem;
+}
+
+
+/* About us page */
+.about-banner{ width: 100%; padding: 100px 0; background: url("../images/about-banner-bg.png") center top no-repeat; background-size: cover;}
+.about-banner h1{ color: #fff; font-size: 52px; font-weight: 600; margin-bottom: 15px;}
+.about-banner p{ font-size: 18px; color: rgb(255 255 255 / 80%);}
+.aboutpage{ width: 100%; padding: 110px 0; position: relative; overflow: hidden; background: url("../images/shadow.png") left -150px no-repeat; background-size: cover;}
+.aboutpage h2{ font-size: 22px; color: #000; margin-bottom: 10px;}
+.aboutpage h3{ font-size: 42px; color: #FF4955; margin-bottom: 20px; font-weight: 600;}
+.aboutpage p{ font-size: 16px; color: #545454; margin-bottom: 15px; line-height: 32px;}
+.aboutpage li{ font-size: 16px; color: #545454; padding: 7px 0 7px 25px; line-height: 28px; background:  url(../images/check.svg) left 15px no-repeat; background-size: 13px;}
+
+.courseToday{ width: 100%; padding: 85px 0;}
+.coursecard{ background:#93E9C1 url(../images/todaybg.png)left top no-repeat; border-radius: 20px; padding: 65px 55px 45px; position: relative;}
+.coursecard h3{ font-size: 42px; color: #545454; font-weight: 600;}
+.coursecard h3 span{ display: block; font-size: 18px; margin-bottom: 5px;}
+.coursecard a{ position: absolute; right: 55px; bottom: 55px;}
+
+.aboutonlineexam{ width: 100%; background: #FFF8F8; padding: 75px 0;}
+.aboutonlineexam h2{ font-size: 32px; color: #FF4955; font-weight: 600; text-align: center; margin-bottom: 55px;}
+.aboutonlineexam .card-body{ padding:20px; background: #fff; border-radius: 10px; box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.05); min-height: 255px;}
+.aboutonlineexam .card-body h3{ font-size: 18px; color: #00A4D8; margin: 20px 0 15px; line-height: 26px;}
+.aboutonlineexam .card-body p{ font-size: 16px; color: #767575;}
+
+
+.inner-banner{ width: 100%; padding: 80px 0;  background: url("../images/home/hero-banner.jpg") center top no-repeat; background-size: cover;}
+.inner-banner h1{ color: #fff; font-size: 52px; font-weight: 600; margin-bottom: 15px;}
+
+.classPage{ width: 100%; padding: 65px 0; position: relative;}
+.classPage .accordion-button:focus { box-shadow: inherit;}
+.classPage h2{ font-size: 26px; color: #00A4D8; margin-bottom: 30px;}
+.classPage h3{ font-size: 26px; color: #FF4955; margin-bottom: 30px;}
+.classPage h4{ font-size: 20px; color: #2F3044; margin-bottom: 10px;}
+.classPage h5{ font-size: 15px; color: #686868; margin-bottom: 10px;}
+.SelectLevel ul{ padding: 0px; margin-bottom: 15px;}
+.SelectLevel li{ float: left; width: 25%; padding-left: 20px;}
+.SelectLevel li .form-check { font-size: 15px; padding: 0px; margin: 0 0 15px;}
+
+.classPage .accordion-item{ border: 1px solid #EAEEF2; box-shadow: 0px 7px 26px rgba(0, 164, 216, 0.06); border-radius: 10px; margin-bottom: 15px; position: relative; overflow: hidden;}
+.classPage .accordion-item:first-of-type>.accordion-header .accordion-button{ border: 0px; border-radius: 0;}
+.classPage .accordion-body .form-check{ padding: 7px 20px;}
+.classPage .accordion-button{ color: #fff;}
+.classPage .accordion-button.red{ background: #FF4955;}
+.classPage .accordion-button.green{ background: #3EBE42;}
+.classPage .accordion-button.blue{ background: #00A4D8;}
+.classPage .accordion-button.yallow{ background: #FEA404;}
+
+.faqs{ width: 100%; padding: 75px 0; position: relative;}
+.faqs h2{ font-size: 42px; font-weight: 600; color: #00A4D8; line-height: 52px;}
+.faqs .accordion-button{ padding: 0 15px;}
+.faqs .accordion-button:focus { box-shadow: inherit;}
+
+#loginPopup .btn-close{ position: absolute; top: 15px; right: 15px; opacity: 1;}
+#loginPopup img{ width: 235px; height: auto; margin-bottom: 25px;}
+#loginPopup p{ text-align: center; font-size: 18px; margin-bottom: 25px;}
+#loginPopup label{ font-size: 16px;}
+#loginPopup .form-control{ height: 52px;}
+#loginPopup .btn{ padding: 10px 15px; width: 100%; margin-top: 20px; margin-bottom: 40px;}
+#loginPopup a{ color: #FF4955; font-weight: 600;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
