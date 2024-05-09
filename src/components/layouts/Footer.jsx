@@ -1,6 +1,7 @@
 import React,{ useState, useEffect } from "react";
 import {Link} from "react-router-dom";
-import logo from "../../asset/images/digital-edu-park-logo.webp"
+import logo from "../../asset/images/digital-edu-park-logo.webp";
+import { useNavigate } from 'react-router-dom';
 const Footer =()=>{
 	const [showButton, setShowButton] = useState(false);
 	const navigate = useNavigate();
