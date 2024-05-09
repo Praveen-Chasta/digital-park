@@ -94,8 +94,12 @@ import logo from "../../asset/images/digital-edu-park-logo.webp"
                     <center><img src={logo} alt="Digitaledupark"/></center>
             <p>Enter your phone number to sign in</p>
             
-            <label>Mobile Number</label>
-            <input type="text" className="form-control" placeholder="+91 9876543215"/>
+            <label>User Name</label>
+            <input type="text" className="form-control" placeholder="Enter User Name"/>
+
+						<label>Enter Password</label>
+            <input type="password" className="form-control" placeholder="Enter Password"/>
+						
             <button type="button" className="btn btn-primary">Submit</button>
             
             <p>Don't have an account? <Link to="#">Sign Up</Link></p>
