@@ -12,7 +12,6 @@ import axios from 'axios';
 							axios.get(baseUrl)
 							.then(response => 
 								{
-										console.log(response.data);
 										setcategoriesClassData(response.data.data);
 								})
 							.catch(error => {

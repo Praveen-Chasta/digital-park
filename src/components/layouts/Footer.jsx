@@ -1,16 +1,21 @@
 import React,{ useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import logo from "../../asset/images/digital-edu-park-logo.webp"
-
+import { useNavigate } from 'react-router-dom';
  const Footer =()=>{
 	const [showButton, setShowButton] = useState(false);
+	const navigate = useNavigate();
+		const onSubmit=()=>
+		{
+			navigate('/dashboard');
+		}
+
 	useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
 	const handleScroll = () => {
     if (window.scrollY > 120) {
       setShowButton(true);
@@ -25,6 +30,8 @@ import logo from "../../asset/images/digital-edu-park-logo.webp"
       behavior: 'smooth'
     });
   };
+	
+
    return(
 		<>
 				<footer> 
@@ -87,27 +94,62 @@ import logo from "../../asset/images/digital-edu-park-logo.webp"
 							</div>
 				</footer>
 				<div className="modal fade" id="loginPopup" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div className="modal-dialog">
-        <div className="modal-content">
-            <div className="modal-body">
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <center><img src={logo} alt="Digitaledupark"/></center>
-            <p>Enter your phone number to sign in</p>
-            
-            <label>User Name</label>
-            <input type="text" className="form-control" placeholder="Enter User Name"/>
+							<div className="modal-dialog">
+									<div className="modal-content">
+											<div className="modal-body">
+											<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															<center><img src={logo} alt="Digitaledupark"/></center>
+											<p>Enter your user name and password to sign in</p>
+											
+											<label>User Name</label>
+											<input type="text" className="form-control" placeholder="Enter User Name"/>
 
-						<label>Enter Password</label>
-            <input type="password" className="form-control" placeholder="Enter Password"/>
-						
-            <button type="button" className="btn btn-primary">Submit</button>
-            
-            <p>Don't have an account? <Link to="#">Sign Up</Link></p>
-            
-            </div>
-        </div>
-    </div>
-    </div>
+											<label>Enter Password</label>
+											<input type="password" className="form-control" placeholder="Enter Password"/>
+											
+											<button type="button" className="btn btn-primary" onClick={onSubmit}>Submit</button>
+											
+											<p>Don't have an account? <Link to="#"  aria-label="SignUp" data-bs-toggle="modal" data-bs-target="#SignUpPopup">Sign Up</Link></p>
+											
+											</div>
+									</div>
+							</div>
+    		</div>
+				<div className="modal fade" id="SignUpPopup" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div className="modal-dialog">
+									<div className="modal-content">
+											<div className="modal-body">
+											<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															<center><img src={logo} alt="Digitaledupark"/></center>
+											<p>Enter your user name and password to sign in</p>
+											
+											<label>Email</label>
+											<input type="text" className="form-control" placeholder="Enter Email"/>
+
+											<label>Enter Password</label>
+											<input type="password" className="form-control" placeholder="Enter Password"/>
+
+											<label>Enter Full Name</label>
+											<input type="text" className="form-control" placeholder="Enter Full Name"/>
+
+											<label>Contact Number</label>
+											<input type="number" className="form-control" placeholder="Contact Number"/>
+
+											<label>Class</label>
+											<select className="form-control" name="class_name">
+												<option value="">class 1</option>
+												<option value="">class 2</option>
+												
+											</select>
+
+											<button type="button" className="btn btn-primary">Submit</button>
+										
+											<p>Do have an account? <Link to="#"  aria-label="login" data-bs-toggle="modal" data-bs-target="#loginPopup">Login</Link></p>
+											
+											</div>
+									</div>
+							</div>
+    		</div>
 				<button
         onClick={scrollToTop}
         id="backTop"
