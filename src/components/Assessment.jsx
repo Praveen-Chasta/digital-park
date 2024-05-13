@@ -20,10 +20,9 @@ import axios from 'axios';
 					}, 
 					[]);
 					
-					const getRandomColor = () =>
-						 {
-								return '#' + Math.floor(Math.random()*16777215).toString(16);
-							}
+					const bgColors = ['bg-blue', 'bg-primary', 'bg-green'];
+					const Colors = ['blue', 'primary', 'green'];
+					
 				
      return (
 						<section className="py-5 scroller overflow-hidden">
@@ -38,7 +37,7 @@ import axios from 'axios';
 											 {  categoryData.map((data,index)=>(
 														<div className="col-md-4" key={index}>
 															<div className="card assesment__card rounded-3 bg-white">
-																<div className="card-header border-0 py-3" style={{ backgroundColor: getRandomColor()}}>
+																<div className={`card-header  border-0 py-3 ${bgColors[index % bgColors.length]} `}>
 																	<h3 className="fs-6 fw-medium text-white mb-0">{data.category}</h3>
 																</div>
 																<div className="card-body">
@@ -49,7 +48,7 @@ import axios from 'axios';
 																	</ul>
 																</div>
 																<div className="card-footer border-0 py-3 bg-transparent">
-																	<button className="btn btn-primary blue fs-6 w-100" disabled>View all </button>
+																	<button className={`btn btn-primary ${Colors[index % Colors.length]} fs-6 w-100`} disabled>View all </button>
 																</div>
 															</div>
 														</div>
