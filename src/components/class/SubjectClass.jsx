@@ -1,4 +1,25 @@
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 const SubjectClass=()=>{
+
+  const [label, setLabel] = useState([]);
+  const [label1, setLabel1] = useState([]);
+  
+  
+	const baseUrl ="https://digitaledupark.pleximus.co.in/api/edu/quiz-label";
+  useEffect(() => 
+    {
+      axios.get(baseUrl)
+      .then(response => 
+        {
+          setLabel(response.data.data);
+        })
+        .catch(error =>
+           {
+              console.error('Error fetching data: ', error);
+         });
+    },
+    []);
     return(
             <>
               <section className="classPage clearfix">
@@ -9,30 +30,19 @@ const SubjectClass=()=>{
                       <h2>Subject Wise Quiz</h2>
                       <h5>Select Difficulty Level :</h5>
                         <ul className="SelectLevel clearfix">
-                        <li className="clearfix">
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio1" name="optradio" value="option1" checked />Basic (L1)
-                            <label className="form-check-label" for="radio1"></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio2" name="optradio" value="option1" checked />Medium (L2)
-                            <label className="form-check-label" for="radio2"></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio3" name="optradio" value="option1" checked />High (L3)
-                            <label className="form-check-label" for="radio3"></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio4" name="optradio" value="option1" checked />Miscellaneous (L4)
-                            <label className="form-check-label" for="radio4"></label>
-                          </div>
-                        </li>
+                          { label.map((data,index)=>
+                            (
+                              <li className="clearfix" key={index}>
+                                <div className="form-check">
+                                  <input type="radio" className="form-check-input" id="radio" name={"option"+index} value={"option" +index}  checked={index === 0} />
+                                  {data.name}
+                                  <label className="form-check-label" htmlFor= {"radio" + index}  ></label>
+                                </div>
+                              </li>
+                            ))
+                          }
+                       
+                      
                       </ul>
                         <div className="accordion-item">
                         <div className="accordion-header" id="heading_1">
@@ -44,24 +54,24 @@ const SubjectClass=()=>{
                           <div className="accordion-body">
                           <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1"/> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                           </div>
@@ -77,24 +87,24 @@ const SubjectClass=()=>{
                           <div className="accordion-body">
                           <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                           </div>
@@ -110,24 +120,24 @@ const SubjectClass=()=>{
                           <div className="accordion-body">
                           <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                           </div>
@@ -143,24 +153,24 @@ const SubjectClass=()=>{
                           <div className="accordion-body">
                           <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1"/> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                           </div>
@@ -176,24 +186,24 @@ const SubjectClass=()=>{
                           <div className="accordion-body">
                           <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1"/> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                           </div>
@@ -204,30 +214,17 @@ const SubjectClass=()=>{
                       <h3>Chapter Wise Quiz</h3>
                       <h5>Select Difficulty Level :</h5>
                         <ul className="SelectLevel clearfix">
-                        <li className="clearfix">
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio21" name="optradio21" value="option21" checked />Basic (L1)
-                            <label className="form-check-label" for="radio21"></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio22" name="optradio22" value="option22" />Medium (L2)
-                            <label className="form-check-label" for="radio22"></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio23" name="optradio23" value="option23" />High (L3)
-                            <label className="form-check-label" for="radio23"></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="form-check">
-                            <input type="radio" className="form-check-input" id="radio24" name="optradio24" value="option24" />Miscellaneous (L4)
-                            <label className="form-check-label" for="radio24"></label>
-                          </div>
-                        </li>
+                        { label.map((data,index)=>
+                            (
+                              <li className="clearfix">
+                                <div className="form-check">
+                                  <input type="radio" className="form-check-input" id={"radio2"+index} name={"optradio2"+index} value={"option2"+index} checked={index === 2} />
+                                    {data.name}
+                                  <label className="form-check-label" htmlFor={"radio2"+index}></label>
+                                </div>
+                              </li>
+                            ))}
+                       
                       </ul>
                         
                         <div className="accordion-item">
@@ -241,41 +238,41 @@ const SubjectClass=()=>{
                             <h4>Chapter 1</h4>
                             <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             <h4 className="mt-3">Chapter 2</h4>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                             <button className="btn btn-primary blue animate-btn mt-3 w-100">Start Exam</button>
@@ -293,41 +290,41 @@ const SubjectClass=()=>{
                           <h4>Chapter 1</h4>
                             <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             <h4 className="mt-3">Chapter 2</h4>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                             <button className="btn btn-primary blue animate-btn mt-3 w-100">Start Exam</button>
@@ -345,41 +342,41 @@ const SubjectClass=()=>{
                           <h4>Chapter 1</h4>
                             <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             <h4 className="mt-3">Chapter 2</h4>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                             <button className="btn btn-primary blue animate-btn mt-3 w-100">Start Exam</button>
@@ -397,41 +394,41 @@ const SubjectClass=()=>{
                           <h4>Chapter 1</h4>
                             <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             <h4 className="mt-3">Chapter 2</h4>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                             <button className="btn btn-primary blue animate-btn mt-3 w-100">Start Exam</button>
@@ -449,33 +446,33 @@ const SubjectClass=()=>{
                           <h4>Chapter 1</h4>
                             <div className="form-check">
                             <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
-                            <label className="form-check-label" for="radio5"></label>
+                            <label className="form-check-label" htmlFor="radio5"></label>
                           </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
-                              <label className="form-check-label" for="radio8"></label>
+                              <label className="form-check-label" htmlFor="radio8"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             <h4 className="mt-3">Chapter 2</h4>
                             
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1" /> 20 Question Quiz
-                              <label className="form-check-label" for="radio6"></label>
+                              <label className="form-check-label" htmlFor="radio6"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio7" name="optradio" value="option1" /> 30 Question Quiz
-                              <label className="form-check-label" for="radio7"></label>
+                              <label className="form-check-label" htmlFor="radio7"></label>
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio8" name="optradio" value="option1" /> 40 Question Quiz
@@ -483,7 +480,7 @@ const SubjectClass=()=>{
                             </div>
                             <div className="form-check">
                               <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
-                              <label className="form-check-label" for="radio9"></label>
+                              <label className="form-check-label" htmlFor="radio9"></label>
                             </div>
                             
                             <button className="btn btn-primary blue animate-btn mt-3 w-100">Start Exam</button>
