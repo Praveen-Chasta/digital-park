@@ -238,25 +238,11 @@
 #loginPopup .form-control{ height: 52px;}
 #loginPopup .btn{ padding: 10px 15px; width: 100%; margin-top: 20px; margin-bottom: 40px;}
 #loginPopup a{ color: #FF4955; font-weight: 600;}
-#SignUpPopup .btn-close{ position: absolute; top: 15px; right: 15px; opacity: 1;}
-#SignUpPopup img{ width: 235px; height: auto; margin-bottom: 25px;}
-#SignUpPopup p{ text-align: center; font-size: 18px; margin-bottom: 25px;}
-#SignUpPopup label{ font-size: 16px;}
-#SignUpPopup .form-control{ height: 52px;}
-#SignUpPopup .btn{ padding: 10px 15px; width: 100%; margin-top: 20px; margin-bottom: 40px;}
-#SignUpPopup a{ color: #FF4955; font-weight: 600;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#signUpPopup .btn-close{ position: absolute; top: 15px; right: 15px; opacity: 1;}
+#signUpPopup img{ width: 235px; height: auto; margin-bottom: 25px;}
+#signUpPopup p{ text-align: center; font-size: 18px; margin-bottom: 25px;}
+#signUpPopup label{ font-size: 16px;}
+#signUpPopup .form-control{ height: 52px;}
+#signUpPopup .btn{ padding: 10px 15px; width: 100%; margin-top: 20px; margin-bottom: 40px;}
+#signUpPopup a{ color: #FF4955; font-weight: 600;}

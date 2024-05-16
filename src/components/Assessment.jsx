@@ -3,16 +3,19 @@ import DoubleCheck from "../asset/images/icons/doubble-check.svg";
 import AssessmentGradient from "../asset/images/home/assesment-gradient.svg";
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import { SERVER_URL } from "../config";
+
+const BASE_URL = SERVER_URL;
+
  const Assesment =()=>{
-	const [categoryData, setcategoriesClassData] = useState([]);
-	const baseUrl ="https://digitaledupark.pleximus.co.in/api/edu/categories-class";
+	const [categoryData, setCategoriesClassData] = useState([]);
 
 				useEffect(() => 
 					{
-							axios.get(baseUrl)
+							axios.get(`${BASE_URL}/categories-class`)
 							.then(response => 
 								{
-										setcategoriesClassData(response.data.data);
+										setCategoriesClassData(response.data.data);
 								})
 							.catch(error => {
 									console.error('Error fetching data: ', error);
@@ -22,8 +25,8 @@ import axios from 'axios';
 					
 					const bgColors = ['bg-blue', 'bg-primary', 'bg-green'];
 					const Colors = ['blue', 'primary', 'green'];
+
 					
-				
      return (
 						<section className="py-5 scroller overflow-hidden">
 								<div className="container py-sm-5">
@@ -43,8 +46,14 @@ import axios from 'axios';
 																<div className="card-body">
 																	<ul className="d-flex flex-column gap-2 check__list fw-medium" style={{'--double-check':`url(${DoubleCheck});`}}>
 																			{data.class.map((classData) => (
-																					<li key={classData.id}>{classData.class_name}	</li>
+																					// <li key={classData.id}>{classData.class_name}	</li>
+																					
+																					<Link    
+																					to={`/classes/${classData?.class_id}`}
+																					>{classData.class_name} </Link>
+						
                        							 	))}
+													
 																	</ul>
 																</div>
 																<div className="card-footer border-0 py-3 bg-transparent">

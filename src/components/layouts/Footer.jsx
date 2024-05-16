@@ -2,6 +2,9 @@ import React,{ useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import logo from "../../asset/images/digital-edu-park-logo.webp";
 import { useNavigate } from 'react-router-dom';
+import Login from "../Auth/Login/Login";
+import SignUp from "../Auth/SignUp/SignUp";
+
 const Footer =()=>{
 	const [showButton, setShowButton] = useState(false);
 	const navigate = useNavigate();
@@ -93,7 +96,7 @@ const Footer =()=>{
 								</div>
 							</div>
 				</footer>
-				<div className="modal fade" id="loginPopup" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				{/* <div className="modal fade" id="loginPopup" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div className="modal-dialog">
 									<div className="modal-content">
 											<div className="modal-body">
@@ -149,7 +152,12 @@ const Footer =()=>{
 											</div>
 									</div>
 							</div>
-    		</div>
+    		</div> */}
+
+			<Login/>
+			<SignUp/>
+
+
 				<button
         onClick={scrollToTop}
         id="backTop"
