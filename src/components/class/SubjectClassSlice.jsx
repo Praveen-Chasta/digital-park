@@ -9,6 +9,7 @@ const BASE_URL = SERVER_URL;
 const initialState = {
     data:[],
     chapters: [],
+    no_of_question:[],
     success: false,
 };
 
@@ -45,6 +46,20 @@ export const subjectReducer = createAsyncThunk(
   );
   
 
+  
+export const noOfQuestionReducer = createAsyncThunk(
+  "noOfQuestionReducer",
+  async (obj, { getState }) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/quiz-setting`);
+      // console.log("slice data",response?.data.data)
+      return response?.data;
+    } catch (error) {
+      return error?.message;
+    }
+  }
+);
+
 
   export const SubjectClassSlice = createSlice({
     name: "subjectClass",
@@ -62,6 +77,11 @@ export const subjectReducer = createAsyncThunk(
     .addCase(chapterReducer.fulfilled, (state, action) => {
       // console.log("dddd", action?.payload?.data);
         state.chapters = action?.payload?.data;
+    });
+    builder
+    .addCase(noOfQuestionReducer.fulfilled, (state, action) => {
+      // console.log("dddd", action?.payload?.data);
+        state.no_of_question = action?.payload?.data;
     });
     },
   });

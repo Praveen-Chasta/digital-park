@@ -214,7 +214,9 @@ function SignUp() {
                                         <div className="input-container">
                                             <label>Contact Number</label>
                                             <input
-                                                type="number"
+                                                pattern="[0-9]{10}"
+                                                title="Please enter a valid 10-digit phone number"
+                                                type="tel"
                                                 id="contact_number"
                                                 className="form-control"
                                                 placeholder="Contact Number"

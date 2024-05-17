@@ -2,7 +2,7 @@ import React,{useState, useCallback, useEffect} from "react";
 import { useParams  } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { subjectReducer, chapterReducer } from "./SubjectClassSlice";
+import { subjectReducer, chapterReducer, noOfQuestionReducer } from "./SubjectClassSlice";
 
 import { SERVER_URL } from "../../config";
 
@@ -15,10 +15,13 @@ const SubjectClass=()=>{
 
   const [subjectDifficulty , setSubjectDifficulty] = useState('');
   const [chapterDifficulty , setChapterDifficulty] = useState('');
+  const [noOfQuestion , setNoOfQuestion] = useState('');
+  const [chapterNoOfQuestion , setChapterNoOfQuestion] = useState('');
+
 
   const data = useSelector((state) => state.subjectClass.data);
   const chapter = useSelector((state) => state.subjectClass.chapters);
-
+  const question = useSelector((state) => state.subjectClass.no_of_question);
 
   const dispatch = useDispatch();
   const getAllList = useCallback(async () => {
@@ -63,6 +66,25 @@ const SubjectClass=()=>{
       mounted = false;
     };
   }, [getAllChapterList]);
+
+  const getQuestionNoList = useCallback(async () => {
+    dispatch(
+      noOfQuestionReducer({
+      })
+    );
+  }, [dispatch]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      getQuestionNoList();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [getQuestionNoList]);
   
   useEffect(() => 
     {
@@ -132,11 +154,24 @@ const SubjectClass=()=>{
                               </div>
                               <div id={"collapse_"+i} className="accordion-collapse collapse show" aria-labelledby={"heading_"+i} data-bs-parent="#accordionQuiz">
                                 <div className="accordion-body">
-                                <div className="form-check">
+
+                                {question && question?.length > 0 ? (
+                            question?.map((item, i) => (
+                                <div className="form-check" key={i}>
+                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="chapterNoOfQuestion" value={item.id}  onChange={() => setChapterNoOfQuestion(item.id)}/> {item.no_of_questions}{" Question Quiz"}
+                                    <label className="form-check-label" htmlFor={"radio7" + i}></label>
+                                  </div>
+                              ))
+                              ) : (
+                                <tr>
+                                  <td colSpan="12">No Data Found</td>
+                                </tr>
+                              )}
+
+                                {/* <div className="form-check">
                                   <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
                                   <label className="form-check-label" htmlFor="radio5"></label>
                                 </div>
-                                  
                                   <div className="form-check">
                                     <input type="radio" className="form-check-input" id="radio6" name="optradio" value="option1"/> 20 Question Quiz
                                     <label className="form-check-label" htmlFor="radio6"></label>
@@ -152,7 +187,7 @@ const SubjectClass=()=>{
                                   <div className="form-check">
                                     <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
                                     <label className="form-check-label" htmlFor="radio9"></label>
-                                  </div>
+                                  </div> */}
 
                                 <button className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`}>Start Exam</button>
                                   
@@ -349,7 +384,21 @@ const SubjectClass=()=>{
                             item.chapters?.map((data, i) => (
                               <>
                               <h4 key={i}>{data.chapter}</h4>
-                                  <div className="form-check">
+
+                              {question && question?.length > 0 ? (
+                            question?.map((item, i) => (
+                                <div className="form-check" key={i}>
+                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="noOfQuestion" value={item.id}  onChange={() => setNoOfQuestion(item.id)}/> {item.no_of_questions}{" Question Quiz"}
+                                    <label className="form-check-label" htmlFor={"radio7" + i}></label>
+                                  </div>
+                              ))
+                              ) : (
+                                <tr>
+                                  <td colSpan="12">No Data Found</td>
+                                </tr>
+                              )}
+
+                                  {/* <div className="form-check">
                                   <input type="radio" className="form-check-input" id="radio5" name="optradio" value="option1" checked /> 10 Question Quiz
                                   <label className="form-check-label" htmlFor="radio5"></label>
                                 </div>
@@ -368,7 +417,7 @@ const SubjectClass=()=>{
                                   <div className="form-check">
                                     <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
                                     <label className="form-check-label" htmlFor="radio9"></label>
-                                  </div>
+                                  </div> */}
                                   </>
                                   
                                 ))
