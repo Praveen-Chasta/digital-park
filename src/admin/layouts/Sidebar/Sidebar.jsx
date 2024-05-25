@@ -35,7 +35,7 @@ const Sidebar=()=>{
 									<li><Link href="edit-student.html">Student Edit</Link></li>
 								</ul>
 							</li>
-							<li className="submenu">
+							{/* <li className="submenu">
 								<Link href="#"><i className="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span className={dashboardStyle['menu-arrow']}></span></Link>
 								<ul>
 									<li><Link href="teachers.html">Teacher List</Link></li>
@@ -60,7 +60,7 @@ const Sidebar=()=>{
 									<li><Link href="edit-subject.html">Subject Edit</Link></li>
 								</ul>
 							</li>
-						
+						 */}
 						</ul>
 					</div>
           </div>

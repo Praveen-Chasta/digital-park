@@ -15,18 +15,18 @@ const Header =()=>{
         </Link> */}
       </div>
       
-      <div className={dashboardStyle['menu-toggle']}>
+      {/* <div className={dashboardStyle['menu-toggle']}>
       <Link href="javascript:void(0);" id={dashboardStyle['toggle_btn']}>
       <i className="fas fa-bars"></i>
       </Link>
-      </div>
-      
+      </div> */}
+{/*       
       <div className={dashboardStyle['top-nav-search']}>
       <form>
       <input type="text" className={dashboardStyle['form-control']} placeholder="Search here"/>
       <button className={dashboardStyle['btn']} type="submit"><i className="fas fa-search"></i></button>
       </form>
-      </div>
+      </div> */}
       <Link className={dashboardStyle['mobile_btn']} id="mobile_btn">
       <i className="fas fa-bars"></i>
       </Link>
@@ -37,8 +37,8 @@ const Header =()=>{
       <div className={dashboardStyle['user-img']}>
         <img className="rounded-circle" src={profile01} width="31" alt="Ryan Taylor"/>
         <div className={dashboardStyle['user-text']}>
-          <h6>Ryan Taylor</h6>
-          <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p>
+          <h6>Hi Ashish</h6>
+          {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
         </div>
       </div>
       </Link>
@@ -48,12 +48,12 @@ const Header =()=>{
           <img src={profile01} alt="User Image" className="avatar-img rounded-circle"/>
         </div>
         <div className={dashboardStyle['user-text']}>
-          <h6>Ryan Taylor</h6>
-          <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p>
+          <h6>Hi Ashish</h6>
+          {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
         </div>
       </div>
-      <Link className={dashboardStyle['dropdown-item']} href="profile.html">My Profile</Link>
-      <Link className={dashboardStyle['dropdown-item']} href="inbox.html">Inbox</Link>
+      {/* <Link className={dashboardStyle['dropdown-item']} href="profile.html">My Profile</Link>
+      <Link className={dashboardStyle['dropdown-item']} href="inbox.html">Inbox</Link> */}
       <Link className={dashboardStyle['dropdown-item']} href="login.html">Logout</Link>
       </div>
       </li>

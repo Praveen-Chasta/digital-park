@@ -3083,8 +3083,8 @@ footer p {
 }
 
 .page-wrapper {
-  margin-left: 259px;
-  padding-top: 60px;
+  margin-left: 281px;
+  /* padding-top: 60px; */
   position: relative;
   transition: all 0.4s ease;
 }
