@@ -16,22 +16,11 @@ function Exampage() {
         <div className={dashboardStyle['page-wrapper']}>
           <div className="container">
 
-            <div className="section">
-              <div className="question-info">
-                <h2>Question type: Short Answer</h2>
+            <div className="section mt-5">
+              <div className="question-info mt-5">
                 <h3>Question No 1.</h3>
-                <p>As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</p>
-                <p><strong>Outline:</strong></p>
-                <ul>
-                  <li>Payment processing system - schedule - Tenth May (Friday) - Unexpected power outage - three days - overall delay - seven days - includes recovery of lost work - will not recur</li>
-                </ul>
-                <p><strong>Important Instructions:</strong></p>
-                <ul>
-                  <li>It is compulsory to use all the specific words mentioned in the Outline in your email. You can add other sentences of your choice, as appropriate.</li>
-                  <li>The name of the sender and receiver should be as given</li>
-                  <li>The email must contain a minimum of fifty words, or it will not be evaluated at all.</li>
-                  <li>If the outline is not strictly followed (including the specific words used), or correct English (including spelling and grammar) is not used, the grade in this section will be poor.</li>
-                </ul>
+                <p>1.As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</p>
+               
                 {/* <textarea placeholder="Write your email here..."></textarea> */}
                 <div class="input-block row">
                   <div class="col-lg-9">
@@ -45,6 +34,18 @@ function Exampage() {
                       <input class="form-check-input" type="radio" name="gender" id="gender_female" value="option2" />
                       <label class="form-check-label" for="gender_female">
                         option 2
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="gender_female" value="option2" />
+                      <label class="form-check-label" for="gender_female">
+                        option 3
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="gender_female" value="option2" />
+                      <label class="form-check-label" for="gender_female">
+                        option 4
                       </label>
                     </div>
                   </div>

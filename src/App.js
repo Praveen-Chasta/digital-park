@@ -18,7 +18,7 @@ function App() {
                     <Route path="/about"  element={<About/>}/>
                     <Route path="/classes/:id"  element={<ClassComponent/>}/>
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
-                    <Route path="/dashboard"  element={<AdminDashboard/>}/>
+                    {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}
                     <Route path='/dashboard/instruction' element={<Instruction/>}/>
                     <Route path='/dashboard/instruction1' element={<Instruction1/>}/>
                     <Route path='/dashboard/exam' element={<Exampage/>}/>
