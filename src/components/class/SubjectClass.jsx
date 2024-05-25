@@ -1,5 +1,5 @@
 import React,{useState, useCallback, useEffect} from "react";
-import { useParams  } from "react-router-dom";
+import { Link, useParams  } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { subjectReducer, chapterReducer, noOfQuestionReducer } from "./SubjectClassSlice";
@@ -188,8 +188,9 @@ const SubjectClass=()=>{
                                     <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
                                     <label className="form-check-label" htmlFor="radio9"></label>
                                   </div> */}
+                                   <Link to='/dashboard/instruction1' className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`}>Start Exam</Link>
 
-                                <button className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`}>Start Exam</button>
+                                {/* <button className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`}>Start Exam</button> */}
                                   
                                 </div>
                               </div>
@@ -445,8 +446,8 @@ const SubjectClass=()=>{
                                     <input type="radio" className="form-check-input" id="radio9" name="optradio" value="option1" /> 50 Question Quiz
                                     <label className="form-check-label" htmlFor="radio9"></label>
                                   </div> */}
-                                  
-                                  <button className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`}>Start Exam</button>
+                                  <Link to='/dashboard/instruction1' className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`}>Start Exam</Link>
+                                  {/* <button >Start Exam</button> */}
                                 </div>
                               </div>
                               </div>

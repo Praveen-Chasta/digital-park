@@ -70,7 +70,7 @@ const Navbar=()=>{
 									Academics
 								</Link>
 								<ul className="dropdown-menu">
-									<li><Link to="/classes" className="dropdown-item" >classes</Link></li>
+									<li><Link to="#" className="dropdown-item" >action</Link></li>
 									<li><Link to="#" className="dropdown-item" >Another action</Link></li>  
 								</ul>
 							</li>

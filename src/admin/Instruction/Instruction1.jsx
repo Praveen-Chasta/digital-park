@@ -1,13 +1,24 @@
 import React from "react";
 import "./instruction.module.css";
 import { useNavigate } from 'react-router-dom';
+import Header from "../layouts/Header/Header.jsx";
+import Footer from "../layouts/Footer/Footer.jsx";
+import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
+import dashboardStyle from "../dashboard/dashboard.module.css"
+import { Link } from "react-router-dom";
 const Instruction1 =() =>{
   const navigate = useNavigate();
    const submit =()=>{
     navigate('/dashboard/exam');
    }
    return (<>
-   <p>TCS Open SeeSame-TCS Practice Test</p>
+
+<div className={dashboardStyle['main-wrapper']}>
+		
+    <Header/>
+     <Sidebar/>
+     <div className={dashboardStyle['page-wrapper']}>
+     <p>TCS Open SeeSame-TCS Practice Test</p>
 <h5>General Instructions:</h5>
 <ol type="1">
   <li>Total duration of examination is 90 minutes.</li>
@@ -58,8 +69,20 @@ const Instruction1 =() =>{
 
   </ol>
 
-<button className="btn next btn-sm" id="next" style={{"border": "1px solid gray","padding": "7px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}}  onClick={submit}>Next</button>
+<Link to="/dashboard/instruction"  className="btn next btn-sm" id="next" style={{"border": "1px solid gray","padding": "7px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}}  onClick={submit}>Next</Link>
+{/* <button>Next</button> */}
 
+  
+  </div>
+   <Footer/>
+</div>
+<br/>
+<br/>
+
+
+
+
+  
    </>)
 }
 export default Instruction1;
