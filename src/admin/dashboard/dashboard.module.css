@@ -2816,9 +2816,9 @@ html.menu-opened body {
 -----------------------*/
 
 footer {
-  padding: 17px 0px;
-  background: #fff;
-  text-align: center;
+/*  padding: 17px 0px 0;*/
+/*  background: #fff;*/
+/*  text-align: center;*/
 }
 
 footer p {
