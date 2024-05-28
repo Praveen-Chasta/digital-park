@@ -19,7 +19,7 @@ export const profileReducer = createAsyncThunk(
       const response = await axios.get(`${BASE_URL}/student-details`, {
         
         headers: {
-            remember_token: token,
+            "remember-token": token,
         },
       });
       // console.log("Slice list Data",{response});

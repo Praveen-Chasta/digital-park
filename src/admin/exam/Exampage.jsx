@@ -292,7 +292,7 @@ function Exampage() {
             </div>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
       <br />
       <br />

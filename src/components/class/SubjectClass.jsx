@@ -12,13 +12,13 @@ const SubjectClass=()=>{
   const { id } = useParams();
   const [label, setLabel] = useState([]);
 
-  let [subjectDifficulty , setSubjectDifficulty] = useState('');
-  let [chapterDifficulty , setChapterDifficulty] = useState('');
+  let [subjectDifficulty , setSubjectDifficulty] = useState(1);
+  let [chapterDifficulty , setChapterDifficulty] = useState(1);
   const [noOfQuestion , setNoOfQuestion] = useState('');
   const [chapterNoOfQuestion , setChapterNoOfQuestion] = useState('');
-  const [subjectId , setSubjectId] = useState(1);
-  const [ChapterId , setChapterId] = useState(1);
-  const [chapterSubjectId , setChapterSubjectId] = useState(1);
+  const [subjectId , setSubjectId] = useState(0);
+  const [ChapterId , setChapterId] = useState(0);
+  const [chapterSubjectId , setChapterSubjectId] = useState(0);
   const [timeLimit , setTimeLimit] = useState(0);
 
 

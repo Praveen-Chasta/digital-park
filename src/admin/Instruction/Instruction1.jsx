@@ -77,7 +77,7 @@ const Instruction1 =() =>{
 
   
   </div>
-   <Footer/>
+   {/* <Footer/> */}
 </div>
 <br/>
 <br/>

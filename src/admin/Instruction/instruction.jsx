@@ -75,7 +75,7 @@ const Instruction =()=>
        </div>  
 				
 				</div>
-				 <Footer/>
+				 {/* <Footer/> */}
 			</div>
 			<br/>
 			<br/>
