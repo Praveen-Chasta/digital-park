@@ -192,22 +192,29 @@ function Exampage() {
             <div className="section mt-5">
               <div className="question-info mt-5">
               {quizData[currentQuestion] ? (
-                  <h4>Type : {quizData[currentQuestion].type}</h4>
+
+                  <div className="mb-5">
+  
+                         {/* <button style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","margin-right":"30px"}}> {quizData[currentQuestion].type} Ability</button> */}
+                         <button style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","margin-right":"30px"}}> Analytics Ability</button>
+                         <button style={{"color":"white","backgroundColor":"gray","padding":"6px","margin-left":"30px"}}>  Verbal Ability</button>
+                  </div>
+                
                 ) : (
                   <p>Question not available</p>
                 )}
-                <h3>Question No {currentQuestion + 1}</h3>
+                <h6 style={{"fontWeight":"14px"}}>Question No {currentQuestion + 1} .</h6>
                 {quizData[currentQuestion] ? (
-                  <p>{quizData[currentQuestion].question}</p>
+                  <h6 style={{"fontWeight":"600"}}>{currentQuestion + 1}. {quizData[currentQuestion].question}</h6>
                 ) : (
                   <p>Question not available</p>
                 )}
-                <div className="options">
+                <div className="options" style={{"marginLeft":"20px"}}>
                   {quizData[currentQuestion] && quizData[currentQuestion].options ? (
                     quizData[currentQuestion].options.map((option, index) => (
                       <div key={index}>
                         <input
-                          type="radio"
+                          type="radio" style={{"marginRight":"20px"}}
                           id={`question-${quizData[currentQuestion].id}-option-${index}`}
                           name={`question-${quizData[currentQuestion].id}-option-${index}`}
                           value={option}
@@ -236,7 +243,7 @@ function Exampage() {
                   <button className='btn btn-sm save_prev' onClick={() => handleNavigation('prev')} disabled={currentQuestion === 0}>
                     Previous
                   </button>
-                  <button className='btn btn-sm save_next' onClick={() => handleNavigation('next')} disabled={currentQuestion === quizData.length - 1}>
+                  <button className='btn btn-sm save_next' onClick={() => handleNavigation('next')} disabled={currentQuestion === quizData.length - 1} style={{"marginRight":"20px"}}>
                     Next
                   </button>
                 </div>
