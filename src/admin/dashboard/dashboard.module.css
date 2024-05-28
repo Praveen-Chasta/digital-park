@@ -3084,6 +3084,7 @@ footer p {
 
 .page-wrapper {
   margin-left: 281px;
+  width: 1140px !important;
   /* padding-top: 60px; */
   position: relative;
   transition: all 0.4s ease;
@@ -10565,9 +10566,7 @@ ol.breadcrumb.bg-secondary {
   .sm-box .fab {
       font-size: 100px;
   }
-  footer {
-      text-align: center;
-  }
+  
   .dash-circle {
       display: block;
   }
@@ -11326,13 +11325,3 @@ ol.breadcrumb.bg-secondary {
   }
 }
 
-.footer {
-  bottom: 0 !important;
-  padding: 20px calc(1.5rem * .5);
-  position: absolute;
-  right: 0;
-  /* color: var(--vz-footer-color); */
-  left: 0px;
-  height: 60px;
-  /* background-color: var(--vz-footer-bg); */
-}

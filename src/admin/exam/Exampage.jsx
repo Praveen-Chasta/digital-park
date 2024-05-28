@@ -4,7 +4,7 @@ import Header from "../layouts/Header/Header.jsx";
 import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 import dashboardStyle from "../dashboard/dashboard.module.css"
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { quizQuestionsReducer } from "./ExamSlice.jsx";
 import PageRefreshWarning from "./PageRefreshWarning.jsx";
