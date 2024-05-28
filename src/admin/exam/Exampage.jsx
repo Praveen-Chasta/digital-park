@@ -191,6 +191,11 @@ function Exampage() {
             <PageRefreshWarning />
             <div className="section mt-5">
               <div className="question-info mt-5">
+              {quizData[currentQuestion] ? (
+                  <h4>Type : {quizData[currentQuestion].type}</h4>
+                ) : (
+                  <p>Question not available</p>
+                )}
                 <h3>Question No {currentQuestion + 1}</h3>
                 {quizData[currentQuestion] ? (
                   <p>{quizData[currentQuestion].question}</p>
@@ -242,7 +247,7 @@ function Exampage() {
                   <p>Candidate</p>
                 </div>
                 <div className="question-palette">
-                  <h2>You are viewing Verbal Ability Section</h2>
+                  {/* <h2>You are viewing Verbal Ability Section</h2> */}
                   <div className="palette">
                     {quizData.map((_, index) => {
                       const status = questionStatus[index] ? questionStatus[index].toLowerCase().replace(' ', '-') : '';

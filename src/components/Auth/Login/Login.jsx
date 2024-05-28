@@ -52,6 +52,7 @@ function Login() {
               validationSchema={Yup.object({
                 email: Yup.string()
                   .email("Email must be valid email id.")
+                  .matches(/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/, "Email must be a valid email id with a valid domain.")
                   .required("Required"),
                 password: Yup.string().required("Required"),
               })}
@@ -162,6 +163,15 @@ function Login() {
                       {error}
                     </div>
                   )}
+
+                  
+                  {touched.email && errors.email ? (
+                      <div className={
+                          success
+                              ? "col-sm-12 col-md-12 alert alert-success text-center mt-2 text-capitalize"
+                              : "col-sm-12 col-md-12 alert alert-danger text-center mt-2 text-capitalize"
+                      }>{errors.email}</div>
+                  ) : null}
                 </form>
               )}
             </Formik>

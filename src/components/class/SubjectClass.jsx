@@ -175,11 +175,11 @@ const SubjectClass=()=>{
                             data?.map((item, i) => (
                               <div className="accordion-item" key={i}>
                               <div className="accordion-header" id={"heading_"+i}>
-                                <button className={`accordion-button ${bgColors[i % bgColors.length]}`} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse_"+i} aria-expanded="true" aria-controls={"collapse_"+i} onClick={() => setSubjectId(item.subject_id)}>
+                                <button className={`accordion-button ${bgColors[i % bgColors.length]}`} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse_"+i} aria-expanded="false" aria-controls={"collapse_"+i} onClick={() => setSubjectId(item.subject_id)}>
                                 {item.subject_name}
                                 </button>
                               </div>
-                              <div id={"collapse_"+i} className="accordion-collapse collapse show" aria-labelledby={"heading_"+i} data-bs-parent="#accordionQuiz">
+                              <div id={"collapse_"+i} className="accordion-collapse collapse" aria-labelledby={"heading_"+i} data-bs-parent="#accordionQuiz">
                                 <div className="accordion-body">
 
                                 {question && question?.length > 0 ? (
@@ -252,11 +252,11 @@ const SubjectClass=()=>{
                             chapter?.map((item, i) => (
                               <div className="accordion-item"  key={i}>
                               <div className="accordion-header" id={"heading_2"+i}>
-                                <button className={`accordion-button ${bgColors[i % bgColors.length]}`} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse_21"+i} aria-expanded="true" aria-controls={"collapse_21"+i} onClick={() => setChapterSubjectId(item.subject_id)}>
+                                <button className={`accordion-button ${bgColors[i % bgColors.length]}`} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse_21"+i} aria-expanded="false" aria-controls={"collapse_21"+i} onClick={() => setChapterSubjectId(item.subject_id)}>
                                 {item.subject_name}
                                 </button>
                               </div>
-                              <div id={"collapse_21"+i} className="accordion-collapse collapse show" aria-labelledby={"heading_21"+i} data-bs-parent="#accordionQuiz">
+                              <div id={"collapse_21"+i} className="accordion-collapse collapse" aria-labelledby={"heading_21"+i} data-bs-parent="#accordionQuiz">
                                 <div className="accordion-body">
                                 {item.chapters && item.chapters?.length > 0 ? (
                             item.chapters?.map((data, i) => (
