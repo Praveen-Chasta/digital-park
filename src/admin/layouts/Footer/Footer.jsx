@@ -1,8 +1,8 @@
 import React from "react";
-import "../Footer/Footer.css";
+import "../Footer/Footer.module.css";
 const Footer=()=>{
     return (<>
-              	<footer className="Footer">
+              	<footer className="footer">
 					        <p>COPYRIGHT © 2024 Pleximus.</p>					
 				        </footer>
 			      </>);
