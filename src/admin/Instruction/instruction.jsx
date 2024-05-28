@@ -4,9 +4,11 @@ import Header from "../layouts/Header/Header.jsx";
 import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 import dashboardStyle from "../dashboard/dashboard.module.css"
-import { Link } from "react-router-dom";
+import { Link , useParams} from "react-router-dom";
 const Instruction =()=>
   {
+    
+  const { id, subjectId, ChapterId, timeLimit, Difficulty } = useParams();
      return(
      <>
 
@@ -67,7 +69,7 @@ const Instruction =()=>
              Previous
              I'm ready to Begin</label>
              <br></br>
-             <Link to="/dashboard/exam" class="btn" style={{"padding":"10px","backgroundColor":"blue",'borderRadius':"3px",'color':"white",'text-align':'center','borderRadius':"64px"}}>Start</Link>
+             <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}`} class="btn" style={{"padding":"10px","backgroundColor":"blue",'borderRadius':"3px",'color':"white",'text-align':'center','borderRadius':"64px"}}>Start</Link>
                {/* <button >Start</button> */}
             <br/>
        </div>  

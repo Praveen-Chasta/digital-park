@@ -19,9 +19,9 @@ function App() {
                     <Route path="/classes/:id"  element={<ClassComponent/>}/>
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
                     {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}
-                    <Route path='/dashboard/instruction' element={<Instruction/>}/>
-                    <Route path='/dashboard/instruction1' element={<Instruction1/>}/>
-                    <Route path='/dashboard/exam' element={<Exampage/>}/>
+                    <Route path='/dashboard/instruction/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Instruction/>}/>
+                    <Route path='/dashboard/instruction1/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Instruction1/>}/>
+                    <Route path='/dashboard/exam/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Exampage/>}/>
                     
                     
                 </Routes> 

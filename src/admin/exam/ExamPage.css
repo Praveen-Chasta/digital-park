@@ -131,6 +131,19 @@ body {
 .buttons button:hover {
   background-color: #1565C0;
 }
+
+.save_prev{
+  border: 1px solid gray;
+  float: right;
+  padding: 7px;
+  background-color: #1976D2;
+  color: white;
+  font-size: 14px;
+}
+.save_prev:hover{
+background: #1976D2;
+color: white;
+}
 .save_next{
     border: 1px solid gray;
     float: right;
@@ -172,4 +185,21 @@ body {
 .button_menu
 {
   margin-top: 20px;
+}
+
+
+.answered {
+  background-color: green;
+}
+
+.not-answered {
+  background-color: red;
+}
+
+.marked {
+  background-color: orange;
+}
+
+.not-visited {
+  background-color: gray;
 }
