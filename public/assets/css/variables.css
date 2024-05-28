@@ -429,7 +429,7 @@ ul li {
 }
 .navbar .nav-item .nav-link {
   font-size: 1.067rem;
-  color: #222222;
+  color: #fff;
   font-weight: 400;
   font-family: var(--body-font), sans-serif;
   transition: all 0.3s ease-in-out;
