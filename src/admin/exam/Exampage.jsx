@@ -11,23 +11,26 @@ import PageRefreshWarning from "./PageRefreshWarning.jsx";
 
 function Exampage() {
 
-
   let { id, subjectId, ChapterId, timeLimit, Difficulty } = useParams();
 
-  const quizData = useSelector((state) => state.quizQuestions.examQuestions);
+  const quizData = useSelector((state) => state.quizQuestions.examQuestions) || [];
 
   const dispatch = useDispatch();
   const getAllQuestionList = useCallback(async () => {
-    dispatch(
-      quizQuestionsReducer({
-        //user_type: "admin",
-        class: id,
-        subject: subjectId,
-        chapter: ChapterId,
-        difficulty_label: Difficulty
-      })
-    );
-  }, [dispatch]);
+    try {
+      dispatch(
+        quizQuestionsReducer({
+          //user_type: "admin",
+          class: id,
+          subject: subjectId,
+          chapter: ChapterId,
+          difficulty_label: Difficulty
+        })
+      );
+    } catch (error) {
+      console.error("Failed to fetch quiz questions:", error);
+    }
+  }, [dispatch, id, subjectId, ChapterId, Difficulty]);
 
   useEffect(() => {
     let mounted = true;
@@ -40,7 +43,6 @@ function Exampage() {
       mounted = false;
     };
   }, [getAllQuestionList]);
-
 
   timeLimit = timeLimit * 60;
   const autoSubmitDelay = 30000; // auto-submit delay in milliseconds (30 seconds)
@@ -55,27 +57,35 @@ function Exampage() {
   );
 
   useEffect(() => {
-    const storedAnswers = localStorage.getItem('quizAnswers');
-    const storedReviewQuestions = localStorage.getItem('quizReviewQuestions');
-    const storedCurrentQuestion = localStorage.getItem('quizCurrentQuestion');
-    const storedTimeLeft = localStorage.getItem('quizTimeLeft');
-    const storedQuestionStatus = localStorage.getItem('quizQuestionStatus');
+    try {
+      const storedAnswers = localStorage.getItem('quizAnswers');
+      const storedReviewQuestions = localStorage.getItem('quizReviewQuestions');
+      const storedCurrentQuestion = localStorage.getItem('quizCurrentQuestion');
+      const storedTimeLeft = localStorage.getItem('quizTimeLeft');
+      const storedQuestionStatus = localStorage.getItem('quizQuestionStatus');
 
-    if (storedAnswers && storedReviewQuestions && storedCurrentQuestion && storedTimeLeft && storedQuestionStatus) {
-      setAnswers(JSON.parse(storedAnswers));
-      setReviewQuestions(JSON.parse(storedReviewQuestions));
-      setCurrentQuestion(parseInt(storedCurrentQuestion, 10));
-      setTimeLeft(parseInt(storedTimeLeft, 10));
-      setQuestionStatus(JSON.parse(storedQuestionStatus));
+      if (storedAnswers && storedReviewQuestions && storedCurrentQuestion && storedTimeLeft && storedQuestionStatus) {
+        setAnswers(JSON.parse(storedAnswers));
+        setReviewQuestions(JSON.parse(storedReviewQuestions));
+        setCurrentQuestion(parseInt(storedCurrentQuestion, 10));
+        setTimeLeft(parseInt(storedTimeLeft, 10));
+        setQuestionStatus(JSON.parse(storedQuestionStatus));
+      }
+    } catch (error) {
+      console.error("Failed to retrieve data from local storage:", error);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('quizAnswers', JSON.stringify(answers));
-    localStorage.setItem('quizReviewQuestions', JSON.stringify(reviewQuestions));
-    localStorage.setItem('quizCurrentQuestion', currentQuestion);
-    localStorage.setItem('quizTimeLeft', timeLeft);
-    localStorage.setItem('quizQuestionStatus', JSON.stringify(questionStatus));
+    try {
+      localStorage.setItem('quizAnswers', JSON.stringify(answers));
+      localStorage.setItem('quizReviewQuestions', JSON.stringify(reviewQuestions));
+      localStorage.setItem('quizCurrentQuestion', currentQuestion);
+      localStorage.setItem('quizTimeLeft', timeLeft);
+      localStorage.setItem('quizQuestionStatus', JSON.stringify(questionStatus));
+    } catch (error) {
+      console.error("Failed to save data to local storage:", error);
+    }
   }, [answers, reviewQuestions, currentQuestion, timeLeft, questionStatus]);
 
   useEffect(() => {
@@ -95,14 +105,18 @@ function Exampage() {
     let autoSubmitTimer;
 
     const checkNetworkStatus = () => {
-      if (!navigator.onLine) {
-        autoSubmitTimer = setTimeout(() => {
-          if (!submitted) {
-            handleSubmit();
-          }
-        }, autoSubmitDelay);
-      } else {
-        clearTimeout(autoSubmitTimer);
+      try {
+        if (!navigator.onLine) {
+          autoSubmitTimer = setTimeout(() => {
+            if (!submitted) {
+              handleSubmit();
+            }
+          }, autoSubmitDelay);
+        } else {
+          clearTimeout(autoSubmitTimer);
+        }
+      } catch (error) {
+        console.error("Error checking network status:", error);
       }
     };
 
@@ -111,7 +125,7 @@ function Exampage() {
     const interval = setInterval(checkNetworkStatus, 5000);
 
     return () => clearInterval(interval);
-  }, [submitted]);
+  }, [submitted, autoSubmitDelay]);
 
   const handleAnswer = (questionId, answer) => {
     setAnswers(prevAnswers => ({
@@ -125,7 +139,7 @@ function Exampage() {
 
   const handleClearAnswer = () => {
     const updatedAnswers = { ...answers };
-    delete updatedAnswers[quizData[currentQuestion].id];
+    delete updatedAnswers[quizData[currentQuestion]?.id];
     setAnswers(updatedAnswers);
     const updatedStatus = [...questionStatus];
     updatedStatus[currentQuestion] = 'Not Answered';
@@ -155,6 +169,7 @@ function Exampage() {
       setCurrentQuestion(prevQuestion => prevQuestion - 1);
     }
   };
+
   const handlePaletteClick = (index) => {
     setCurrentQuestion(index);
   };
@@ -166,21 +181,14 @@ function Exampage() {
     }
   };
 
-
-
-
-
   return (
-
     <>
       <div className={dashboardStyle['main-wrapper']}>
-
         <Header />
         <Sidebar />
         <div className={dashboardStyle['page-wrapper']}>
           <div className="container">
-          <PageRefreshWarning/>
-
+            <PageRefreshWarning />
             <div className="section mt-5">
               <div className="question-info mt-5">
                 <h3>Question No {currentQuestion + 1}</h3>
@@ -189,9 +197,6 @@ function Exampage() {
                 ) : (
                   <p>Question not available</p>
                 )}
-
-
-
                 <div className="options">
                   {quizData[currentQuestion] && quizData[currentQuestion].options ? (
                     quizData[currentQuestion].options.map((option, index) => (
@@ -211,9 +216,7 @@ function Exampage() {
                     <p>Options not available</p>
                   )}
                 </div>
-
                 <div className="button_menu">
-
                   {quizData[currentQuestion] ? (
                     <button
                       className="btn review-next button"
@@ -225,13 +228,12 @@ function Exampage() {
                     <p>Question not available</p>
                   )}
                   <button className='btn btn-sm clear-response' onClick={handleClearAnswer}>Clear Response</button>
-                  <button className='btn  btn-sm save_prev' onClick={() => handleNavigation('prev')} disabled={currentQuestion === 0}>
+                  <button className='btn btn-sm save_prev' onClick={() => handleNavigation('prev')} disabled={currentQuestion === 0}>
                     Previous
                   </button>
-                  <button className='btn  btn-sm save_next' onClick={() => handleNavigation('next')} disabled={currentQuestion === quizData.length - 1}>
+                  <button className='btn btn-sm save_next' onClick={() => handleNavigation('next')} disabled={currentQuestion === quizData.length - 1}>
                     Next
                   </button>
-
                 </div>
               </div>
               <div className="sidebar">
@@ -242,7 +244,6 @@ function Exampage() {
                 <div className="question-palette">
                   <h2>You are viewing Verbal Ability Section</h2>
                   <div className="palette">
-
                     {quizData.map((_, index) => {
                       const status = questionStatus[index] ? questionStatus[index].toLowerCase().replace(' ', '-') : '';
                       return (
@@ -291,8 +292,6 @@ function Exampage() {
       <br />
       <br />
     </>
-
-
   );
 }
 
