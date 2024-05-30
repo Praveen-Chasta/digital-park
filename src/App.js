@@ -9,7 +9,7 @@ import Instruction from "./admin/Instruction/instruction.jsx";
 import Instruction1 from './admin/Instruction/Instruction1.jsx';
 import Exampage from './admin/exam/Exampage.jsx';
 
-function App() {
+function App(props) {
     return ( 
        
         <Router>
@@ -19,7 +19,7 @@ function App() {
                     <Route path="/classes/:id"  element={<ClassComponent/>}/>
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
                     {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}
-                    <Route path='/dashboard/instruction/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Instruction/>}/>
+                    <Route path='/dashboard/instruction/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty'  element={<Instruction/>}/>
                     <Route path='/dashboard/instruction1/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Instruction1/>}/>
                     <Route path='/dashboard/exam/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Exampage/>}/>
                     

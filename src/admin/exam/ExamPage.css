@@ -85,7 +85,7 @@ body {
   background-color: #E0E0E0;
   text-align: center;
   line-height: 30px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   cursor: pointer;
 }
 .legend {

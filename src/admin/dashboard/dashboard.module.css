@@ -3085,6 +3085,7 @@ footer p {
 .page-wrapper {
   margin-left: 281px;
   width: 1140px !important;
+  /* background-color: #9fb0f059; */
   /* padding-top: 60px; */
   position: relative;
   transition: all 0.4s ease;

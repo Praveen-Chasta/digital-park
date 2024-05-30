@@ -187,7 +187,7 @@ function Exampage() {
         <Header />
         <Sidebar />
         <div className={dashboardStyle['page-wrapper']}>
-          <div className="container">
+          <div className="container" style={{"backgroundColor":"#6680e74f !important"}}>
             <PageRefreshWarning />
             <div className="section mt-5">
               <div className="question-info mt-5">
@@ -196,8 +196,8 @@ function Exampage() {
                   <div className="mb-5">
   
                          {/* <button style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","margin-right":"30px"}}> {quizData[currentQuestion].type} Ability</button> */}
-                         <button style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","margin-right":"30px"}}> Analytics Ability</button>
-                         <button style={{"color":"white","backgroundColor":"gray","padding":"6px","margin-left":"30px"}}>  Verbal Ability</button>
+                         <button  className='btn btn-sm clear-response' style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","margin-right":"30px"}}> Analytics Ability</button>
+                         <button className='btn btn-sm clear-response' style={{"color":"white","backgroundColor":"gray","padding":"6px","margin-left":"30px"}}>  Verbal Ability</button>
                   </div>
                 
                 ) : (
