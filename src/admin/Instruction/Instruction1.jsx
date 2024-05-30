@@ -9,7 +9,7 @@ import { Link , useParams} from "react-router-dom";
 const Instruction1 =() =>{
 
 
-  const { id, subjectId, ChapterId, timeLimit , Difficulty} = useParams();
+  const { id, subjectId, ChapterId, timeLimit , Difficulty, no_of_question} = useParams();
   const navigate = useNavigate();
    const submit =()=>{
     navigate('/dashboard/exam');
@@ -72,7 +72,7 @@ const Instruction1 =() =>{
 
   </ol>
 
-<Link to={`/dashboard/instruction/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}`}  className="btn next btn-sm" id="next" style={{"border": "1px solid gray","padding": "7px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}}  onClick={submit}>Next</Link>
+<Link to={`/dashboard/instruction/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`}  className="btn next btn-sm" id="next" style={{"border": "1px solid gray","padding": "7px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}}  onClick={submit}>Next</Link>
 {/* <button>Next</button> */}
 
   

@@ -22,7 +22,7 @@ const SubjectClass=()=>{
   const [timeLimit , setTimeLimit] = useState(0);
 
 
-  console.log(timeLimit);
+  console.log(chapterNoOfQuestion);
 
   const data = useSelector((state) => state.subjectClass.data);
   const chapter = useSelector((state) => state.subjectClass.chapters);
@@ -117,6 +117,7 @@ const SubjectClass=()=>{
     }, [initialUser]);
     
     let Difficulty = subjectDifficulty ? subjectDifficulty : chapterDifficulty;
+    let no_of_question = chapterNoOfQuestion ? chapterNoOfQuestion : noOfQuestion;
     const navigate = useNavigate();
     const handleSubmit = () => {
     
@@ -124,7 +125,7 @@ const SubjectClass=()=>{
           const loginModal = new window.bootstrap.Modal(document.getElementById('loginPopup'));
           loginModal.show();
         }else{
-          navigate(`/dashboard/instruction1/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}`)
+          navigate(`/dashboard/instruction1/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`)
         }
     };
 
@@ -185,7 +186,7 @@ const SubjectClass=()=>{
                                 {question && question?.length > 0 ? (
                             question?.map((item, i) => (
                                 <div className="form-check" key={i}>
-                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="chapterNoOfQuestion" value={item.id}  onChange={() => {setChapterNoOfQuestion(item.id); setTimeLimit(item.quiz_time);}}/> {item.no_of_questions}{" Question Quiz"}
+                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="chapterNoOfQuestion" value={item.id}  onChange={() => {setChapterNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}}/> {item.no_of_questions}{" Question Quiz"}
                                     <label className="form-check-label" htmlFor={"radio7" + i}></label>
                                   </div>
                               ))
@@ -272,7 +273,7 @@ const SubjectClass=()=>{
                               {question && question?.length > 0 ? (
                             question?.map((item, i) => (
                                 <div className="form-check" key={i}>
-                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="noOfQuestion" value={item.id}  onChange={() => { setNoOfQuestion(item.id); setTimeLimit(item.quiz_time);}} /> {item.no_of_questions}{" Question Quiz"}
+                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="noOfQuestion" value={item.id}  onChange={() => { setNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}} /> {item.no_of_questions}{" Question Quiz"}
                                     <label className="form-check-label" htmlFor={"radio7" + i}></label>
                                   </div>
                               ))

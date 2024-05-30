@@ -1,14 +1,34 @@
-import React from "react";
+import React, {  useCallback, useEffect } from "react";
 import "./instruction.module.css";
 import Header from "../layouts/Header/Header.jsx";
 import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 import dashboardStyle from "../dashboard/dashboard.module.css"
 import { Link , useParams} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { startExamReducer } from "../exam/ExamSlice.jsx";
+
 const Instruction =()=>
   {
     
-  const { id, subjectId, ChapterId, timeLimit, Difficulty } = useParams();
+  const { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = useParams();
+
+  const dispatch = useDispatch();
+  const handleStartExam = useCallback(() => {
+    dispatch(
+      startExamReducer({
+        class: id,
+        subject: subjectId,
+        chapter: ChapterId,
+        difficulty_level:Difficulty,
+        no_of_question:no_of_question,
+        duration:timeLimit
+
+      })
+    );
+  }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
+
+
      return(
      <>
 
@@ -69,7 +89,7 @@ const Instruction =()=>
              Previous
              I'm ready to Begin</label>
              <br></br>
-             <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}`} class="btn" style={{"padding":"10px","backgroundColor":"blue",'borderRadius':"3px",'color':"white",'text-align':'center','borderRadius':"64px"}}>Start</Link>
+             <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} class="btn" style={{"padding":"10px","backgroundColor":"blue",'borderRadius':"3px",'color':"white",'text-align':'center','borderRadius':"64px"}} onClick={handleStartExam}>Start</Link>
                {/* <button >Start</button> */}
             <br/>
        </div>  
