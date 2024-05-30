@@ -77,14 +77,14 @@ body {
 .palette {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 10px;
 }
 .palette-item {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   background-color: #E0E0E0;
   text-align: center;
-  line-height: 20px;
+  line-height: 30px;
   border-radius: 50%;
   cursor: pointer;
 }
