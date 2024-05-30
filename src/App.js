@@ -8,7 +8,7 @@ import AdminDashboard from "./admin/dashboard/dashboard.jsx";
 import Instruction from "./admin/Instruction/instruction.jsx";
 import Instruction1 from './admin/Instruction/Instruction1.jsx';
 import Exampage from './admin/exam/Exampage.jsx';
-
+import Result from './admin/exam/Result.jsx';
 function App() {
     return ( 
        
@@ -19,9 +19,10 @@ function App() {
                     <Route path="/classes/:id"  element={<ClassComponent/>}/>
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
                     {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}
-                    <Route path='/dashboard/instruction/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Instruction/>}/>
-                    <Route path='/dashboard/instruction1/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Instruction1/>}/>
-                    <Route path='/dashboard/exam/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty' element={<Exampage/>}/>
+                    <Route path='/dashboard/instruction/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty/:no_of_question' element={<Instruction/>}/>
+                    <Route path='/dashboard/instruction1/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty/:no_of_question' element={<Instruction1/>}/>
+                    <Route path='/dashboard/exam/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty/:no_of_question' element={<Exampage/>}/>
+                    <Route path='/result' element={<Result/>}/>
                     
                     
                 </Routes> 

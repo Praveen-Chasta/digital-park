@@ -9,7 +9,6 @@ const Header =()=>{
 
   const data = useSelector((state) => state.userProfile.data);
 
-    console.log(data);
   const dispatch = useDispatch();
   const getAllList = useCallback(async () => {
     dispatch(
