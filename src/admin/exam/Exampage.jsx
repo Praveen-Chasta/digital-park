@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
-import './ExamPage.css'; // Import this if you separate the CSS into an App.css file
+import ExamPageCss from './ExamPage.module.css'; // Import this if you separate the CSS into an App.css file
 import Header from "../layouts/Header/Header.jsx";
-import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 import dashboardStyle from "../dashboard/dashboard.module.css"
 import {  useParams } from "react-router-dom";
@@ -333,17 +332,16 @@ function Exampage() {
         <Header />
         <Sidebar />
         <div className={dashboardStyle['page-wrapper']}>
-          <div className="container" style={{"backgroundColor":"#6680e74f !important"}}>
+          <div className={ExamPageCss['container']} style={{"backgroundColor":"#6680e74f !important"}}>
             <PageRefreshWarning />
-            <div className="section mt-5">
-              <div className="question-info mt-5">
+            <div className={`${ExamPageCss['section']} mt-5`}>
+              <div className={`${ExamPageCss['question-info']} mt-5`}>
               {quizData[currentQuestion] ? (
 
                   <div className="mb-5">
   
-                         {/* <button style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","margin-right":"30px"}}> {quizData[currentQuestion].type} Ability</button> */}
-                         <button  className='btn btn-sm clear-response' style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","margin-right":"30px"}}> Analytics Ability</button>
-                         <button className='btn btn-sm clear-response' style={{"color":"white","backgroundColor":"gray","padding":"6px","margin-left":"30px"}}>  Verbal Ability</button>
+                           <button  className={`btn btn-sm ${ExamPageCss['clear-response']}`} style={{"color":"white","backgroundColor":"#1976D2","padding":"6px","marginRight":"30px"}}> Analytics Ability</button>
+                         <button className='btn btn-sm clear-response' style={{"color":"white","backgroundColor":"gray","padding":"6px","marginLeft":"30px"}}>  Verbal Ability</button>
                   </div>
                 
                 ) : (
@@ -356,7 +354,7 @@ function Exampage() {
                 ) : (
                   <p>Question not available</p>
                 )}
-                <div className="options" style={{"marginLeft":"20px"}}>
+                <div className={ExamPageCss['options']} style={{"marginLeft":"20px"}}>
                   {quizData[currentQuestion] && quizData[currentQuestion].options ? (
                     quizData[currentQuestion].options.map((option, index) => (
                       <div key={index}>
@@ -375,10 +373,10 @@ function Exampage() {
                     <p>Options not available</p>
                   )}
                 </div>
-                <div className="button_menu">
+                <div className={ExamPageCss['button_menu']}>
                   {quizData[currentQuestion] ? (
                     <button
-                      className="btn review-next button"
+                      className= {`${ExamPageCss['review-next']} btn button`}
                       onClick={() =>{ handleReview(quizData[currentQuestion].id); setQuestionId(quizData[currentQuestion].id); reviewQuestions.includes(quizData[currentQuestion].id) ? setIsReview(0) : setIsReview(1);}}
                     >
                       {reviewQuestions.includes(quizData[currentQuestion].id) ? 'Unmark Review' : 'Mark For Review'}
@@ -386,11 +384,11 @@ function Exampage() {
                   ) : (
                     <p>Question not available</p>
                   )}
-                  <button className='btn btn-sm clear-response' onClick={() => { handleClearAnswer(); setQuestionId(quizData[currentQuestion].id);}}>Clear Response</button>
-                  <button className='btn btn-sm save_prev' onClick={() => {handleNavigation('prev'); getResultList();}} disabled={currentQuestion === 0}>
+                  <button className={`${ExamPageCss['clear-response']} btn btn-sm`} onClick={() => { handleClearAnswer(); setQuestionId(quizData[currentQuestion].id);}}>Clear Response</button>
+                  <button className={`btn btn-sm ${ExamPageCss['save_prev']}`} onClick={() => {handleNavigation('prev'); getResultList();}} disabled={currentQuestion === 0}>
                     Previous
                   </button>
-                  <button className='btn btn-sm save_next'
+                  <button className= {`${ExamPageCss['save_next']} btn btn-sm`}
                     onClick={() =>{ 
                       handleNavigation('next');
                       getResultList();
@@ -401,20 +399,20 @@ function Exampage() {
                   </button>
                 </div>
               </div>
-              <div className="sidebar">
-                <div className="timer">
+              <div className={ExamPageCss['sidebar']}>
+                <div className={ExamPageCss['timer']}>
                   <p>Time Left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</p>
                   <p>Candidate</p>
                 </div>
-                <div className="question-palette">
+                <div className={ExamPageCss['question-palette']}>
                   {/* <h2>You are viewing Verbal Ability Section</h2> */}
-                  <div className="palette">
+                  <div className={ExamPageCss['palette']}>
                     {quizData.map((_, index) => {
                       const status = questionStatus[index] ? questionStatus[index].toLowerCase().replace(' ', '-') : '';
                       return (
                         <div
                           key={index}
-                          className={`palette-item ${status}`}
+                          className={`${ExamPageCss['palette-item']} ${status}`}
                           onClick={() => {handlePaletteClick(index)}}
                         >
                           {index + 1}
@@ -422,27 +420,27 @@ function Exampage() {
                       );
                     })}
                   </div>
-                  <div className="legend">
+                  <div className={ExamPageCss['legend']}>
                     <h3>Legend:</h3>
-                    <div className="legend-item">
-                      <div className="legend-color answered"></div>
+                    <div className={ExamPageCss['legend-item']}>
+                      <div className={` ${ExamPageCss['legend-color']} ${ExamPageCss['answered']}`}></div>
                       <span>Answered</span>
                     </div>
-                    <div className="legend-item">
-                      <div className="legend-color not-answered"></div>
+                    <div className={ExamPageCss['legend-item']}>
+                      <div className={` ${ExamPageCss['legend-color']} ${ExamPageCss['not-answered']}`}></div>
                       <span>Not Answered</span>
                     </div>
-                    <div className="legend-item">
-                      <div className="legend-color marked"></div>
+                    <div className={ExamPageCss['legend-item']}>
+                      <div className={`${ExamPageCss['legend-color']} ${ExamPageCss['marked']}`}></div>
                       <span>Marked</span>
                     </div>
-                    <div className="legend-item">
-                      <div className="legend-color not-visited"></div>
+                    <div className={ExamPageCss['legend-item']}>
+                      <div className={`${ExamPageCss['legend-color']} ${ExamPageCss['not-visited']}`}></div>
                       <span>Not Visited</span>
                     </div>
                   </div>
                 </div>
-                <div className="buttons">
+                <div className={ExamPageCss['buttons']}>
                   <button>Profile</button>
                   <button>Instructions</button>
                   <button>Question Paper</button>
@@ -452,8 +450,7 @@ function Exampage() {
             </div>
           </div>
         </div>
-        {/* <Footer /> */}
-      </div>
+       </div>
       <br />
       <br />
     </>
