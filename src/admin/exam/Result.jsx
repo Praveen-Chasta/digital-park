@@ -23,7 +23,7 @@ function Result() {
     <div className={dashboardStyle['main-wrapper']}>
       <Header />
       {/* <Sidebar /> */}
-      <div className={dashboardStyle['page-wrapper']}>
+      <div className={dashboardStyle['page-wrappers']}>
         <div className="result-container">
           <div className="container section mt-5">
           
