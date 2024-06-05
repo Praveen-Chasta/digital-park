@@ -4,7 +4,8 @@ import {Chart} from 'chart.js/auto'
 import ChartComponent from '../chartComponent/ChartComponent';
 import axios from "axios";
 import { SERVER_URL } from "../../config";
-import "./ExamPage.css";
+
+import ExamPageCss from './ExamPage.module.css';
 
 const ResultDatatable=()=>{
   const[search,setSearch] = useState("");

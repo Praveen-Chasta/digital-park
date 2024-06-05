@@ -4,7 +4,7 @@ import AssessmentGradient from "../asset/images/home/assesment-gradient.svg";
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import { SERVER_URL } from "../config";
-
+import AssessmentStyle from "./AssessmentStyle.module.css";
 const BASE_URL = SERVER_URL;
 
  const Assesment =()=>{
@@ -48,8 +48,8 @@ const BASE_URL = SERVER_URL;
 																			{data.class.map((classData) => (
 																					// <li key={classData.id}>{classData.class_name}	</li>
 																					
-																					<Link    
-																					to={`/classes/${classData?.class_id}`}
+																					<Link key={classData.id}  className={AssessmentStyle['fontStyle']}
+																					to={`/classes/${classData?.class_id}`} 
 																					>{classData.class_name} </Link>
 						
                        							 	))}
