@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
+import {Chart} from 'chart.js/auto'
 import Header from "../layouts/Header/Header.jsx";
 import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 import dashboardStyle from "../dashboard/dashboard.module.css"
+import ChartComponent from '../chartComponent/ChartComponent';
 import './result.css'; // Import this if you separate the CSS into an App.css file
 import ResultDatatable from "./resultDatatable.jsx";
 
@@ -16,6 +18,26 @@ function Result() {
        localStorage.setItem('result_quiz_id', quizResult.quiz_id);
      }
      
+     const pieChartData = {
+      // labels: [
+      //   'Red',
+      //   'Blue',
+      //   'Yellow',
+      //   'green'
+      // ],
+      datasets: [{
+        label: 'Pie Dataset',
+        data: [300, 50, 100, 50],
+        backgroundColor: [
+          "rgba(255, 73, 85, 1)",
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          "rgba(62, 190, 66, 1)"
+  
+        ],
+        hoverOffset: 4
+      }]
+    }
  
  
   return (
@@ -86,10 +108,10 @@ function Result() {
                   <h1 className="charts-heading">Marks Obtained</h1>
                   <hr/>
                   <div className="row">
-                    <div className="col-lg-4">
-                      <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717415726/Group_427320132_ociyrs.png" alt="Pie Chart" className="chart-img"/>
+                    <div className="col-lg-5 col-md-6 col-sm-7">
+                      <ChartComponent type="pie" data={pieChartData} />
                     </div>
-                    <div className="col-lg-8 p-4">
+                    <div className="col-lg-7 col-md-6 col-sm-5 p-4">
                       <div className="row">
                         <div className="col-lg-6">
                           <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717416504/Rectangle_4153252_jxzdq4.png" alt="" />

@@ -9,6 +9,8 @@ import Instruction from "./admin/Instruction/instruction.jsx";
 import Instruction1 from './admin/Instruction/Instruction1.jsx';
 import Exampage from './admin/exam/Exampage.jsx';
 import Result from './admin/exam/Result.jsx';
+import ResultGraph from './admin/exam/resultGraph.jsx';
+
 function App() {
     return ( 
        
@@ -24,7 +26,7 @@ function App() {
                     <Route path='/dashboard/exam/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty/:no_of_question' element={<Exampage/>}/>
                     <Route path='/result' element={<Result/>}/>
                     
-                    
+                    <Route path= "/resultGraph" element={<ResultGraph/>}/>
                 </Routes> 
         </Router>  
     );

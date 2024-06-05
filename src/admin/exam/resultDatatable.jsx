@@ -1,5 +1,7 @@
 import DataTable from "react-data-table-component";
 import React, { useState, useCallback, useEffect } from "react";
+import {Chart} from 'chart.js/auto'
+import ChartComponent from '../chartComponent/ChartComponent';
 import axios from "axios";
 import { SERVER_URL } from "../../config";
 import "./ExamPage.css";
