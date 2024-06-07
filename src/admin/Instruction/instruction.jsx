@@ -1,12 +1,13 @@
 import React, {  useCallback, useEffect } from "react";
-import "./instruction.module.css";
 import Header from "../layouts/Header/Header.jsx";
 import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
-import dashboardStyle from "../dashboard/dashboard.module.css"
+// import dashboardStyle from "../dashboard/dashboard.module.css"
 import { Link , useParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { startExamReducer } from "../exam/ExamSlice.jsx";
+import "./instruction.module.css";
+import "./instruction.css";
 
 const Instruction =()=>
   {
@@ -32,18 +33,18 @@ const Instruction =()=>
      return(
      <>
 
-<div className={dashboardStyle['main-wrapper']}>
-		
+{/* <div className={dashboardStyle['main-wrapper']}> */}
+		<div className="ins-container">
           <Header/>
 			     <Sidebar/>
-		       <div className={dashboardStyle['page-wrapper']}>
+		       {/* <div className={dashboardStyle['page-wrapper']}> */}
 
-              <div>
+          <div className="col-xl-9 col-lg-9  instructions-top-container">
              
              <p>This is a Practice Test to get you familiarize with the test format and some tof the concepts that may be used. The question paper displayed is for practice purposes only. Under no circumstances should it be presumed as a sample paper.</p>
 
             <h5> A. Test Format</h5>
-             <ol type="1">  
+             <ol type="1" className="col-xl-10 col-lg-10">  
             <li>The TCS Aptitude Test has 2 sections - (Verbal Ability and Analytical Ability). The Verbal Ability Section has 1 question and the Analytical Ability Section has 30 questions.</li> 
             <li> The test will begin with the Verbal Ability Section first and then move to the Analytical Ability Section. The section are sequential and you cannot back to the Verbal Analytical Ability Section once you move to the next section.</li>
            <li>  The test duration for the Verbal Ability Section is (10 minutes) and for the Analytical Ability Section is (80 minutes).</li>
@@ -56,7 +57,7 @@ const Instruction =()=>
              </ol>
             
              <h5>B. Verbal Ability Section</h5> 
-             <ol type="1">
+             <ol type="1" className="col-xl-10 col-lg-10">
                <li>Read the question and all instructions in this section carefully.</li>
                <li>To answer the question, enter free text in the space provided.</li>
                <li>You will be automatically logged out of the Verbal Ability Section on completion of 10 minutes. The text entered by you will be submitted and taken as the final answer.</li>
@@ -65,7 +66,7 @@ const Instruction =()=>
              </ol>
             
              <h5>C. Analytical Ability Section</h5>  
-               <ol type="1">
+               <ol type="1" className="col-xl-10 col-lg-10">
                  <li>This section has multiple choice question.</li>
                  <li>The Analytical Ability Section has two sub-section A and Section B.</li>
                  <li>Section A has 28 question, both carrying equal marks.</li>
@@ -74,7 +75,7 @@ const Instruction =()=>
                  <li>An online scientific calculator has been provided on the test screen for your use. You are permitted to use your own scientific calculator, if you wish.</li>
                </ol>
             <h5>  D. Additional Instructions applicable to the actual TCS Online Aptitude Test</h5>
-             <ol>
+             <ol className="col-xl-10 col-lg-10">
              <li>Your performance in both Verbal and Analytical Ability Sections will be considered for shortlisting.</li>
              <li>Please refrain form using function keys on your keyboard as it will lock you out of the test.</li>
              <li>In case you get locked out/face any technical issues/require any assistance during the test, please connect with the coordinators at the examination center.</li>
@@ -83,18 +84,23 @@ const Instruction =()=>
              <li> You are permitted to leave the examination center only after you have submitted your test.
             </li>
              </ol>
-             <strong> All the Best!</strong><br></br>
-             <input type="checkbox"  name  ="checkbox" checked />
-             <label htmlFor="checkbox" style={{"color":"red"}}> The computer provided to me is in proper working condition. I have read and understood the instruction given above.
-             Previous
-             I'm ready to Begin</label>
+             <h1> All the Best!</h1><br></br>
+             <div className="d-flex align-item-center ">
+              <input type="checkbox"  name  ="checkbox" className="instruction-checkbox"  />
+              <label htmlFor="checkbox" className="instruction-label"> The computer provided to me is in proper working condition. I have read and understood the instruction given above.
+              Previous
+              I'm ready to Begin</label>
+             </div>
              <br></br>
-             <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} class="btn" style={{"padding":"10px","backgroundColor":"blue",'borderRadius':"3px",'color':"white",'text-align':'center','borderRadius':"64px"}} onClick={handleStartExam}>Start</Link>
+            <div className="d-flex align-item-center">
+            <button className="instruction-previous-button">Previous</button>
+              <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button>
+            </div>
                {/* <button >Start</button> */}
             <br/>
-       </div>  
+          </div>  
 				
-				</div>
+				{/* </div> */}
 				 {/* <Footer/> */}
 			</div>
 			<br/>

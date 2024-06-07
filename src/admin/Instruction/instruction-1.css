@@ -1,0 +1,179 @@
+.instruction-1-top-container{
+    background: #EBFAFF;
+}
+
+.instruction-1-main-container{
+    padding-top: 30px;
+}
+
+@media screen and (min-width:992px){
+    .instruction-1-main-container{
+        margin-left: 280px;
+        margin-top: 60px;
+    }
+  }
+
+@media screen and (max-width:992px){
+    .instruction-1-main-container{
+        margin-left: 50px;
+        margin-top: 60px;
+        margin-right: 50px;
+    }
+  }
+
+.instruction-1-practise-test-container{
+    background: rgba(102, 50, 89, 1);
+    border-radius: 5px;
+    border:0;
+}
+
+.instruction-1-practise-test-container p{
+    font-family: "Readex Pro";
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 47.5px;
+    text-align: left;
+    color:#FFFFFF;
+    padding: 30px;
+}
+
+.instruction-1-main-container .h5{
+    margin-top: 30px;
+    font-family: "Readex Pro";
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: left;
+    color: rgba(0, 164, 216, 1);
+}
+
+.instruction-1-practise-ol-list{
+    font-family: "Readex Pro";
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: left;
+    color: rgba(72, 71, 71, 1);
+    margin-left: 15px;
+}
+
+.ol-1-li-1{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background: var(--Blue-Primary, rgba(0, 164, 216, 1));
+    color:#FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+.ol-1-li-2{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background: rgba(255, 73, 85, 1);
+    color:#FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+.ol-1-li-3{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background: rgba(62, 190, 66, 1);
+    color:#FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+.ol-1-li-4{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background: rgba(210, 87, 240, 1);
+    color:#FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+.ol-1-li-5{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background: rgba(210, 87, 240, 1);
+    color:#FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+.instrucion-1-para-element{
+    font-family: "Readex Pro";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: left;
+    color: rgba(72, 71, 71, 1);
+}
+
+.instrucion-1-span-element{
+    font-family: "Readex Pro";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 28px;
+    text-align: left;
+    color: rgba(255, 73, 85, 1);
+}
+
+.instrucion-1-h5{
+    font-family: "Readex Pro";
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 27.5px;
+    text-align: left;
+    color: rgba(0, 164, 216, 1);
+}
+
+.li{
+    font-family: "Readex Pro";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: left;
+    color: rgba(255, 73, 85, 1);
+}
+
+.ol-li-4{
+    font-family: "Readex Pro";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+    color: rgba(72, 71, 71, 1);
+}
+
+.instruction-1-link{
+    width: 205px;
+    height: 50px;
+    border-radius: 5px 0px 0px 0px;
+}
