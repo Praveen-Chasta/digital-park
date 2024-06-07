@@ -5,7 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { loginReducer, togglesuccess } from './LoginSlice';
+import { loginReducer, togglesuccess,messageClear } from './LoginSlice';
+import { PropagateLoader } from 'react-spinners';
+
 function Login() {
 
   const navigate = useNavigate();
@@ -13,16 +15,32 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+  const {loader} = useSelector(state=>state.login);
   let success = useSelector((state) => state.login.success);
 
+
   useEffect(() => {
-    if (success) {
-      // If success is true, trigger the click event on the close button
-      const closeButton = document.getElementById('closeButton');
-      if (closeButton) {
-        closeButton.click();
+    // if (success) {
+    //   // If success is true, trigger the click event on the close button
+    //   const closeButton = document.getElementById('closeButton');
+    //   if (closeButton) {
+    //     closeButton.click();
+    //   }
+    // }
+   
+    if(success)
+      {
+
+       
+        setTimeout(()=>{
+          const closeButton = document.getElementById('closeButton');
+          if (closeButton) 
+            {
+               closeButton.click()
+            }
+        },100);
+       
       }
-    }
   }, [success]);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +49,13 @@ function Login() {
     setShowPassword(!showPassword);
   };
 
-
+const overrideStyle ={
+  display:'flex',
+  margin:'0 auto',
+  height:'24px',
+  justifyContent:'center',
+  alignItem:'center',
+}
 
   return (
 
@@ -70,13 +94,13 @@ function Login() {
                       navigate("/", {
                         replace: true
                       });
-                    }, 3000);
+                    }, 1000);
                   } else {
                     dispatch(togglesuccess(false));
                     setError(data?.payload?.error.message);
                     setTimeout(() => {
                       setError("");
-                    }, 3000);
+                    }, 1000);
                   }
                 });
               }}
@@ -141,7 +165,11 @@ function Login() {
                   </div>
 
 
-                  <button type="submit" className="btn btn-primary" >Login</button>
+                  <button  disabled={loader ? true : false}   className={`btn btn-primary ${loader ? "pb-4" : ""}`} type='submit' >
+                      {
+                        loader ? <PropagateLoader color='#fff' cssoverride = {overrideStyle} /> : 'Login'
+                      }
+                    </button>
                   {/* <p>Don't have an account? <Link  >Sign Up</Link></p> */}
                   <p>Don't have an account? <Link data-bs-target="#signUpPopup" data-bs-toggle="modal" aria-label="Sign Up" >Sign Up</Link></p>
 

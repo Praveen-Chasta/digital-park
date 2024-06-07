@@ -1,6 +1,5 @@
 import React, {  useCallback, useEffect } from "react";
 import Header from "../layouts/Header/Header.jsx";
-import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 // import dashboardStyle from "../dashboard/dashboard.module.css"
 import { Link , useParams} from "react-router-dom";
@@ -101,7 +100,6 @@ const Instruction =()=>
           </div>  
 				
 				{/* </div> */}
-				 {/* <Footer/> */}
 			</div>
 			<br/>
 			<br/>

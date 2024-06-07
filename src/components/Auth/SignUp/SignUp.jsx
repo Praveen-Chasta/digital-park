@@ -6,7 +6,7 @@ import { signUpReducer, togglesuccess } from './RegisterSlice';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
-
+import { PropagateLoader } from 'react-spinners';
 import { SERVER_URL } from "../../../config"
 
 const BASE_URL = SERVER_URL;
@@ -22,6 +22,8 @@ function SignUp() {
     const [classes, setClasses] = useState([]);
     const [classesId, setClassesId] = useState('');
 
+    const {loader} = useSelector(state=>state.register);
+    
     useEffect(() => {
         axios.get(`${BASE_URL}/categories`)
             .then(response => {
@@ -51,17 +53,28 @@ function SignUp() {
     };
 
     useEffect(() => {
-        if (success) {
-            // If success is true, trigger the click event on the close button
-            const closeButton = document.getElementById('closeSignUpButton');
-            if (closeButton) {
-                closeButton.click();
+        if(success)
+            {
+            setTimeout(()=>{
+                const closeButton = document.getElementById('closeButton');
+                if (closeButton) 
+                  {
+                     closeButton.click()
+                  }
+              },100);
+             
             }
-        }
-    }, [success]);
+     }, [success]);
+    const overrideStyle ={
+        display:'flex',
+        margin:'0 auto',
+        height:'24px',
+        justifyContent:'center',
+        alignItem:'center',
+      }
     return (
         <div className="modal fade" id="signUpPopup" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-lg p-5">
                 <div className="modal-content">
                     <div className="modal-body">
 
@@ -107,7 +120,7 @@ function SignUp() {
                                             navigate("/", {
                                                 replace: true,
                                             });
-                                        }, 3000);
+                                        }, 500);
                                     } else {
                                         dispatch(togglesuccess(false));
                                         setError(data?.payload?.error.message);
@@ -271,7 +284,12 @@ function SignUp() {
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="btn btn-primary" >Sign Up</button>
+                                    <button type="submit"  disabled={loader ? true : false}  className={`btn btn-primary ${loader ? "pb-4" : ""}`} >
+                                    {
+                                        loader ? <PropagateLoader color='#fff' cssoverride = {overrideStyle} /> : 'Sign Up'
+                                    }
+
+                                    </button>
                                     {/* <p>Already have an account? <Link  >Log In</Link></p> */}
                                     <p>Already have an account? <Link data-bs-toggle="modal" data-bs-target="#loginPopup" aria-label="Login">Login</Link></p>
 

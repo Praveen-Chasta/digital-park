@@ -2,7 +2,6 @@ import React from "react";
 // import "./instruction.module.css";
 import { useNavigate } from 'react-router-dom';
 import Header from "../layouts/Header/Header.jsx";
-import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 // import dashboardStyle from "../dashboard/dashboard.module.css"
 import { Link , useParams} from "react-router-dom";
@@ -83,9 +82,8 @@ const Instruction1 =() =>{
           <button className="border-0"><Link to={`/dashboard/instruction/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`}  className="instruction-1-link" id="next" style={{"padding": "7px", "padding":"15px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}}  onClick={submit}>Next</Link></button>
           {/* <button>Next</button> */}
 
-            
         </div>
-        {/* <Footer/> */}
+      
 </div>
       <br/>
       <br/>
