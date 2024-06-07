@@ -5,7 +5,7 @@ import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 import dashboardStyle from "../dashboard/dashboard.module.css"
 import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addResultReducer, getResultReducer, quizQuestionsReducer, finalSubmitReducer, quizResultReducer } from "./ExamSlice.jsx";
+import { addResultReducer, getResultReducer, quizQuestionsReducer, finalSubmitReducer, quizResultReducer, resultReducer } from "./ExamSlice.jsx";
 import PageRefreshWarning from "./PageRefreshWarning.jsx";
 import { useNavigate } from 'react-router-dom';
 
@@ -98,6 +98,19 @@ function Exampage() {
     try {
       dispatch(
         quizResultReducer({
+          //user_type: "admin",
+          quiz_id:startExam.id,
+        })
+      );
+    } catch (error) {
+      console.error("Failed to fetch quiz questions:", error);
+    }
+  }, [dispatch,startExam.id]);
+
+  const getResult = useCallback(async () => {
+    try {
+      dispatch(
+        resultReducer({
           //user_type: "admin",
           quiz_id:startExam.id,
         })
@@ -301,6 +314,7 @@ function Exampage() {
       
         setSubmitted(true);
         getQuizResult();
+        getResult();
 
       }}, [dispatch,resultId, startExam.id, QuestionId,selectedOption, isReview, questionStatusId]);
       
