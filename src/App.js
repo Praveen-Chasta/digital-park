@@ -10,6 +10,7 @@ import Instruction1 from './admin/Instruction/Instruction1.jsx';
 import Exampage from './admin/exam/Exampage.jsx';
 import Result from './admin/exam/Result.jsx';
 import ResultGraph from './admin/exam/resultGraph.jsx';
+import ExamQuestion from './admin/exam/ExamQuestion.jsx';   
 
 function App() {
     return ( 
@@ -27,6 +28,7 @@ function App() {
                     <Route path='/result' element={<Result/>}/>
                     
                     <Route path= "/resultGraph" element={<ResultGraph/>}/>
+                    <Route path="examQuestion" element={<ExamQuestion/>}/>
                 </Routes> 
         </Router>  
     );

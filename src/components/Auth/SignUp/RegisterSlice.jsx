@@ -34,13 +34,30 @@ export const signUpReducer = createAsyncThunk(
 
 export const RegisterSlice = createSlice({
   name: "register",
-  initialState,
+  initialState:{
+    loader:false,
+  },
   reducers: {
     togglesuccess: (state, action) => {
       //console.log(action);
       state.success = action?.payload;
     },
   },
+  extraReducers:(builder)=>{
+    builder
+    .addCase(signUpReducer.pending,(state,{payload})=>{
+        state.loader = true;
+    })
+    .addCase(signUpReducer.rejected,(state,{payload})=>{
+      state.loader = false;
+      state.errorMessage = payload.error;
+  })
+  .addCase(signUpReducer.fulfilled,(state,{payload})=>{
+    state.loader = false;
+    state.successMessage = payload.message;
+})
+
+}
 
 });
 
