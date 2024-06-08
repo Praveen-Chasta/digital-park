@@ -2,18 +2,27 @@ import React, {  useCallback, useEffect } from "react";
 import Header from "../layouts/Header/Header.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 // import dashboardStyle from "../dashboard/dashboard.module.css"
-import { Link , useParams} from "react-router-dom";
+import { Link , useLocation, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { startExamReducer } from "../exam/ExamSlice.jsx";
 import "./instruction.module.css";
 import "./instruction.css";
+import useBlockNavigation from "../exam/BlockNavigation.jsx";
 
 const Instruction =()=>
   {
     
-  const { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = useParams();
+
+    const location = useLocation();
+    let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
+
+
+    useBlockNavigation();
+  
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  
   const handleStartExam = useCallback(() => {
     dispatch(
       startExamReducer({
@@ -26,8 +35,17 @@ const Instruction =()=>
 
       })
     );
+    navigate('/dashboard/examQuestion', {
+      state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+    });
   }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
 
+  const handlePrevious = ()=>{
+    navigate('/dashboard/instruction1', {
+      state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+    });
+  }
+  
 
      return(
      <>
@@ -92,11 +110,12 @@ const Instruction =()=>
              </div>
              <br></br>
             <div className="d-flex align-item-center">
-            <button className="instruction-previous-button">Previous</button>
-              {/* <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button> */}
-              <button className="border-0" onClick={handleStartExam} style={{ padding: "10px", paddingTop: "13px", color: "white", textAlign: 'center' }}>
-                I'm ready to Begin
-              </button>
+            <button className="instruction-previous-button" onClick={handlePrevious}>Previous</button>
+              {/* <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} 
+              class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button> */}
+            
+              <button className="border-0"  onClick={handleStartExam}> <Link class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}}> I'm ready to Begin</Link></button>
+            
             </div>
                {/* <button >Start</button> */}
             <br/>

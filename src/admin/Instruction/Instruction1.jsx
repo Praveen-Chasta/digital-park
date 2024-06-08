@@ -4,16 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../layouts/Header/Header.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 // import dashboardStyle from "../dashboard/dashboard.module.css"
-import { Link , useParams} from "react-router-dom";
+import { Link , useLocation} from "react-router-dom";
 import "./instruction-1.css"
+import useBlockNavigation from "../exam/BlockNavigation.jsx";
 const Instruction1 =() =>{
 
+  useBlockNavigation();
+  const location = useLocation();
+  let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
 
-  const { id, subjectId, ChapterId, timeLimit , Difficulty, no_of_question} = useParams();
   const navigate = useNavigate();
    const submit =()=>{
-    navigate('/dashboard/exam');
+    navigate('/dashboard/instruction', {
+      state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+    });
    }
+
+    const handlePrevious=()=>{
+      navigate(`/classes/${id}`);
+    }
    return (<>
 
 {/* <div className={dashboardStyle['main-wrapper']}> */}
@@ -78,8 +87,9 @@ const Instruction1 =() =>{
                   <li>Note: that ONLY Quesstions for which answers are saved or marked for reivew after answering will be considered for evalution.
                   Next</li>
             </ol>
+          <button className="border-0"  onClick={handlePrevious}><Link  className="instruction-1-link" id="next" style={{"padding": "7px", "padding":"15px","margin-right":"10px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}} >Previous</Link></button>
 
-          <button className="border-0"><Link to={`/dashboard/instruction/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`}  className="instruction-1-link" id="next" style={{"padding": "7px", "padding":"15px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}}  onClick={submit}>Next</Link></button>
+          <button className="border-0"  onClick={submit}><Link  className="instruction-1-link" id="next" style={{"padding": "7px", "padding":"15px","color": "white", "backgroundColor": "#1976D2","marginBottom": "14px"}} >Next</Link></button>
           {/* <button>Next</button> */}
 
         </div>

@@ -8,28 +8,80 @@ import ChartComponent from "../chartComponent/ChartComponent.jsx";
 import './result.css'; // Import this if you separate the CSS into an App.css file
 // import ResultDatatable from "./resultDatatable.jsx";
 // import ResultDatatale from '../exam/resultDatatable.jsx'
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {  useLocation } from "react-router-dom";
+import { quizResultReducer, resultReducer } from "./ExamSlice.jsx";
+import useBlockNavigation from "./BlockNavigation.jsx";
 function Result() {
+
+  const location = useLocation();
+  const dispatch = useDispatch();
+  useBlockNavigation();
+  let { quiz_id } = location.state || {};
 
   const quizResult = useSelector((state) => state.quizQuestions.quizResult) || [];
   const result = useSelector((state) => state.quizQuestions.result) || [];
   
-  if (quizResult.quiz_id) 
-    {
-       localStorage.setItem('result_quiz_id', quizResult.quiz_id);
-     }
+  const getQuizResult = useCallback(async () => {
+    try {
+      dispatch(
+        quizResultReducer({
+          //user_type: "admin",
+          quiz_id:quiz_id,
+        })
+      );
+    } catch (error) {
+      console.error("Failed to fetch quiz questions:", error);
+    }
+  }, [dispatch, quiz_id]);
 
+  useEffect(() => {
+    let mounted = true;
 
-        let total_no_of_question = result.total_no_of_question ?? 0;
-        let no_of_right_answer= result.no_of_right_answer ?? 0;
-        let no_of_wrong_answer= result.no_of_wrong_answer ?? 0;
-        let no_of_attempt_question= result.no_of_attempt_question ?? 0;
-        let no_of_not_attempt_question= result.no_of_not_attempt_question ?? 0;
-        let no_of_marked_question= result.no_of_marked_question ?? 0;
-        let total_no_marks= result.total_no_marks ?? 0;
+    if (mounted) {
+      getQuizResult();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [getQuizResult]);
+  
+
+  const getResult = useCallback(async () => {
+    try {
+      dispatch(
+        resultReducer({
+          //user_type: "admin",
+          quiz_id:quiz_id,
+        })
+      );
+    } catch (error) {
+      console.error("Failed to fetch quiz questions:", error);
+    }
+  }, [dispatch, quiz_id]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      getResult();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [getResult]);
+
+    let total_no_of_question = result.total_no_of_question ?? 0;
+    let no_of_right_answer= result.no_of_right_answer ?? 0;
+    let no_of_wrong_answer= result.no_of_wrong_answer ?? 0;
+    let no_of_attempt_question= result.no_of_attempt_question ?? 0;
+    let no_of_not_attempt_question= result.no_of_not_attempt_question ?? 0;
+    let no_of_marked_question= result.no_of_marked_question ?? 0;
+    let total_no_marks= result.total_no_marks ?? 0;
      
-     const pieChartData = {
+    const pieChartData = {
       // labels: [
       //   'Red',
       //   'Blue',

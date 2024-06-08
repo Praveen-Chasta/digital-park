@@ -76,7 +76,7 @@ const Header =()=>{
       <i className="fas fa-bars"></i>
       </Link>
       <ul className={`nav ${dashboardStyle['user-menu']}`}>
-     
+      <Link className="nav-link active" aria-current="page" style={{'color':'black', fontSize:'18px', fontWeight:'bold'}} to="/">Home</Link>
       <li className="nav-item dropdown has-arrow new-user-menus">
       <Link href="#" className={`dropdown-toggle ${dashboardStyle['nav-link']} `} data-bs-toggle="dropdown">
       <div className={dashboardStyle['user-img']}>

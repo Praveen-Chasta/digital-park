@@ -22,8 +22,6 @@ const SubjectClass=()=>{
   const [timeLimit , setTimeLimit] = useState(0);
 
 
-  console.log(chapterNoOfQuestion);
-
   const data = useSelector((state) => state.subjectClass.data);
   const chapter = useSelector((state) => state.subjectClass.chapters);
   const question = useSelector((state) => state.subjectClass.no_of_question);
@@ -125,7 +123,9 @@ const SubjectClass=()=>{
           const loginModal = new window.bootstrap.Modal(document.getElementById('loginPopup'));
           loginModal.show();
         }else{
-          navigate(`/dashboard/instruction1/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`)
+          navigate('/dashboard/instruction1', {
+            state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+          });
         }
     };
 

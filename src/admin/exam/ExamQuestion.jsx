@@ -1,20 +1,17 @@
 import Header from "../layouts/Header/Header.jsx";
 import "./ExamQuestion.css";
 import React, { useState, useCallback, useEffect } from "react";
-import {  useParams } from "react-router-dom";
+import {  useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addResultReducer, getResultReducer, quizQuestionsReducer, finalSubmitReducer, quizResultReducer, resultReducer } from "./ExamSlice.jsx"
 import PageRefreshWarning from "./PageRefreshWarning.jsx";
 import { useNavigate } from 'react-router-dom';
+import useBlockNavigation from "./BlockNavigation.jsx";
 function ExamQuestion(){
-
-    // let { id=1, subjectId=1, ChapterId=0, timeLimit=20, Difficulty=1 } = useParams();
     
-    let id=1; 
-    let subjectId=1;
-    let  ChapterId=0;
-    let   timeLimit=20;
-    let    Difficulty=1;
+    const location = useLocation();
+    let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
+  
   const quizData = useSelector((state) => state.quizQuestions.examQuestions) || [];
   const startExam = useSelector((state) => state.quizQuestions.startExam);
 
@@ -336,8 +333,11 @@ function ExamQuestion(){
       }
       const navigate = useNavigate();
       
+      const quiz_id=  startExam.id;
       if (submitted) {
-        navigate('/result')
+        navigate('/result', {
+            state: { quiz_id }
+          });
     }
  
     return (
