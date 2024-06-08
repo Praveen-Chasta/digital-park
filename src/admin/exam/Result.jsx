@@ -7,7 +7,7 @@ import dashboardStyle from "../dashboard/dashboard.module.css"
 import ChartComponent from "../chartComponent/ChartComponent.jsx";
 import './result.css'; // Import this if you separate the CSS into an App.css file
 // import ResultDatatable from "./resultDatatable.jsx";
-import ResultDatatale from '../exam/resultDatatable.jsx'
+// import ResultDatatale from '../exam/resultDatatable.jsx'
 import { useSelector } from "react-redux";
 
 function Result() {
@@ -211,16 +211,18 @@ function Result() {
                   </p>
                 </div>
 
-
-                <div className="col-lg-6 question-container-even mb-4 p-0">
+                  <div className="row">
+                   
                   {quizResult.slice(0, showAllQuestions ? quizResult.length : 4).map((questionObj, index) => (
+                     <div className="col-lg-6 question-container-even mb-4 p-0">
+                  
                     <div key={questionObj.question_id} className="question-options-container">
                       <h1>Question {questionObj.question_id}: {questionObj.question}</h1>
                       {questionObj.options.map((option, optIndex) => (
                         <div key={optIndex} className={`option${optIndex + 1}`}>
                           <input
                             type="radio"
-                            className="radio-input"
+                            className="radio-input "
                             id={`option-${questionObj.result_id}-${optIndex}`}
                             name={`question-${questionObj.result_id}`}
                             value={option}
@@ -230,7 +232,8 @@ function Result() {
                             htmlFor={`option-${questionObj.result_id}-${optIndex}`}
                             style={{
                               color: `option${optIndex + 1}` === questionObj.correct_answer ? 'green' : 'red',
-                              fontWeight: `option${optIndex + 1}` === questionObj.correct_answer ? 'bold' : 'normal'
+                              fontWeight: `option${optIndex + 1}` === questionObj.correct_answer ? 'bold' : 'normal',
+                              marginLeft:'20px'
                             }}
                           >
                             {option}
@@ -242,123 +245,15 @@ function Result() {
                         <p className="result-para-2">Answer Correct: {questionObj.correct_answer}</p>
                       </div>
                     </div>
-                  ))}
+                    </div>
+                   ))}
+                  </div>
+                
+                  </div>
                   <div className="Time-taken-container">
                     <p>Time Spent: 02 Sec</p>
                   </div>
-                </div>
-     {/* <div className="col-lg-6 question-container-even mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
-                      <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
-                      </div>
-                    </div>
-                </div> */}
-                {/* <div className="col-lg-6 question-container-odd mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test"/>
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
-                      <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
-                      </div>
-                    </div>
-                </div>
-                <div className="col-lg-6 question-container-even mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test"/>
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
-                      <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
-                      </div>
-                    </div>
-                </div>
-                <div className="col-lg-6 question-container-odd mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test"/>
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
-                      <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
-                      </div>
-                    </div>
-                </div> */}
+               
                
               {quizResult.length > 4 && (
                 <div className="d-flex justify-content-center">
@@ -383,7 +278,7 @@ function Result() {
   {/* <Footer /> */}
   
       
-</div>
+{/* </div> */}
 <br />
 <br />
 </>
