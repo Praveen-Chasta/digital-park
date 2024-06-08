@@ -340,6 +340,11 @@ function ExamQuestion(){
           });
     }
  
+    const handleInstruction =()=>{
+      navigate('/dashboard/instruction', {
+        state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+      });
+     }
     return (
         <>
             <Header/>
@@ -440,7 +445,7 @@ function ExamQuestion(){
                                     
                                 </div>
                                 <div className="exam-question-timer">
-                                    <h1>Time Left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</h1>
+                                <h1>Time Left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</h1>
                                     <p>Candidate</p>
                                 </div>
                         </div>
@@ -491,7 +496,7 @@ function ExamQuestion(){
                                     <button className="button-one">Profile</button>
                                 </div>
                                 <div className="d-flex align-item-center col-lg-6">
-                                    <button className="button-one">Instructions</button>
+                                    <button className="button-one"onClick={handleInstruction}>Instructions</button>
                                 </div>
                                 <div className="d-flex align-item-center col-lg-6">
                                     <button className="button-one">Question Paper</button>

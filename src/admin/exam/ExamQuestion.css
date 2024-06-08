@@ -216,6 +216,7 @@
     border-radius: 5px;
     background: rgba(62, 190, 66, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .exam-question-attempted-question-details-container .cont-2{
@@ -224,6 +225,7 @@
     border-radius: 5px;
     background: rgba(255, 73, 85, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .exam-question-attempted-question-details-container .cont-3{
@@ -232,6 +234,7 @@
     border-radius: 5px;
     background: rgba(0, 164, 216, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .exam-question-attempted-question-details-container .cont-4{
@@ -240,6 +243,7 @@
     border-radius: 5px;
     background: rgba(190, 188, 188, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .cont-1 p{
@@ -281,7 +285,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 180px;
+    /* margin-top: 180px; */
 }
 
 .result-1{

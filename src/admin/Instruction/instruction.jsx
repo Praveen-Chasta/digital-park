@@ -103,7 +103,7 @@ const Instruction =()=>
              </ol>
              <h1> All the Best!</h1><br></br>
              <div className="d-flex align-item-center ">
-              <input type="checkbox"  name  ="checkbox" className="instruction-checkbox"  />
+              <input type="checkbox"  name  ="checkbox" className="instruction-checkbox" checked />
               <label htmlFor="checkbox" className="instruction-label"> The computer provided to me is in proper working condition. I have read and understood the instruction given above.
               Previous
               I'm ready to Begin</label>

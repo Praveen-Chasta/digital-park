@@ -16,7 +16,7 @@ function Result() {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  useBlockNavigation();
+  // useBlockNavigation();
   let { quiz_id } = location.state || {};
 
   const quizResult = useSelector((state) => state.quizQuestions.quizResult) || [];
