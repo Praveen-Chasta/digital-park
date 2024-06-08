@@ -93,7 +93,10 @@ const Instruction =()=>
              <br></br>
             <div className="d-flex align-item-center">
             <button className="instruction-previous-button">Previous</button>
-              <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button>
+              {/* <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button> */}
+              <button className="border-0" onClick={handleStartExam} style={{ padding: "10px", paddingTop: "13px", color: "white", textAlign: 'center' }}>
+                I'm ready to Begin
+              </button>
             </div>
                {/* <button >Start</button> */}
             <br/>

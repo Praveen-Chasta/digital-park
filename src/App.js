@@ -28,7 +28,7 @@ function App() {
                     <Route path='/result' element={<Result/>}/>
                     
                     <Route path= "/resultGraph" element={<ResultGraph/>}/>
-                    <Route path="examQuestion" element={<ExamQuestion/>}/>
+                    <Route path='/dashboard/examQuestion' element={<ExamQuestion />} />
                 </Routes> 
         </Router>  
     );

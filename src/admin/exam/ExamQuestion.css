@@ -214,7 +214,7 @@
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: rgba(255, 73, 85, 1);
+    background: rgba(62, 190, 66, 1);
     margin: 10px;
 }
 
@@ -222,7 +222,7 @@
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: rgba(0, 164, 216, 1);
+    background: rgba(255, 73, 85, 1);
     margin: 10px;
 }
 
@@ -230,7 +230,7 @@
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: rgba(62, 190, 66, 1);
+    background: rgba(0, 164, 216, 1);
     margin: 10px;
 }
 
@@ -244,22 +244,22 @@
 
 .cont-1 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .cont-2 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .cont-3 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .cont-4 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .exam-question-bottom-1-container{
