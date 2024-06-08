@@ -16,7 +16,6 @@ const Instruction =()=>
     const location = useLocation();
     let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
 
-
     useBlockNavigation();
   
   const navigate = useNavigate();

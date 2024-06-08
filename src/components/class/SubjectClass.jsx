@@ -14,8 +14,7 @@ const SubjectClass=()=>{
 
   let [subjectDifficulty , setSubjectDifficulty] = useState(1);
   let [chapterDifficulty , setChapterDifficulty] = useState(1);
-  const [noOfQuestion , setNoOfQuestion] = useState('');
-  const [chapterNoOfQuestion , setChapterNoOfQuestion] = useState('');
+  
   const [subjectId , setSubjectId] = useState(0);
   const [ChapterId , setChapterId] = useState(0);
   const [chapterSubjectId , setChapterSubjectId] = useState(0);
@@ -25,8 +24,10 @@ const SubjectClass=()=>{
   const data = useSelector((state) => state.subjectClass.data);
   const chapter = useSelector((state) => state.subjectClass.chapters);
   const question = useSelector((state) => state.subjectClass.no_of_question);
+  const [noOfQuestion , setNoOfQuestion] = useState('');
+  const [chapterNoOfQuestion , setChapterNoOfQuestion] = useState('');
 
-  
+
   const dispatch = useDispatch();
   const getAllList = useCallback(async () => {
     dispatch(
@@ -115,7 +116,9 @@ const SubjectClass=()=>{
     }, [initialUser]);
     
     let Difficulty = subjectDifficulty ? subjectDifficulty : chapterDifficulty;
-    let no_of_question = chapterNoOfQuestion ? chapterNoOfQuestion : noOfQuestion;
+    // let no_of_question = chapterNoOfQuestion ? chapterNoOfQuestion : noOfQuestion;
+    let no_of_question = (chapterNoOfQuestion || noOfQuestion) ?? question[0].no_of_questions;
+
     const navigate = useNavigate();
     const handleSubmit = () => {
     
@@ -128,6 +131,19 @@ const SubjectClass=()=>{
           });
         }
     };
+
+
+    useEffect(() => {
+    if (question && question.length > 0) {
+        setChapterNoOfQuestion(question[0].no_of_questions);
+        setNoOfQuestion(question[0].no_of_questions);
+        setTimeLimit(question[0].quiz_time);
+    }
+}, [question]);
+
+useEffect(() => {
+}, [chapterNoOfQuestion]);
+
 
     return(
             <>
@@ -186,7 +202,7 @@ const SubjectClass=()=>{
                                 {question && question?.length > 0 ? (
                             question?.map((item, i) => (
                                 <div className="form-check" key={i}>
-                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="chapterNoOfQuestion" value={item.id}  onChange={() => {setChapterNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}}/> {item.no_of_questions}{" Question Quiz"}
+                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="chapterNoOfQuestion" value={item.id}  onChange={() => {setChapterNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}}  defaultChecked={i === 0} /> {item.no_of_questions}{" Question Quiz"}
                                     <label className="form-check-label" htmlFor={"radio7" + i}></label>
                                   </div>
                               ))
@@ -273,8 +289,8 @@ const SubjectClass=()=>{
                               {question && question?.length > 0 ? (
                             question?.map((item, i) => (
                                 <div className="form-check" key={i}>
-                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="noOfQuestion" value={item.id}  onChange={() => { setNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}} /> {item.no_of_questions}{" Question Quiz"}
-                                    <label className="form-check-label" htmlFor={"radio7" + i}></label>
+                                    <input type="radio" className="form-check-input" id={"radio8" + i} name="noOfQuestion" value={item.id}  onChange={() => { setNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}} /> {item.no_of_questions}{" Question Quiz"}
+                                    <label className="form-check-label" htmlFor={"radio8" + i}></label>
                                   </div>
                               ))
                               ) : (
