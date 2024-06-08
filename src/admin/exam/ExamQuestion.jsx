@@ -345,6 +345,10 @@ function ExamQuestion(){
         state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
       });
      }
+     const buttonStyle = {
+      background: currentQuestion === 0 ? 'rgba(167, 205, 217, 1)' : 'rgba(0, 164, 216, 1)'
+    };
+    
     return (
         <>
             <Header/>
@@ -422,7 +426,7 @@ function ExamQuestion(){
                                     <p>Question not available</p>
                                 )}
                                 <button className="button-4" onClick={() => { handleClearAnswer(); setQuestionId(quizData[currentQuestion].id);}}>Clear Response</button>
-                                <button className="button-5" onClick={() => {handleNavigation('prev'); getResultList();}} disabled={currentQuestion === 0}>
+                                <button className="button-5" onClick={() => {handleNavigation('prev'); getResultList();}} disabled={currentQuestion === 0} style={buttonStyle}>
                                     Previous
                                 </button>
                                 <button className= "button-5"
@@ -431,7 +435,9 @@ function ExamQuestion(){
                                     getResultList();
                                     handleNextAddResult();
                                     handleResultId();
-                                    }} disabled={currentQuestion === quizData.length - 1} style={{"marginRight":"20px"}}>
+                                    }} disabled={currentQuestion === quizData.length - 1} 
+                                    style={{"marginRight":"20px",background: currentQuestion === quizData.length - 1 ? 'rgba(167, 205, 217, 1)' : 'rgba(0, 164, 216, 1)'}}
+                                    >
                                     Next
                                 </button>
                             </div>
