@@ -354,7 +354,7 @@ function ExamQuestion(){
             <Header/>
             <div className="exam-question-top-container">
                 <div className="container-fluid row">
-
+                <PageRefreshWarning />
 
                     <div className="col-xl-8 col-lg-12 exam-question-main-container">
                         <div className="exam-question-button-container mb-4">
