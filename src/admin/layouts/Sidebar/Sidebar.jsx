@@ -1,12 +1,11 @@
 import React  from "react";
 import dashboardStyle from "../../dashboard/dashboard.module.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import './sidebar.css';
 
 
 const Sidebar=()=>{
-	
-
-  
+	 
   
   return(
         <>
@@ -14,10 +13,10 @@ const Sidebar=()=>{
                 <div className={`${dashboardStyle['sidebar-inner']} slimscroll`}>
 					<div id="sidebar-menu" className={dashboardStyle['sidebar-menu']}>
 						<ul>
-							<li className={dashboardStyle['menu-title']}> 
+							{/* <li className={dashboardStyle['menu-title']}> 
 								<span>Main Menu</span>
-							</li>
-							<li className="submenu active">
+							</li> */}
+							{/* <li className="submenu active">
 								<Link href="#">
 									<i className="feather-grid"></i> <span> Dashboard</span> <span className="menu-arrow"></span></Link>
 								<ul>
@@ -25,8 +24,8 @@ const Sidebar=()=>{
 									<li><Link href="teacher-dashboard.html">Teacher Dashboard</Link></li>
 									<li><Link href="student-dashboard.html">Student Dashboard</Link></li>
 								</ul>
-							</li>
-							<li className="submenu">
+							</li> */}
+							{/* <li className="submenu">
 								<Link href="#"><i className="fas fa-graduation-cap"></i> <span> Students</span> <span className={dashboardStyle['menu-arrow']}></span></Link>
 								<ul>
 									<li><Link href="students.html">Student List</Link></li>
@@ -34,7 +33,15 @@ const Sidebar=()=>{
 									<li><Link href="add-student.html">Student Add</Link></li>
 									<li><Link href="edit-student.html">Student Edit</Link></li>
 								</ul>
-							</li>
+							</li> */}
+							
+								<li className="ul-0 mt-4">Dashboard</li>
+								<li className="ul-1 mt-4">Quizz</li>
+								<li className="ul-1 mt-4">History</li>
+								<li className="ul-1 mt-4"><i class="bi bi-person"></i>Profile</li>
+								<li className="ul-1 mt-4">Contact Us</li>
+								<li className="ul-1 mt-4"><i class="bi bi-box-arrow-right bg-white"></i>Logout</li>
+							
 							{/* <li className="submenu">
 								<Link href="#"><i className="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span className={dashboardStyle['menu-arrow']}></span></Link>
 								<ul>

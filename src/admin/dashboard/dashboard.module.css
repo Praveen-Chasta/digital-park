@@ -2438,7 +2438,7 @@ div.dataTables_wrapper div.dataTables_length select {
 -----------------------*/
 
 .header {
-  background-color: #fff;
+  background-color: rgba(0, 164, 216, 1);
   border-bottom: 1px solid #f3f3f4;
   left: 0;
   position: fixed;
@@ -2842,7 +2842,7 @@ footer p {
   transition: all 0.2s ease-in-out 0s;
   width: 259px;
   z-index: 1001;
-  background: #FFFFFF;
+  background: rgba(47, 48, 68, 1);
 }
 
 .sidebar.opened {

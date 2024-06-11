@@ -103,8 +103,8 @@ const Instruction =()=>
 				{/* </div> */}
 				 {/* <Footer/> */}
 			</div>
-			<br/>
-			<br/>
+			{/* <br/>
+			<br/> */}
 
 
            

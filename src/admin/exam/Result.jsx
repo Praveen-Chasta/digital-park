@@ -46,7 +46,7 @@ function Result() {
       <Header />
       {/* <Sidebar /> */}
       <div className={dashboardStyle['page-wrappers']}>
-        <div className="result-container">
+        <div className="result-container pt-5">
           <div className="container section mt-5">
           
               {/* <div className="question-info1 mt-5">
@@ -309,8 +309,7 @@ function Result() {
   
       
 </div>
-<br />
-<br />
+
 </>
   );
 }

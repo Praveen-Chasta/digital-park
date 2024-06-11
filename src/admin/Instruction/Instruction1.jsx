@@ -87,8 +87,8 @@ const Instruction1 =() =>{
         </div>
         {/* <Footer/> */}
 </div>
-      <br/>
-      <br/>
+      {/* <br/>
+      <br/> */}
 
 
 
