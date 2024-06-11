@@ -73,21 +73,6 @@ const Header =()=>{
       <button className={dashboardStyle['btn']} type="submit"><i className="fas fa-search"></i></button>
       </form>
       </div> */}
-<<<<<<< HEAD
-      <Link className={dashboardStyle['mobile_btn']} id="mobile_btn">
-      <i className="fas fa-bars"></i>
-      </Link>
-      <ul className={`nav ${dashboardStyle['user-menu']}`}>
-      <Link className="nav-link active" aria-current="page" style={{'color':'black', fontSize:'18px', fontWeight:'bold'}} to="/">Home</Link>
-      <li className="nav-item dropdown has-arrow new-user-menus">
-      <Link href="#" className={`dropdown-toggle ${dashboardStyle['nav-link']} `} data-bs-toggle="dropdown">
-      <div className={dashboardStyle['user-img']}>
-        <img className="rounded-circle" src={profile01} width="31" alt="Ryan Taylor"/>
-        <div className={dashboardStyle['user-text']}>
-        <h6>Hi 
-        {user ? <> {data.user_name ?? ""} </> : <> {""}</>} </h6>
-          {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
-=======
      <div className="header-flex-container d-flex align-item-center justify-content-between">
         <h2 className="student-result-heading">Result</h2>
           <Link className={dashboardStyle['mobile_btn']} id="mobile_btn">
@@ -101,7 +86,7 @@ const Header =()=>{
             
             <div className={dashboardStyle['user-text']}>
             <h6 className="student-username">Hi 
-            {user ? <> {data.user_name} </> : <> {""}</>} </h6>
+            {user ? <> {data.user_name ?? ""} </> : <> {""}</>} </h6>
               {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
             </div>
             <img className="rounded-circle" src={profile01} width="31" alt="Ryan Taylor"/>
@@ -125,7 +110,6 @@ const Header =()=>{
           </li>
           
           </ul>
->>>>>>> 2c7a9bd86f5467793d79ae7afffb6ebee051aff3
         </div>
       
       </div>
