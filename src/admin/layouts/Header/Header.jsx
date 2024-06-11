@@ -83,7 +83,7 @@ const Header =()=>{
         <img className="rounded-circle" src={profile01} width="31" alt="Ryan Taylor"/>
         <div className={dashboardStyle['user-text']}>
         <h6>Hi 
-        {user ? <> {data.user_name} </> : <> {""}</>} </h6>
+        {user ? <> {data.user_name ?? ""} </> : <> {""}</>} </h6>
           {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
         </div>
       </div>

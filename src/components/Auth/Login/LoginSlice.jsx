@@ -9,7 +9,8 @@ const BASE_URL = SERVER_URL;
 const initialState = {
   email: "",
   success: false,
-  initialUser: ""
+  initialUser: "",
+  userInfo:[]
 };
 
 
@@ -53,7 +54,9 @@ export const LoginSlice = createSlice({
     },
     [loginReducer.fulfilled]: (state, action) => {
       state.initialUser = action?.payload?.data.remember_token;
+      state.userInfo = action?.payload?.data?.data;
     },
+    
    
   },
   extraReducers:(builder)=>{
@@ -68,6 +71,8 @@ export const LoginSlice = createSlice({
     .addCase(loginReducer.fulfilled,(state,{payload})=>{
       state.loader = false;
       state.successMessage = payload.message;
+      state.userInfo = payload.data; // Assuming action.payload contains user data
+
   })
 
   }

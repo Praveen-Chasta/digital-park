@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState,useCallback, useEffect } from 'react'
 import logo from "../../../asset/images/digital-edu-park-logo.webp"
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik } from "formik";
@@ -7,9 +7,9 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { loginReducer, togglesuccess,messageClear } from './LoginSlice';
 import { PropagateLoader } from 'react-spinners';
+import {startExamReducer} from "../../../admin/exam/ExamSlice.jsx"
 
 function Login() {
-
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,6 +17,7 @@ function Login() {
   const dispatch = useDispatch();
   const {loader} = useSelector(state=>state.login);
   let success = useSelector((state) => state.login.success);
+  let userInfo = useSelector((state) => state.login.userInfo);
 
 
   useEffect(() => {
@@ -27,7 +28,11 @@ function Login() {
     //     closeButton.click();
     //   }
     // }
-   
+
+    if(userInfo.class_id){
+      getStartExam();
+    }
+
     if(success)
       {
 
@@ -38,7 +43,7 @@ function Login() {
             {
                closeButton.click()
             }
-        },100);
+        });
        
       }
   }, [success]);
@@ -56,6 +61,31 @@ const overrideStyle ={
   justifyContent:'center',
   alignItem:'center',
 }
+
+
+
+const getStartExam = useCallback(async () => {
+  try {
+    let params = {};
+
+    if (userInfo.quiz_id !== undefined) {
+      params.class=  userInfo.class_id;
+      params.subject=  userInfo.subjectId;
+      params.chapter=  userInfo.ChapterId;
+      params.difficulty_level= userInfo.Difficulty;
+      params.no_of_question= userInfo.no_of_question;
+      params.duration= userInfo.duration;
+    }
+
+    dispatch(startExamReducer(params));
+    navigate('/exam', {
+      state: { id: userInfo.class_id , subjectId: userInfo.subjectId, ChapterId:userInfo.ChapterId,
+         timeLimit:userInfo.duration, Difficulty:userInfo.Difficulty, no_of_question:userInfo.no_of_question}
+    });
+  } catch (error) {
+    console.error("Failed to fetch quiz questions:", error);
+  }
+}, [dispatch,]);
 
   return (
 

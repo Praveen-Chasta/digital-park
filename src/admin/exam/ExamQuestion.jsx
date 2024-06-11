@@ -3,11 +3,13 @@ import "./ExamQuestion.css";
 import React, { useState, useCallback, useEffect } from "react";
 import {  useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addResultReducer, getResultReducer, quizQuestionsReducer, finalSubmitReducer, quizResultReducer, resultReducer } from "./ExamSlice.jsx"
+import { addResultReducer, getResultReducer, quizQuestionsReducer, finalSubmitReducer, quizResultReducer, resultReducer , startExamReducer} from "./ExamSlice.jsx"
 import PageRefreshWarning from "./PageRefreshWarning.jsx";
 import { useNavigate } from 'react-router-dom';
 import useBlockNavigation from "./BlockNavigation.jsx";
+
 function ExamQuestion(){
+    const dispatch = useDispatch();
     
     const location = useLocation();
     let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
@@ -19,14 +21,13 @@ function ExamQuestion(){
   const finalSubmit = useSelector((state) => state.quizQuestions.finalSubmit) || [];
   const quizResult = useSelector((state) => state.quizQuestions.quizResult) || [];
   
-
   timeLimit = timeLimit * 60;
   const autoSubmitDelay = 30000; // auto-submit delay in milliseconds (30 seconds)
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [QuestionId, setQuestionId] = useState(quizData[currentQuestion]?.id ?? 0);
   const [isReview, setIsReview] = useState(0);
-  const [resultId, setResultId] = useState(0);
+  const [resultId, setResultId] = useState();
   const [selectedOption, setSelectedOption] = useState("");
   const [answers, setAnswers] = useState({});
   const [reviewQuestions, setReviewQuestions] = useState([]);
@@ -35,8 +36,38 @@ function ExamQuestion(){
   const [questionStatus, setQuestionStatus] = useState(
     quizData.map(() => '4')
   );
-  const [questionStatusId, setQuestionStatusId] = useState('4');
+  const [questionStatusId, setQuestionStatusId] = useState(4);
   const [currentTime, setCurrentTime] = useState('');
+
+  const initiateExam = useCallback(() => {
+    dispatch(
+      startExamReducer({
+        class: id,
+        subject: subjectId,
+        chapter: ChapterId,
+        difficulty_level:Difficulty,
+        no_of_question:no_of_question,
+        duration:timeLeft
+
+      })
+    );
+    navigate('/exam', {
+      state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+    });
+  }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
+
+  useEffect(() => {
+    const hasRenderedBefore = localStorage.getItem('hasRenderedBefore');
+    
+    // Check if component has rendered before
+    if (hasRenderedBefore) {
+      // Call initiateExam on reload
+      initiateExam();
+    } else {
+      // Mark that component has rendered
+      localStorage.setItem('hasRenderedBefore', true);
+    }
+  }, []);
   
 
   useEffect(() => {
@@ -63,22 +94,29 @@ function ExamQuestion(){
   };
 
 
-  const dispatch = useDispatch();
   const getAllQuestionList = useCallback(async () => {
     try {
-      dispatch(
-        quizQuestionsReducer({
-          //user_type: "admin",
-          class: id,
-          subject: subjectId,
-          chapter: ChapterId,
-          difficulty_label: Difficulty
-        })
-      );
+      // dispatch(
+      //   quizQuestionsReducer({
+      //     //user_type: "admin",
+      //     class: id,
+      //     subject: subjectId,
+      //     chapter: ChapterId,
+      //     difficulty_label: Difficulty
+      //   })
+      // );
+      let params = {};
+
+    if (startExam.questions.length > 0) {
+      params.quiz_id = startExam.id;
+      params.questions = startExam.questions;
+    } 
+
+    dispatch(quizQuestionsReducer(params));
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
     }
-  }, [dispatch, id, subjectId, ChapterId, Difficulty]);
+  }, [dispatch, startExam.id, startExam.questions]);
 
   useEffect(() => {
     let mounted = true;
@@ -133,7 +171,18 @@ function ExamQuestion(){
     }
   }, [dispatch, startExam.id, startExam.questions]);
 
- 
+  useEffect(() => {
+    // let mounted = true;
+
+    // if (mounted) {
+      getResultList();
+    // }
+
+    // return () => {
+    //   mounted = false;
+    // };
+  }, [getResultList]);
+
 
   const examSubmit = useCallback(async () => {
     try {
@@ -178,7 +227,7 @@ function ExamQuestion(){
         setAnswers(JSON.parse(storedAnswers));
         setReviewQuestions(JSON.parse(storedReviewQuestions));
         setCurrentQuestion(parseInt(storedCurrentQuestion, 10));
-        setTimeLeft(parseInt(storedTimeLeft, 10));
+        // setTimeLeft(parseInt(storedTimeLeft, 10));
         setQuestionStatus(JSON.parse(storedQuestionStatus));
       }
     } catch (error) {
@@ -321,7 +370,6 @@ function ExamQuestion(){
       const handleResultId = () => {
 
 
-       
         if (getQuestionResult.length > 0 ) {
           setResultId(getQuestionResult[currentQuestion].id);
 
@@ -329,7 +377,6 @@ function ExamQuestion(){
           setResultId(0);
 
         }
-      
       }
       const navigate = useNavigate();
       
@@ -341,7 +388,7 @@ function ExamQuestion(){
     }
  
     const handleInstruction =()=>{
-      navigate('/dashboard/instruction', {
+      navigate('/instruction', {
         state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
       });
      }
@@ -354,7 +401,6 @@ function ExamQuestion(){
             <Header/>
             <div className="exam-question-top-container">
                 <div className="container-fluid row">
-                <PageRefreshWarning />
 
                     <div className="col-xl-8 col-lg-12 exam-question-main-container">
                         <div className="exam-question-button-container mb-4">
@@ -378,10 +424,11 @@ function ExamQuestion(){
                               )}
                             </div>
                             <div className="col-lg-10">
-                                <h5 className="exam-question-heading">Question No {currentQuestion + 1}.</h5>
+                                  
+                                  <h5 className="exam-question-heading">Question No {currentQuestion + 1}. </h5>
                                 <hr/>
                                 {quizData[currentQuestion] ? (
-                                <p className="exam-question-paragraph"  onChange={() => {setQuestionId(quizData[currentQuestion].id);  }}>{quizData[currentQuestion].question}</p>
+                                <p className="exam-question-paragraph"  onChange={() => {setQuestionId(getQuestionResult[currentQuestion].question_id); getResultList(); setResultId(getQuestionResult[currentQuestion].id); }}>{quizData[currentQuestion].question}</p>                                 
                             ) : (
                                 <p className="exam-question-paragraph">Question not available</p>
                             )}
@@ -396,8 +443,12 @@ function ExamQuestion(){
                                         id={`question-${quizData[currentQuestion].id}-option-${index}`}
                                         name={`question-${quizData[currentQuestion].id}-option-${index}`}
                                         value={option}
-                                        checked={answers[quizData[currentQuestion].id] === option}
-                                        onChange={() =>{ handleAnswer(quizData[currentQuestion].id, option); setSelectedOption(`option${index+1}`); setQuestionId(quizData[currentQuestion].id);}}
+                                        checked={answers[quizData[currentQuestion].id] === option || quizData[currentQuestion].answer === `option${index}`}
+                                        onChange={() =>{ 
+                                          handleAnswer(quizData[currentQuestion].id, option); 
+                                          getResultList(); setSelectedOption(`option${index+1}`);
+                                          setQuestionId(getQuestionResult[currentQuestion].question_id);
+                                          setResultId(getQuestionResult[currentQuestion].id);}}
                                     />
                                     <label htmlFor={`question-${quizData[currentQuestion].id}-option-${index}`} >{option}</label>
                                     </div>
@@ -418,15 +469,15 @@ function ExamQuestion(){
                                 {quizData[currentQuestion] ? (
                                     <button
                                     className= "button-3"
-                                    onClick={() =>{ handleReview(quizData[currentQuestion].id); setQuestionId(quizData[currentQuestion].id); reviewQuestions.includes(quizData[currentQuestion].id) ? setIsReview(0) : setIsReview(1);}}
+                                    onClick={() =>{ handleReview(quizData[currentQuestion].id); getResultList(); setResultId(getQuestionResult[currentQuestion].id); setQuestionId(getQuestionResult[currentQuestion].question_id); reviewQuestions.includes(quizData[currentQuestion].id) ? setIsReview(0) : setIsReview(1);}}
                                     >
                                     {reviewQuestions.includes(quizData[currentQuestion].id) ? 'Unmark Review' : 'Mark For Review'}
                                     </button>
                                 ) : (
                                     <p>Question not available</p>
                                 )}
-                                <button className="button-4" onClick={() => { handleClearAnswer(); setQuestionId(quizData[currentQuestion].id);}}>Clear Response</button>
-                                <button className="button-5" onClick={() => {handleNavigation('prev'); getResultList();}} disabled={currentQuestion === 0} style={buttonStyle}>
+                                <button className="button-4" onClick={() => { handleClearAnswer(); getResultList(); setResultId(getQuestionResult[currentQuestion].id); setQuestionId(getQuestionResult[currentQuestion].question_id);}}>Clear Response</button>
+                                <button className="button-5" onClick={() => {handleNavigation('prev');    getResultList();  }} disabled={currentQuestion === 0} style={buttonStyle}>
                                     Previous
                                 </button>
                                 <button className= "button-5"
@@ -434,7 +485,7 @@ function ExamQuestion(){
                                     handleNavigation('next');
                                     getResultList();
                                     handleNextAddResult();
-                                    handleResultId();
+                                    // handleResultId();
                                     }} disabled={currentQuestion === quizData.length - 1} 
                                     style={{"marginRight":"20px",background: currentQuestion === quizData.length - 1 ? 'rgba(167, 205, 217, 1)' : 'rgba(0, 164, 216, 1)'}}
                                     >
@@ -466,6 +517,7 @@ function ExamQuestion(){
                                     </div> */}
                                     {quizData.map((_, index) => {
                                         const status = questionStatus[index] ? questionStatus[index].toLowerCase().replace(' ', '-') : '4';
+
                                         return (
                                             <p
                                             key={index}

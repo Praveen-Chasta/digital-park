@@ -48,7 +48,7 @@ const Footer =()=>{
 												<li className="mb-2"><Link to="/about">About Us </Link></li>
 												<li className="mb-2"><Link to="#">Gallery</Link></li>
 												<li className="mb-2"><Link to="#">Transfer Of Equity </Link></li>
-												<li className="mb-2"><Link to="#">FAQs</Link></li>
+												<li className="mb-2"><Link to="/faqs">FAQs</Link></li>
 											</ul>
 										</div>
 									</div>

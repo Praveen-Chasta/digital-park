@@ -11,7 +11,7 @@ import Exampage from './admin/exam/Exampage.jsx';
 import Result from './admin/exam/Result.jsx';
 import ResultGraph from './admin/exam/resultGraph.jsx';
 import ExamQuestion from './admin/exam/ExamQuestion.jsx';   
-
+import FAQs from './components/FAQs/FAQs.jsx';
 function App() {
     return ( 
        
@@ -23,11 +23,12 @@ function App() {
                     {/* <Route path="/classes"  element={<ClassComponent/>}/> */}
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
                     {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}
-                    <Route path='/dashboard/instruction' element={<Instruction/>}/>
-                    <Route path='/dashboard/instruction1' element={<Instruction1/>}/>
+                    <Route path='/instruction' element={<Instruction/>}/>
+                    <Route path='/instructionDetails' element={<Instruction1/>}/>
                     <Route path='/result' element={<Result/>}/>
                     <Route path= "/resultGraph" element={<ResultGraph/>}/>
-                    <Route path='/dashboard/examQuestion' element={<ExamQuestion />} />
+                    <Route path='/exam' element={<ExamQuestion />} />
+                    <Route path='/faqs' element={<FAQs />} />
                 </Routes> 
         </Router>  
     );

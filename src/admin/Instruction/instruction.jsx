@@ -4,7 +4,7 @@ import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 // import dashboardStyle from "../dashboard/dashboard.module.css"
 import { Link , useLocation, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { startExamReducer } from "../exam/ExamSlice.jsx";
+import { startExamReducer , quizQuestionsReducer} from "../exam/ExamSlice.jsx";
 import "./instruction.module.css";
 import "./instruction.css";
 import useBlockNavigation from "../exam/BlockNavigation.jsx";
@@ -24,7 +24,7 @@ const Instruction =()=>
   
   const handleStartExam = useCallback(() => {
     dispatch(
-      startExamReducer({
+      quizQuestionsReducer({
         class: id,
         subject: subjectId,
         chapter: ChapterId,
@@ -34,13 +34,31 @@ const Instruction =()=>
 
       })
     );
-    navigate('/dashboard/examQuestion', {
+    // getAllQuestionsList();
+    navigate('/exam', {
       state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
     });
   }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
 
+  // const getAllQuestionsList = useCallback(async () => {
+  //   try {
+  //     dispatch(
+  //       quizQuestionsReducer({
+  //         //user_type: "admin",
+  //         class: id,
+  //         subject: subjectId,
+  //         chapter: ChapterId,
+  //         difficulty_label: Difficulty
+  //       })
+  //     );
+   
+  //   } catch (error) {
+  //     console.error("Failed to fetch quiz questions:", error);
+  //   }
+  // }, [dispatch, id, subjectId, ChapterId, Difficulty,]);
+
   const handlePrevious = ()=>{
-    navigate('/dashboard/instruction1', {
+    navigate('/instructionDetails', {
       state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
     });
   }

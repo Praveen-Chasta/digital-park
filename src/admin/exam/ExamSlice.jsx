@@ -22,11 +22,18 @@ const initialState = {
     "quizQuestionsReducer",
     async (obj, { getState }) => {
       try {
+        const token = await localStorage.getItem('token');
         const response = await axios.post(`${BASE_URL}/questions`, {
         class: obj.class,
         subject: obj.subject,
         chapter: obj.chapter,
-        difficulty_label: obj.difficulty_label,
+        difficulty_label: obj.difficulty_level,
+        questions: obj.questions,
+        }
+        , {
+          headers: {
+            'remember-token': token,
+          }
         });
         // console.log("slice data")
         // console.log("slice data",response.data)
@@ -197,7 +204,7 @@ const initialState = {
       builder
         .addCase(getResultReducer.fulfilled, (state, action) => {
         //   console.log("dddd", action?.payload?.data);
-          state.getResult = action?.payload.message;
+          state.getResult = action?.payload.data;
         });
    
       builder
@@ -207,12 +214,10 @@ const initialState = {
         });
       builder
         .addCase(quizResultReducer.fulfilled, (state, action) => {
-          console.log("dddd", action?.payload?.data);
           state.quizResult = action?.payload.data;
         });
       builder
       .addCase(resultReducer.fulfilled, (state, action) => {
-        console.log("dddd", action?.payload?.data);
         state.result = action?.payload.data;
       });
       

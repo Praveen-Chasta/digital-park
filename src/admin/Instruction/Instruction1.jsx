@@ -15,7 +15,7 @@ const Instruction1 =() =>{
 
   const navigate = useNavigate();
    const submit =()=>{
-    navigate('/dashboard/instruction', {
+    navigate('/instruction', {
       state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
     });
    }
