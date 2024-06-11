@@ -1,7 +1,7 @@
 .dashboard_main-wrapper__mfz3B {
     width: 100vw;
-    height: 100vh;
-    min-height: 100vh;
+    height: auto;
+    /* min-height: 100vh; */
 }
 
 .dashboard_page-wrapper__CJtZQ {
@@ -32,7 +32,8 @@
 
 .result-container{
     background: #EBFAFF;
- 
+    height:auto;
+    padding-bottom: 50px;
 }
   
   .graph-container{

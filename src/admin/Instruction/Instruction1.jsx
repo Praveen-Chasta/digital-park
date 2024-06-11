@@ -95,8 +95,8 @@ const Instruction1 =() =>{
         </div>
       
 </div>
-      <br/>
-      <br/>
+      {/* <br/>
+      <br/> */}
 
 
 
