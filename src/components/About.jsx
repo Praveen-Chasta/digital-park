@@ -5,7 +5,9 @@ import StudentWrapper from "./StudentWrapper";
 import AboutOnlineExam from "./about/AboutOnlineExam.jsx";
 import Courses from "./about/Courses.jsx";
 import Footer from "./layouts/Footer.jsx";
-const About =()=>{
+const About =(props)=>{
+  
+
   return(
         <>
           <Navbar/>

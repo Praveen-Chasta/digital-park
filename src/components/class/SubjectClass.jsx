@@ -14,21 +14,19 @@ const SubjectClass=()=>{
 
   let [subjectDifficulty , setSubjectDifficulty] = useState(1);
   let [chapterDifficulty , setChapterDifficulty] = useState(1);
-  const [noOfQuestion , setNoOfQuestion] = useState('');
-  const [chapterNoOfQuestion , setChapterNoOfQuestion] = useState('');
+  
   const [subjectId , setSubjectId] = useState(0);
   const [ChapterId , setChapterId] = useState(0);
-  const [chapterSubjectId , setChapterSubjectId] = useState(0);
   const [timeLimit , setTimeLimit] = useState(0);
 
-
-  console.log(chapterNoOfQuestion);
 
   const data = useSelector((state) => state.subjectClass.data);
   const chapter = useSelector((state) => state.subjectClass.chapters);
   const question = useSelector((state) => state.subjectClass.no_of_question);
+  const [noOfQuestion , setNoOfQuestion] = useState('');
+  const [chapterNoOfQuestion , setChapterNoOfQuestion] = useState('');
 
-  
+
   const dispatch = useDispatch();
   const getAllList = useCallback(async () => {
     dispatch(
@@ -117,7 +115,9 @@ const SubjectClass=()=>{
     }, [initialUser]);
     
     let Difficulty = subjectDifficulty ? subjectDifficulty : chapterDifficulty;
-    let no_of_question = chapterNoOfQuestion ? chapterNoOfQuestion : noOfQuestion;
+    // let no_of_question = chapterNoOfQuestion ? chapterNoOfQuestion : noOfQuestion;
+    let no_of_question = (chapterNoOfQuestion || noOfQuestion) ?? question[0].no_of_questions;
+
     const navigate = useNavigate();
     const handleSubmit = () => {
     
@@ -125,9 +125,24 @@ const SubjectClass=()=>{
           const loginModal = new window.bootstrap.Modal(document.getElementById('loginPopup'));
           loginModal.show();
         }else{
-          navigate(`/dashboard/instruction1/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`)
+          navigate('/dashboard/instruction1', {
+            state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+          });
         }
     };
+
+
+    useEffect(() => {
+    if (question && question.length > 0) {
+        setChapterNoOfQuestion(question[0].no_of_questions);
+        setNoOfQuestion(question[0].no_of_questions);
+        setTimeLimit(question[0].quiz_time);
+    }
+}, [question]);
+
+useEffect(() => {
+}, [chapterNoOfQuestion]);
+
 
     return(
             <>
@@ -173,21 +188,21 @@ const SubjectClass=()=>{
                       </ul>
 
                       {data && data?.length > 0 ? (
-                            data?.map((item, i) => (
-                              <div className="accordion-item" key={i}>
-                              <div className="accordion-header" id={"heading_"+i}>
-                                <button className={`accordion-button ${bgColors[i % bgColors.length]}`} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse_"+i} aria-expanded="false" aria-controls={"collapse_"+i} onClick={() => setSubjectId(item.subject_id)}>
+                            data?.map((item, subjectIndex) => (
+                              <div className="accordion-item" key={subjectIndex}>
+                              <div className="accordion-header" id={"heading_"+subjectIndex}>
+                                <button className={`accordion-button ${bgColors[subjectIndex % bgColors.length]}`} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse_"+subjectIndex} aria-expanded="false" aria-controls={"collapse_"+subjectIndex} onClick={() => setSubjectId(item.subject_id)}>
                                 {item.subject_name}
                                 </button>
                               </div>
-                              <div id={"collapse_"+i} className="accordion-collapse collapse" aria-labelledby={"heading_"+i} data-bs-parent="#accordionQuiz">
+                              <div id={"collapse_"+subjectIndex} className="accordion-collapse collapse" aria-labelledby={"heading_"+subjectIndex} data-bs-parent="#accordionQuiz">
                                 <div className="accordion-body">
 
                                 {question && question?.length > 0 ? (
-                            question?.map((item, i) => (
-                                <div className="form-check" key={i}>
-                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="chapterNoOfQuestion" value={item.id}  onChange={() => {setChapterNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}}/> {item.no_of_questions}{" Question Quiz"}
-                                    <label className="form-check-label" htmlFor={"radio7" + i}></label>
+                            question?.map((qItem, qIndex) => (
+                                <div className="form-check" key={qIndex}>
+                                    <input type="radio" className="form-check-input" id={"radio" + subjectIndex + "_" + qIndex} name={"chapterNoOfQuestion" + subjectIndex}  value={qItem.id}  onChange={() => {setChapterNoOfQuestion(qItem.no_of_questions); setTimeLimit(qItem.quiz_time);}}  defaultChecked={qIndex === 0} /> {qItem.no_of_questions}{" Question Quiz"}
+                                    <label className="form-check-label" htmlFor={"radio" + subjectIndex + "_" + qIndex}></label>
                                   </div>
                               ))
                               ) : (
@@ -199,8 +214,7 @@ const SubjectClass=()=>{
                               
                                    {/* <Link to='/dashboard/instruction1' className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`}>Start Exam</Link> */}
 
-                                <button className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`} onClick={handleSubmit}>Start Exam</button>
-                                  
+                                <button className={`btn btn-primary ${bgColors[subjectIndex % bgColors.length]} animate-btn mt-3 w-100`} onClick={handleSubmit}>Start Exam</button>
                                 </div>
                               </div>
                               </div>
@@ -250,62 +264,102 @@ const SubjectClass=()=>{
                       </ul>
                         
                       {chapter && chapter?.length > 0 ? (
-                            chapter?.map((item, i) => (
-                              <div className="accordion-item"  key={i}>
-                              <div className="accordion-header" id={"heading_2"+i}>
-                                <button className={`accordion-button ${bgColors[i % bgColors.length]}`} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse_21"+i} aria-expanded="false" aria-controls={"collapse_21"+i} onClick={() => setChapterSubjectId(item.subject_id)}>
-                                {item.subject_name}
+                          chapter?.map((chapterSubjectItem, chapterSubjectIndex) => (
+                            <div className="accordion-item" key={chapterSubjectIndex}>
+                              <div className="accordion-header" id={"heading_2" + chapterSubjectIndex}>
+                                <button
+                                  className={`accordion-button ${bgColors[chapterSubjectIndex % bgColors.length]}`}
+                                  type="button"
+                                  data-bs-toggle="collapse"
+                                  data-bs-target={"#collapse_21" + chapterSubjectIndex}
+                                  aria-expanded="false"
+                                  aria-controls={"collapse_21" + chapterSubjectIndex}
+                                  onClick={() => {
+                                    setSubjectId(chapterSubjectItem.subject_id);
+                                    if (chapterSubjectItem.chapters && chapterSubjectItem.chapters.length > 0) {
+                                      setChapterId(chapterSubjectItem.chapters[0].id);
+                                    }
+                                  }}
+                                >
+                                  {chapterSubjectItem.subject_name}
                                 </button>
                               </div>
-                              <div id={"collapse_21"+i} className="accordion-collapse collapse" aria-labelledby={"heading_21"+i} data-bs-parent="#accordionQuiz">
+                              <div
+                                id={"collapse_21" + chapterSubjectIndex}
+                                className="accordion-collapse collapse"
+                                aria-labelledby={"heading_21" + chapterSubjectIndex}
+                                data-bs-parent="#accordionQuiz"
+                              >
                                 <div className="accordion-body">
-                                {item.chapters && item.chapters?.length > 0 ? (
-                            item.chapters?.map((data, i) => (
-                              <>
-                              <input
-                                type="checkbox"
-                                id={`Chapter-${i}`}
-                                name="Chapter"
-                                onChange={() => setChapterId(data.id)}
-                              />
-                              <label htmlFor={`Chapter-${i}`}><h4>{data.chapter}</h4></label>
+                                  {chapterSubjectItem.chapters && chapterSubjectItem.chapters?.length > 0 ? (
+                                    chapterSubjectItem.chapters?.map((chapter, chapterIndex) => (
+                                      <>
+                                        <input
+                                          type="checkbox"
+                                          id={`Chapter-${chapterIndex}`}
+                                          name="Chapter"
+                                          value={chapter.id}
+                                          onChange={() => setChapterId(chapter.id)}
+                                          defaultChecked={chapterIndex === 0}
+                                        />
+                                        <label htmlFor={`Chapter-${chapterIndex}`}>
+                                          <h4>{chapter.chapter}</h4>
+                                        </label>
 
-                              {question && question?.length > 0 ? (
-                            question?.map((item, i) => (
-                                <div className="form-check" key={i}>
-                                    <input type="radio" className="form-check-input" id={"radio7" + i} name="noOfQuestion" value={item.id}  onChange={() => { setNoOfQuestion(item.no_of_questions); setTimeLimit(item.quiz_time);}} /> {item.no_of_questions}{" Question Quiz"}
-                                    <label className="form-check-label" htmlFor={"radio7" + i}></label>
-                                  </div>
-                              ))
-                              ) : (
-                                <tr>
-                                  <td colSpan="12">No Data Found</td>
-                                </tr>
-                              )}
+                                        {question && question?.length > 0 ? (
+                                          question?.map((questionItem, questionIndex) => (
+                                            <div className="form-check" key={questionIndex}>
+                                              <input
+                                                type="radio"
+                                                className="form-check-input"
+                                                id={"radio" + chapterSubjectIndex + "_" + questionIndex}
+                                                name={"noOfQuestion" + chapterSubjectIndex}
+                                                value={questionItem.id}
+                                                onChange={() => {
+                                                  setNoOfQuestion(questionItem.no_of_questions);
+                                                  setTimeLimit(questionItem.quiz_time);
+                                                }}
+                                                defaultChecked={questionIndex === 0}
+                                              />{" "}
+                                              {questionItem.no_of_questions}{" "}
+                                              Question Quiz
+                                              <label
+                                                className="form-check-label"
+                                                htmlFor={"radio8" + questionIndex}
+                                              ></label>
+                                            </div>
+                                          ))
+                                        ) : (
+                                          <tr>
+                                            <td colSpan="12">No Data Found</td>
+                                          </tr>
+                                        )}
+                                      </>
+                                    ))
+                                  ) : (
+                                    <tr>
+                                      <td colSpan="12">No Data Found</td>
+                                    </tr>
+                                  )}
 
-                              
-                                  </>
-                                  
-                                ))
-                              ) : (
-                                <tr>
-                                  <td colSpan="12">No Data Found</td>
-                                </tr>
-                              )}
-                                  
-                                
                                   {/* <Link className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`} onClick={handleSubmit}>Start Exam</Link> */}
-                                  <button className={`btn btn-primary ${bgColors[i % bgColors.length]} animate-btn mt-3 w-100`} onClick={handleSubmit}>Start Exam</button>
+                                  <button
+                                    className={`btn btn-primary ${bgColors[chapterSubjectIndex % bgColors.length]} animate-btn mt-3 w-100`}
+                                    onClick={handleSubmit}
+                                  >
+                                    Start Exam
+                                  </button>
                                 </div>
                               </div>
-                              </div>
-                            ))
-                          ) : (
-                            <tr>
-                              <td colSpan="12">No Data Found</td>
-                            </tr>
-                          )}
-                        
+                            </div>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan="12">No Data Found</td>
+                          </tr>
+                        )}
+
+                                                
                       
                       </div>
                     </div>

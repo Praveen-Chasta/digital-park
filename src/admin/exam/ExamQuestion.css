@@ -214,24 +214,27 @@
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: rgba(255, 73, 85, 1);
+    background: rgba(62, 190, 66, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .exam-question-attempted-question-details-container .cont-2{
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: rgba(0, 164, 216, 1);
+    background: rgba(255, 73, 85, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .exam-question-attempted-question-details-container .cont-3{
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: rgba(62, 190, 66, 1);
+    background: rgba(0, 164, 216, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .exam-question-attempted-question-details-container .cont-4{
@@ -240,26 +243,27 @@
     border-radius: 5px;
     background: rgba(190, 188, 188, 1);
     margin: 10px;
+    padding-left:15px;
 }
 
 .cont-1 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .cont-2 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .cont-3 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .cont-4 p{
     text-align: center;
-    color: #FFFFFF;
+    background: rgba(190, 188, 188, 1);
 }
 
 .exam-question-bottom-1-container{
@@ -281,7 +285,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 180px;
+    /* margin-top: 180px; */
 }
 
 .result-1{

@@ -1,20 +1,27 @@
 import React, {  useCallback, useEffect } from "react";
 import Header from "../layouts/Header/Header.jsx";
-import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 // import dashboardStyle from "../dashboard/dashboard.module.css"
-import { Link , useParams} from "react-router-dom";
+import { Link , useLocation, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { startExamReducer } from "../exam/ExamSlice.jsx";
 import "./instruction.module.css";
 import "./instruction.css";
+import useBlockNavigation from "../exam/BlockNavigation.jsx";
 
 const Instruction =()=>
   {
     
-  const { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = useParams();
+
+    const location = useLocation();
+    let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
+
+    useBlockNavigation();
+  
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  
   const handleStartExam = useCallback(() => {
     dispatch(
       startExamReducer({
@@ -27,8 +34,17 @@ const Instruction =()=>
 
       })
     );
+    navigate('/dashboard/examQuestion', {
+      state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+    });
   }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
 
+  const handlePrevious = ()=>{
+    navigate('/dashboard/instruction1', {
+      state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+    });
+  }
+  
 
      return(
      <>
@@ -86,22 +102,25 @@ const Instruction =()=>
              </ol>
              <h1> All the Best!</h1><br></br>
              <div className="d-flex align-item-center ">
-              <input type="checkbox"  name  ="checkbox" className="instruction-checkbox"  />
+              <input type="checkbox"  name  ="checkbox" className="instruction-checkbox" checked />
               <label htmlFor="checkbox" className="instruction-label"> The computer provided to me is in proper working condition. I have read and understood the instruction given above.
               Previous
               I'm ready to Begin</label>
              </div>
              <br></br>
             <div className="d-flex align-item-center">
-            <button className="instruction-previous-button">Previous</button>
-              <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button>
+            <button className="instruction-previous-button" onClick={handlePrevious}>Previous</button>
+              {/* <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} 
+              class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button> */}
+            
+              <button className="border-0"  onClick={handleStartExam}> <Link class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}}> I'm ready to Begin</Link></button>
+            
             </div>
                {/* <button >Start</button> */}
             <br/>
           </div>  
 				
 				{/* </div> */}
-				 {/* <Footer/> */}
 			</div>
 			{/* <br/>
 			<br/> */}

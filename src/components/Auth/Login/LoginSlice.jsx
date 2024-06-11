@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { SERVER_URL } from "../../../config"
+import { ErrorMessage } from "formik";
 
 const BASE_URL = SERVER_URL;
 
@@ -38,7 +39,14 @@ export const loginReducer = createAsyncThunk(
 
 export const LoginSlice = createSlice({
   name: "login",
-  initialState,
+  initialState:
+  {
+    successMessage : '',
+    errorMessage: '',
+    loader:false,
+    userInfo: '',
+    success:''
+  },
   reducers: {
     togglesuccess: (state, action) => {
       state.success = action?.payload;
@@ -46,11 +54,25 @@ export const LoginSlice = createSlice({
     [loginReducer.fulfilled]: (state, action) => {
       state.initialUser = action?.payload?.data.remember_token;
     },
-
+   
   },
+  extraReducers:(builder)=>{
+      builder
+      .addCase(loginReducer.pending,(state,{payload})=>{
+          state.loader = true;
+      })
+      .addCase(loginReducer.rejected,(state,{payload})=>{
+        state.loader = false;
+        state.errorMessage = payload.error;
+    })
+    .addCase(loginReducer.fulfilled,(state,{payload})=>{
+      state.loader = false;
+      state.successMessage = payload.message;
+  })
+
+  }
 
 });
 
 export const { togglesuccess } = LoginSlice.actions;
-
 export default LoginSlice.reducer;

@@ -13,6 +13,7 @@ const initialState = {
     getResult:[],
     finalSubmit:[],
     quizResult:[],
+    result:[],
     success: false,
 };
 
@@ -136,6 +137,27 @@ const initialState = {
       try {
 
         const token = await localStorage.getItem('token');
+        const response = await axios.post(`${BASE_URL}/all-question-result`, {
+          quiz_id:obj.quiz_id,
+          
+        }, {
+          headers: {
+            'remember-token': token,
+          }
+        });
+        return response.data;
+      } catch (error) {
+        throw new Error(error.response?.data?.message || error.message);
+      }
+    }
+  );
+
+  export const resultReducer = createAsyncThunk(
+    'resultReducer',
+    async (obj, { getState }) => {
+      try {
+
+        const token = await localStorage.getItem('token');
         const response = await axios.post(`${BASE_URL}/result`, {
           quiz_id:obj.quiz_id,
           
@@ -185,9 +207,15 @@ const initialState = {
         });
       builder
         .addCase(quizResultReducer.fulfilled, (state, action) => {
-        //   console.log("dddd", action?.payload?.data);
+          console.log("dddd", action?.payload?.data);
           state.quizResult = action?.payload.data;
         });
+      builder
+      .addCase(resultReducer.fulfilled, (state, action) => {
+        console.log("dddd", action?.payload?.data);
+        state.result = action?.payload.data;
+      });
+      
    
     },
   });

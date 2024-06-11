@@ -20,15 +20,14 @@ function App() {
                     <Route path="/" element={<Home/>}></Route> 
                     <Route path="/about"  element={<About/>}/>
                     <Route path="/classes/:id"  element={<ClassComponent/>}/>
+                    {/* <Route path="/classes"  element={<ClassComponent/>}/> */}
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
                     {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}
-                    <Route path='/dashboard/instruction/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty/:no_of_question' element={<Instruction/>}/>
-                    <Route path='/dashboard/instruction1/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty/:no_of_question' element={<Instruction1/>}/>
-                    <Route path='/dashboard/exam/:id/:subjectId/:ChapterId/:timeLimit/:Difficulty/:no_of_question' element={<Exampage/>}/>
+                    <Route path='/dashboard/instruction' element={<Instruction/>}/>
+                    <Route path='/dashboard/instruction1' element={<Instruction1/>}/>
                     <Route path='/result' element={<Result/>}/>
-                    
                     <Route path= "/resultGraph" element={<ResultGraph/>}/>
-                    <Route path="examQuestion" element={<ExamQuestion/>}/>
+                    <Route path='/dashboard/examQuestion' element={<ExamQuestion />} />
                 </Routes> 
         </Router>  
     );

@@ -164,7 +164,7 @@
 .question-container-even{
     background-color: #FFFFFF;
     border-radius: 12px;
-    margin-right: 40px;
+    margin-right: 20px;
 }
 
 .question-container-odd{
@@ -348,3 +348,6 @@
     justify-content: center;
     padding-bottom: 25px;
 }
+.optionMerging{
+    margin-left: 25px !important;
+ }

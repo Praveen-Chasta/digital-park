@@ -4,21 +4,84 @@ import Header from "../layouts/Header/Header.jsx";
 import Footer from "../layouts/Footer/Footer.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 import dashboardStyle from "../dashboard/dashboard.module.css"
-import ChartComponent from '../chartComponent/ChartComponent';
+import ChartComponent from "../chartComponent/ChartComponent.jsx";
 import './result.css'; // Import this if you separate the CSS into an App.css file
-import ResultDatatable from "./resultDatatable.jsx";
-
-import { useSelector } from "react-redux";
-
+// import ResultDatatable from "./resultDatatable.jsx";
+// import ResultDatatale from '../exam/resultDatatable.jsx'
+import { useDispatch, useSelector } from "react-redux";
+import {  useLocation } from "react-router-dom";
+import { quizResultReducer, resultReducer } from "./ExamSlice.jsx";
+import useBlockNavigation from "./BlockNavigation.jsx";
 function Result() {
 
+  const location = useLocation();
+  const dispatch = useDispatch();
+  // useBlockNavigation();
+  let { quiz_id } = location.state || {};
+
   const quizResult = useSelector((state) => state.quizQuestions.quizResult) || [];
-  if (quizResult.quiz_id) 
-    {
-       localStorage.setItem('result_quiz_id', quizResult.quiz_id);
-     }
+  const result = useSelector((state) => state.quizQuestions.result) || [];
+  
+  const getQuizResult = useCallback(async () => {
+    try {
+      dispatch(
+        quizResultReducer({
+          //user_type: "admin",
+          quiz_id:quiz_id,
+        })
+      );
+    } catch (error) {
+      console.error("Failed to fetch quiz questions:", error);
+    }
+  }, [dispatch, quiz_id]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      getQuizResult();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [getQuizResult]);
+  
+
+  const getResult = useCallback(async () => {
+    try {
+      dispatch(
+        resultReducer({
+          //user_type: "admin",
+          quiz_id:quiz_id,
+        })
+      );
+    } catch (error) {
+      console.error("Failed to fetch quiz questions:", error);
+    }
+  }, [dispatch, quiz_id]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      getResult();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [getResult]);
+
+    let total_no_of_question = result.total_no_of_question ?? 0;
+    let no_of_right_answer= result.no_of_right_answer ?? 0;
+    let no_of_wrong_answer= result.no_of_wrong_answer ?? 0;
+    let no_of_attempt_question= result.no_of_attempt_question ?? 0;
+    let no_of_not_attempt_question= result.no_of_not_attempt_question ?? 0;
+    let no_of_marked_question= result.no_of_marked_question ?? 0;
+    let total_no_marks= result.total_no_marks ?? 0;
      
-     const pieChartData = {
+    const pieChartData = {
       // labels: [
       //   'Red',
       //   'Blue',
@@ -26,18 +89,32 @@ function Result() {
       //   'green'
       // ],
       datasets: [{
-        label: 'Pie Dataset',
-        data: [300, 50, 100, 50],
-        backgroundColor: [
-          "rgba(255, 73, 85, 1)",
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-          "rgba(62, 190, 66, 1)"
-  
+        labels: [
+          'Total Questions',
+          'Attempted Questions',
+          'Not Attempted Questions',
+          'Wrong Answers',
+          'Right Answers',
+          'Marked Questions'
+        ],
+        data: [total_no_of_question, no_of_attempt_question, no_of_not_attempt_question, no_of_wrong_answer, no_of_right_answer,no_of_marked_question],     
+        backgroundColor : [
+          "rgba(255, 73, 85, 1)",   // Red for total_no_of_question
+          "rgb(255, 205, 86)",      // Yellow for no_of_attempt_question
+          "rgb(62, 190, 66)",       // Green for no_of_not_attempt_question
+          "rgb(54, 162, 235)",      // Blue for no_of_wrong_answer
+          "rgb(155, 89, 182)",      // Purple for no_of_right_answer
+          "rgb(255, 192, 203)"      // Pink for no_of_marked_question
         ],
         hoverOffset: 4
       }]
     }
+
+    const [showAllQuestions, setShowAllQuestions] = useState(false);
+
+    const toggleShowAllQuestions = () => {
+      setShowAllQuestions(!showAllQuestions);
+    };
  
  
   return (
@@ -115,32 +192,38 @@ function Result() {
                       <div className="row">
                         <div className="col-lg-6">
                           <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717416504/Rectangle_4153252_jxzdq4.png" alt="" />
-                          <p className="charts-para">Total Questions</p>
+                          <p className="charts-para">Total Questions: {result.total_no_of_question}</p>
                         </div>
                         <div className="col-lg-6">
                           <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717417294/Rectangle_4153255_iotvyv.png" alt="" />
-                          <p className="charts-para">Question Attempted</p>
+                          <p className="charts-para">Question Attempted: {result.no_of_attempt_question}</p>
                         </div>
                       </div>
                       <div className="row">
                         <div className="col-lg-6">
                           <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717417294/Rectangle_4153253_uopwty.png" alt="" />
-                          <p className="charts-para">Question Unattempt</p>
+                          <p className="charts-para">Question Unattempt: {result.no_of_not_attempt_question}</p>
                         </div>
                         <div className="col-lg-6">
                           <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717417294/Rectangle_4153254_qjifih.png" alt="" />
-                          <p className="charts-para">Question Wrong Answered</p>
+                          <p className="charts-para">Question Wrong Answered: {result.no_of_wrong_answer}</p>
                         </div>
                       </div>
                       <div className="row">
                         <div className="col-lg-6">
-                          <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717417294/Rectangle_4153253_uopwty.png" alt="" />
-                          <p className="charts-para">Question Right Answered</p>
+                        <i class="fa-solid fa-square"  style={{ color: 'purple', fontSize: '21px' }}></i>
+                          <p className="charts-para">Question Right Answered: {result.no_of_right_answer}</p>
                         </div>
                         <div className="col-lg-6">
-                          <img src="https://res.cloudinary.com/dp3nahxbi/image/upload/v1717416504/Rectangle_4153252_jxzdq4.png" alt="" />
-                          <p className="charts-para">Total Questions</p>
-                        </div> 
+                        <i class="fa-solid fa-square"  style={{ color: 'pink', fontSize: '21px' }}></i>
+                          <p className="charts-para">Question Marked: {result.no_of_marked_question}</p>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                        <i class="fa-solid fa-square"  style={{ color: 'grey', fontSize: '21px' }}></i>
+                          <p className="charts-para">Total Marks: {result.total_no_marks}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -175,123 +258,62 @@ function Result() {
                 </div>
                 <div className="quizz-container">
                   <p className="quizz-container-p-1">Quizzes</p>
-                  <p className="quizz-container-p-2">View All</p>
+                  <p className="quizz-container-p-2" onClick={toggleShowAllQuestions}>
+                    {showAllQuestions ? 'Show Less' : 'View All Questions'}
+                  </p>
                 </div>
-                <div className="col-lg-6 question-container-even mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
+
+                  <div className="row">
+                   
+                  {quizResult.slice(0, showAllQuestions ? quizResult.length : 4).map((questionObj, index) => (
+                     <div className="col-lg-6 question-container-even mb-4 p-0">
+                  
+                    <div key={questionObj.question_id} className="question-options-container">
+                      <h1>Question {questionObj.question_id}: {questionObj.question}</h1>
+                      {questionObj.options.map((option, optIndex) => (
+                        <div key={optIndex} className={`option${optIndex + 1}`}>
+                          <input
+                            type="radio"
+                            className="radio-input "
+                            id={`option-${questionObj.result_id}-${optIndex}`}
+                            name={`question-${questionObj.result_id}`}
+                            value={option}
+                            checked={`option${optIndex + 1}` === questionObj.answer}
+                          />
+                          <label
+                            htmlFor={`option-${questionObj.result_id}-${optIndex}`}
+                            style={{
+                              color: `option${optIndex + 1}` === questionObj.correct_answer ? 'green' : 'red',
+                              fontWeight: `option${optIndex + 1}` === questionObj.correct_answer ? 'bold' : 'normal',
+                              marginLeft:'20px'
+                            }}
+                          >
+                            {option}
+                          </label>
+                        </div>
+                      ))}
                       <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
+                        <p className="result-para-1">Answer Given: {questionObj.answer}</p>
+                        <p className="result-para-2">Answer Correct: {questionObj.correct_answer}</p>
                       </div>
                     </div>
-                </div>
-                <div className="col-lg-6 question-container-odd mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test"/>
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
-                      <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
-                      </div>
                     </div>
-                </div>
-                <div className="col-lg-6 question-container-even mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test"/>
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
-                      <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
-                      </div>
-                    </div>
-                </div>
-                <div className="col-lg-6 question-container-odd mb-4 p-0">
-                    <h1>Question 3 : As a Project Leader, write an email to your customer, Mr. Gill Roy, explaining delay to the project. Sign the email as Maria</h1>
-                    <div className="question-options-container">
-                      <div className="option-1">
-                          <input type="radio" className="radio-input" id="test1" name="test"/>
-                          <label for="test1">Test 1</label>
-                      </div>
-                      <div className="option-2">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 2</label>
-                      </div>
-                      <div className="option-3">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 3</label>
-                      </div>
-                      <div className="option-4">
-                          <input type="radio" className="radio-input" id="test1" name="test" />
-                          <label for="test1">Test 4</label>
-                      </div>
-                      <div className="question-result-ans">
-                          <p className="result-para-1">Answer Given (Option 1)</p>
-                          <p className="result-para-2">Answer Correct (Option 2)</p>
-                      </div>
-                      <div className="Time-taken-container">
-                          <p>Time Spend : 02 Sec</p>
-                      </div>
-                    </div>
-                </div>
+                   ))}
+                  </div>
+                
+                  </div>
+                  <div className="Time-taken-container">
+                    <p>Time Spent: 02 Sec</p>
+                  </div>
+               
+               
+              {quizResult.length > 4 && (
                 <div className="d-flex justify-content-center">
-                  <button className="all-question-button">View All Questions</button>
+                  <button className="all-question-button" onClick={toggleShowAllQuestions}>
+                    {showAllQuestions ? 'Show Less' : 'View All Questions'}
+                  </button>
                 </div>
+              )}
             </div>
 
               <div className="col-lg-12 col-sm-12 next-quiz-session-container">
@@ -306,9 +328,6 @@ function Result() {
       </div>
     </div>
   {/* <Footer /> */}
-  
-      
-</div>
 
 </>
   );
