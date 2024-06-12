@@ -53,18 +53,14 @@ function SignUp() {
     };
 
     useEffect(() => {
-        if(success)
-            {
-            setTimeout(()=>{
-                const closeButton = document.getElementById('closeButton');
-                if (closeButton) 
-                  {
-                     closeButton.click()
-                  }
-              },100);
-             
-            }
-     }, [success]);
+        if (success) {
+          const closeButton = document.getElementById('closeSignUpButton');
+          if (closeButton) {
+            closeButton.click();
+          }
+        }
+      }, [success]);
+
     const overrideStyle ={
         display:'flex',
         margin:'0 auto',
