@@ -193,7 +193,7 @@ function ExamQuestion(){
           status:1
         })
       );
-        setSubmitted(true);
+        // setSubmitted(true);
 
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
@@ -381,11 +381,19 @@ function ExamQuestion(){
       const navigate = useNavigate();
       
       const quiz_id=  startExam.id;
-      if (submitted) {
-        navigate('/result', {
-            state: { quiz_id }
+    //   if (submitted) {
+    //     navigate('/result', {
+    //         state: { quiz_id }
+    //       });
+    // }
+
+    useEffect(() => {
+      if (submitted === true) {
+          navigate('/result', {
+              state: { quiz_id }
           });
-    }
+      }
+  }, [submitted, navigate, quiz_id]);
  
     const handleInstruction =()=>{
       navigate('/instruction', {
