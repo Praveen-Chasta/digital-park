@@ -232,7 +232,7 @@ function SignUp() {
                                                 pattern="[0-9]{10}"
                                                 title="Please enter a valid 10-digit phone number"
                                                 type="tel"
-                                                id="contact_number m-0"
+                                                id="contact_number"
                                                 className="form-control"
                                                 placeholder="Contact Number"
                                                 onChange={handleChange}

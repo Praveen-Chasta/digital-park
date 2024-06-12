@@ -1,6 +1,6 @@
 import {logo,smlogo,profile01} from "../../imagepath";
 import { Link ,useNavigate} from "react-router-dom";
-import React,{ useCallback, useEffect} from "react";
+import React,{ useRef, useCallback, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dashboardStyle from "../../dashboard/dashboard.module.css";
 import { useState } from "react";
@@ -54,16 +54,26 @@ const Header =()=>{
 	}, [initialUser]);
 
 
-	const logout = () => {
-		localStorage.removeItem("token");
-    console.log("kjdbbj");
-
-    navigate("/");
-		setUser(null);
-    setUserName(null);
-		
-	};
-
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_name");
+  
+    setTimeout(() => {
+      // Get updated values
+      const token = localStorage.getItem("token");
+      const userName = localStorage.getItem("user_name");
+  
+      // Check if both token and userName are null
+      if (token === null && userName === null) {
+        // Navigate to home page
+        navigate("/");
+      }
+  
+      setUser(null);
+      setUserName(null);
+    }, 0); 
+  };
+  
 
 
   return(
