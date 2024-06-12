@@ -1,0 +1,22 @@
+.form-control{
+    width:100%;
+    border:1px solid #000000;
+    /* margin-right: 20px; */
+}
+
+.password-input{
+    border:1px solid #000000;
+    height: 52px;
+    padding:6px 12px;
+    border-radius: 6px;
+}
+
+.form-control-1{
+    border:none;
+    width:100%;
+}
+
+.password-input{
+    display: flex;
+    align-items: center;
+}

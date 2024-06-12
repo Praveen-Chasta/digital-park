@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginReducer, togglesuccess,messageClear } from './LoginSlice';
 import { PropagateLoader } from 'react-spinners';
 import {startExamReducer} from "../../../admin/exam/ExamSlice.jsx"
+import './login.css';
 
 function Login() {
   const navigate = useNavigate();
@@ -187,12 +188,12 @@ const getStartExam = useCallback(async () => {
 
                   <div className="form-group">
                     <div className="input-container">
-                      <label>Password</label>
-                      <div className="input-group">
+                      <label className="mt-3">Password</label>
+                      <div className="password-input">
                         <input
                           type={showPassword ? "text" : "password"}
                           id="password"
-                          className="form-control"
+                          className="form-control-1"
                           placeholder="Enter Password"
                           onChange={handleChange}
                           onBlur={handleBlur}

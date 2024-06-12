@@ -155,7 +155,7 @@ function SignUp() {
                                             <div className="row">
                                                 <div className="col-md-6">
 
-                                                    <label>Email</label>
+                                                    <label className="mt-3">Email</label>
                                                     <input
                                                         type="email"
                                                         id="email"
@@ -173,7 +173,7 @@ function SignUp() {
 
                                                 <div className="col-md-6">
 
-                                                    <label>Password</label>
+                                                    <label className="mt-3">Password</label>
                                                     <input
                                                         type="password"
                                                         id="password"
@@ -195,7 +195,7 @@ function SignUp() {
                                         <div className="input-container">
                                             <div className="row">
                                                 <div className="col-md-6">
-                                                    <label>Full Name</label>
+                                                    <label className="mt-3">Full Name</label>
                                                     <input
                                                         type="text"
                                                         id="full_name"
@@ -209,7 +209,7 @@ function SignUp() {
                                                 </div>
 
                                                 <div className="col-md-6">
-                                                    <label>User Name</label>
+                                                    <label className="mt-3">User Name</label>
                                                     <input
                                                         type="text"
                                                         id="user_name"
@@ -227,17 +227,18 @@ function SignUp() {
 
                                     <div className="form-group">
                                         <div className="input-container">
-                                            <label>Contact Number</label>
+                                            <label className="mt-3">Contact Number</label>
                                             <input
                                                 pattern="[0-9]{10}"
                                                 title="Please enter a valid 10-digit phone number"
                                                 type="tel"
-                                                id="contact_number"
+                                                id="contact_number m-0"
                                                 className="form-control"
                                                 placeholder="Contact Number"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 value={values.contact_number}
+                                                 
                                             />
                                         </div>
                                     </div>
@@ -246,14 +247,14 @@ function SignUp() {
                                         <div className="input-container">
                                             <div className="row">
                                                 <div className="col-md-6">
-                                                    <label htmlFor="category">Category</label>
+                                                    <label htmlFor="category" className="mt-3">Category</label>
                                                     <select
                                                         className="form-control"
                                                         id="category"
                                                         onChange={handleCategoryChange}
                                                         value={categoryId}
                                                     >
-                                                        <option value="">Select a category</option>
+                                                        <option value="" >Select a category</option>
                                                         {category.map((cat) => (
                                                             <option key={cat.id} value={cat.id}>
                                                                 {cat.category}
@@ -264,7 +265,7 @@ function SignUp() {
 
 
                                                 <div className="col-md-6">
-                                                    <label htmlFor="class">Class</label>
+                                                    <label htmlFor="class" className="mt-3 ">Class</label>
                                                     <select
                                                         className="form-control"
                                                         id="class"
