@@ -28,6 +28,7 @@
     display: block;
     text-align: center;
     justify-content: center;
+    background-color: red;
 }
 
 .dropdown-menu p{
