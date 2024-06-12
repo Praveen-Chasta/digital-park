@@ -381,19 +381,13 @@ function ExamQuestion(){
       const navigate = useNavigate();
       
       const quiz_id=  startExam.id;
-    //   if (submitted) {
-    //     navigate('/result', {
-    //         state: { quiz_id }
-    //       });
-    // }
-
-    useEffect(() => {
+    // useEffect(() => {
       if (submitted === true) {
           navigate('/result', {
               state: { quiz_id }
           });
       }
-  }, [submitted, navigate, quiz_id]);
+  // }, [submitted, navigate, quiz_id]);
  
     const handleInstruction =()=>{
       navigate('/instruction', {
