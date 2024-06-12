@@ -179,7 +179,7 @@ const getStartExam = useCallback(async () => {
                         <input
                           type={showPassword ? "text" : "password"}
                           id="password"
-                          className="form-control"
+                          className="form-control-1"
                           placeholder="Enter Password"
                           onChange={handleChange}
                           onBlur={handleBlur}
