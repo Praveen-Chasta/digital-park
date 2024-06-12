@@ -446,7 +446,8 @@ function ExamQuestion(){
                                         checked={answers[quizData[currentQuestion].id] === option || quizData[currentQuestion].answer === `option${index}`}
                                         onChange={() =>{ 
                                           handleAnswer(quizData[currentQuestion].id, option); 
-                                          getResultList(); setSelectedOption(`option${index+1}`);
+                                          getResultList(); 
+                                          setSelectedOption(`option${index+1}`);
                                           setQuestionId(getQuestionResult[currentQuestion].question_id);
                                           setResultId(getQuestionResult[currentQuestion].id);}}
                                     />
@@ -469,15 +470,26 @@ function ExamQuestion(){
                                 {quizData[currentQuestion] ? (
                                     <button
                                     className= "button-3"
-                                    onClick={() =>{ handleReview(quizData[currentQuestion].id); getResultList(); setResultId(getQuestionResult[currentQuestion].id); setQuestionId(getQuestionResult[currentQuestion].question_id); reviewQuestions.includes(quizData[currentQuestion].id) ? setIsReview(0) : setIsReview(1);}}
+                                    onClick={() =>{ 
+                                      handleReview(quizData[currentQuestion].id); 
+                                      getResultList(); 
+                                      setResultId(getQuestionResult[currentQuestion].id); 
+                                      setQuestionId(getQuestionResult[currentQuestion].question_id); 
+                                      reviewQuestions.includes(quizData[currentQuestion].id) ? setIsReview(0) : setIsReview(1);}}
                                     >
                                     {reviewQuestions.includes(quizData[currentQuestion].id) ? 'Unmark Review' : 'Mark For Review'}
                                     </button>
                                 ) : (
                                     <p>Question not available</p>
                                 )}
-                                <button className="button-4" onClick={() => { handleClearAnswer(); getResultList(); setResultId(getQuestionResult[currentQuestion].id); setQuestionId(getQuestionResult[currentQuestion].question_id);}}>Clear Response</button>
-                                <button className="button-5" onClick={() => {handleNavigation('prev');    getResultList();  }} disabled={currentQuestion === 0} style={buttonStyle}>
+                                <button className="button-4" onClick={() => { 
+                                  handleClearAnswer(); getResultList(); 
+                                  setResultId(getQuestionResult[currentQuestion].id); 
+                                  setQuestionId(getQuestionResult[currentQuestion].question_id);
+                                  }}>Clear Response</button>
+                                <button className="button-5" onClick={() => {
+                                  handleNavigation('prev');    
+                                  getResultList();  }} disabled={currentQuestion === 0} style={buttonStyle}>
                                     Previous
                                 </button>
                                 <button className= "button-5"
@@ -560,7 +572,7 @@ function ExamQuestion(){
                                     <button className="button-one">Question Paper</button>
                                 </div>
                                 <div className="d-flex align-item-center col-lg-6">
-                                    <button className="button-two" onClick={() =>{examSubmit(); handleSubmit();}}>Submit</button>
+                                    <button className="button-two" onClick={() =>{examSubmit(); handleNextAddResult(); handleSubmit();}}>Submit</button>
                                 </div>
                             </div>
                         </div> 

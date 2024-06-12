@@ -16,11 +16,39 @@ const Instruction =()=>
     const location = useLocation();
     let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
 
+    const startExam = useSelector((state) => state.quizQuestions.startExam);
+
     useBlockNavigation();
   
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  // const initiateExam = useCallback(() => {
+  //   dispatch(
+  //     startExamReducer({
+  //       class: id,
+  //       subject: subjectId,
+  //       chapter: ChapterId,
+  //       difficulty_level:Difficulty,
+  //       no_of_question:no_of_question,
+  //       duration:timeLimit
+
+  //     })
+  //   );
+  // }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
+
+  // useEffect(() => {
+    // let mounted = true;
+
+    // if (mounted) {
+      // initiateExam();
+    // }
+
+    // return () => {
+    //   mounted = false;
+    // };
+  // }, [initiateExam]);
   
   const handleStartExam = useCallback(() => {
     dispatch(
@@ -34,31 +62,31 @@ const Instruction =()=>
 
       })
     );
+    // let params = {};
+
+    // if (startExam.questions.length == 0) {
+    //   params.class = startExam.class_id;
+    //   params.subject= startExam.subject_id;
+    //   params.chapter= startExam.chapter_id;
+    //   params.difficulty_level=startExam.difficulty_level;
+    //   params.no_of_question=startExam.no_of_question;
+    //   params.duration=startExam.duration;
+ 
+    // } else{
+    //   params.quiz_id = startExam.id;
+    //   params.questions = startExam.questions;
+    // }
+
+    // dispatch(quizQuestionsReducer(params));
     // getAllQuestionsList();
     navigate('/exam', {
       state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
     });
   }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
 
-  // const getAllQuestionsList = useCallback(async () => {
-  //   try {
-  //     dispatch(
-  //       quizQuestionsReducer({
-  //         //user_type: "admin",
-  //         class: id,
-  //         subject: subjectId,
-  //         chapter: ChapterId,
-  //         difficulty_label: Difficulty
-  //       })
-  //     );
-   
-  //   } catch (error) {
-  //     console.error("Failed to fetch quiz questions:", error);
-  //   }
-  // }, [dispatch, id, subjectId, ChapterId, Difficulty,]);
 
   const handlePrevious = ()=>{
-    navigate('/instructionDetails', {
+    navigate('/instruction-details', {
       state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
     });
   }

@@ -71,6 +71,7 @@ export const LoginSlice = createSlice({
     .addCase(loginReducer.fulfilled,(state,{payload})=>{
       state.loader = false;
       state.successMessage = payload.message;
+      localStorage.setItem("user_name", payload.data?.user_name);
       state.userInfo = payload.data; // Assuming action.payload contains user data
 
   })
