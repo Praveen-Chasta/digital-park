@@ -37,65 +37,66 @@ const Footer =()=>{
 
    return(
 		<>
-				<footer> 
-							<div className="container">
-								<div className="row g-4">
-									<div className="col-xl-3 col-md-4 col-sm-6 col-6">
-										<div className="ps-lg-5">
-											<p className="fw-normal text-white text-uppercase">Used links</p>
-											<ul className="links">
-												<li className="mb-2"><Link to="/">Home </Link></li>
-												<li className="mb-2"><Link to="/about">About Us </Link></li>
-												<li className="mb-2"><Link to="#">Gallery</Link></li>
-												<li className="mb-2"><Link to="#">Transfer Of Equity </Link></li>
-												<li className="mb-2"><Link to="/faqs">FAQs</Link></li>
-											</ul>
-										</div>
-									</div>
-									<div className="col-xl-3 col-md-4 col-sm-6 col-6">
-										<div className="ps-lg-5">
-											<p className="fw-normal text-white text-uppercase">Product</p>
-											<ul className="links">
-												<li className="mb-2"><Link to="#">Skills and Knowledge Assessment </Link></li>
-												<li className="mb-2"><Link to="#">Easy Test Maker</Link></li>
-												<li className="mb-2"><Link to="#">AI-Powered Question Creation</Link></li>
-											</ul>
-										</div>
-									</div>
-									<div className="col-xl-3 col-md-4 col-sm-6 col-6">
-										<div className="ps-lg-5">
-										{/* <p className="fw-normal text-white text-uppercase">Social Media</p> */}
-											<ul className="links mt-4 mt-lg-5">
-												<li className="mb-2"><Link to="#">Online Quiz Maker </Link></li>
-												<li className="mb-2"><Link to="#">Exam Software</Link></li>
-												<li className="mb-2"><Link to="#">Insights & Analytics</Link></li>
-											</ul>
-										</div>
-									</div>
-									<div className="col-xl-3 col-md-4 col-sm-6 col-6">
-										<div className="ps-lg-5">
-											<p className="fw-normal text-white text-uppercase">Social Media</p>
-											<ul className="links">
-												<li className="mb-2"><Link to="https://www.instagram.com/digitaledu.park" target="_blank">Instagram</Link></li>
-												<li className="mb-2"><Link to="https://www.youtube.com/@digitaledupark"target="_blank">Youtube</Link></li>
-												<li className="mb-2"><Link to="https://www.facebook.com/profile.php?id=61558629759797"target="_blank">Facebook</Link></li>
-												<li className="mb-2"><Link to="https://www.linkedin.com/in/digital-edu-park-053098306"target="_blank">Linkedin</Link></li>
-											</ul>
-										</div>
-									</div>
-								</div>
+			<footer> 
+				<div className="container">
+					<div className="row g-4">
+						<div className="col-xl-3 col-md-4 col-sm-6 col-6">
+							<div className="ps-lg-5">
+								<p className="fw-normal text-white text-uppercase text-start mb-3">Used links</p>
+								<ul className="links">
+									<li className="mb-2"><Link to="/">Home </Link></li>
+									<li className="mb-2"><Link to="/about">About Us </Link></li>
+									<li className="mb-2"><Link to="#">Gallery</Link></li>
+									<li className="mb-2"><Link to="#">Transfer Of Equity </Link></li>
+									<li className="mb-2"><Link to="/faqs">FAQs</Link></li>
+								</ul>
 							</div>
+						</div>
+						<div className="col-xl-3 col-md-4 col-sm-6 col-6">
+							<div className="ps-lg-5">
+								<p className="fw-normal text-white text-uppercase text-start mb-3">Product</p>
+									<ul className="links">
+										<li className="mb-2"><Link to="#">Skills and Knowledge Assessment </Link></li>
+										<li className="mb-2"><Link to="#">Easy Test Maker</Link></li>
+										<li className="mb-2"><Link to="#">AI-Powered Question Creation</Link></li>
+									</ul>
+							</div>
+						</div>
+						<div className="col-xl-3 col-md-4 col-sm-6 col-6">
+							<div className="ps-lg-5">
+								{/* <p className="fw-normal text-white text-uppercase">Social Media</p> */}
+								<ul className="links mt-4 mt-lg-4">
+									<li className="mb-2 pt-3"><Link to="#">Online Quiz Maker </Link></li>
+									<li className="mb-2"><Link to="#">Exam Software</Link></li>
+									<li className="mb-2"><Link to="#">Insights & Analytics</Link></li>
+								</ul>
+							</div>
+						</div>
+						<div className="col-xl-3 col-md-4 col-sm-6 col-6">
+							<div className="ps-lg-5">
+								<p className="fw-normal text-white text-uppercase text-start mb-3">Social Media</p>
+								<ul className="links">
+									<li className="mb-2"><Link to="https://www.instagram.com/digitaledu.park" target="_blank">Instagram</Link></li>
+									<li className="mb-2"><Link to="https://www.youtube.com/@digitaledupark"target="_blank">Youtube</Link></li>
+									<li className="mb-2"><Link to="https://www.facebook.com/profile.php?id=61558629759797"target="_blank">Facebook</Link></li>
+									<li className="mb-2"><Link to="https://www.linkedin.com/in/digital-edu-park-053098306"target="_blank">Linkedin</Link></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 
-							<div className="copyright__wrapp py-3 mt-4 mt-md-5 position-relative">
-								<div className="container-fluid"> 
-									<div className="row g-2 align-items-center"> 
-										<div className="col-md-12"> 
-											<div className="text-center mb-0 text-white">&copy; DigitalEduPark 2024 | <Link to="#">Privacy Policy</Link> | <Link to="#">Terms and Conditions</Link></div>
-										</div>
-									</div>
+				<div className="copyright__wrapp py-3 mt-4 mt-md-5 position-relative">
+					<div className="container-fluid"> 
+						<div className="row g-2 align-items-center"> 
+							<div className="col-md-12"> 
+								<div className="text-center mb-0 text-white">&copy; DigitalEduPark 2024 | <Link to="#">Privacy Policy</Link> | <Link to="#">Terms and Conditions</Link>
 								</div>
 							</div>
-				</footer>
+						</div>
+					</div>
+				</div>
+			</footer>
 				{/* <div className="modal fade" id="loginPopup" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div className="modal-dialog">
 									<div className="modal-content">

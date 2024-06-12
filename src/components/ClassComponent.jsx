@@ -6,6 +6,7 @@ import StudentWrapper from "./StudentWrapper";
 import Clasess from "./class/classes";
 import ClassHeader from "./class/ClassHeader";
 import SubjectClass from "./class/SubjectClass";
+import "./ClassComponent.css";
 const ClassComponent=()=>
   {
     return (
@@ -17,6 +18,8 @@ const ClassComponent=()=>
       <StudentWrapper/>
       <Clasess/>
       <Footer/>
+      
+    
       </>
     );
   }

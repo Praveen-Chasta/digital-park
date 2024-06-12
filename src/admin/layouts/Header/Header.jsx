@@ -93,19 +93,19 @@ const Header =()=>{
           </div>
           </Link>
           <div className="dropdown-menu">
-          <div className={dashboardStyle['user-header']}>
+          {/* <div className={dashboardStyle['user-header']}>
             <div className={`${dashboardStyle['avatar']} ${dashboardStyle['avatar-sm']}`}>
               <img src={profile01} alt="User Image" className="avatar-img rounded-circle"/>
             </div>
             <div className={dashboardStyle['user-text']}>
             <h6>Hi 
             {user ? <> {data.user_name} </> : <> {""}</>} </h6>
-              {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
+              <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p>
             </div>
-          </div>
+          </div> */}
           {/* <Link className={dashboardStyle['dropdown-item']} href="profile.html">My Profile</Link>
           <Link className={dashboardStyle['dropdown-item']} href="inbox.html">Inbox</Link> */}
-          <Link to="/" className={dashboardStyle['dropdown-item']}  onClick={logout}>Logout</Link>
+         <p> <Link to="/" className={dashboardStyle['dropdown-item']}  onClick={logout}>Logout</Link></p>
           </div>
           </li>
           

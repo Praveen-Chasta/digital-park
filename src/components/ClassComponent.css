@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* display: flex; */
+    /* justify-content: center; */
+    background-color: #fff;
+    padding: 0 !important;
+}
+.class-container{
+    width:100%;
+}

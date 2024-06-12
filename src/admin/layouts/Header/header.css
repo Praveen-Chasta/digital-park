@@ -23,3 +23,22 @@
     text-align: left;
     color: rgba(238, 240, 248, 1)!important;
 }
+
+.dropdown-menu.show {
+    display: block;
+    text-align: center;
+    justify-content: center;
+}
+
+.dropdown-menu p{
+   margin-bottom: 0;
+}
+
+.header-logout-button{
+    text-align:center;
+    font-family: "Readex Pro";
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 13.75px;
+    color: "blue";
+}

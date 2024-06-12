@@ -1,0 +1,9 @@
+.form-control{
+    width:90%;
+    margin-right: 20px;
+}
+
+.password-input{
+    display: flex;
+    align-items: center;
+}
