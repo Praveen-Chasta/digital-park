@@ -119,13 +119,8 @@ const Header =()=>{
             </div>
             <div className={dashboardStyle['user-text']}>
             <h6>Hi 
-<<<<<<< HEAD
-            {user ? <> {userName ?? ""} </> : <> {""}</>} </h6>
-              {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
-=======
             {user ? <> {data.user_name} </> : <> {""}</>} </h6>
               <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p>
->>>>>>> c1fc87b7318c40dd630d6014643427c3153755aa
             </div>
           </div> */}
           {/* <Link className={dashboardStyle['dropdown-item']} href="profile.html">My Profile</Link>
