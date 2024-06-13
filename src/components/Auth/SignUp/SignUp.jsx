@@ -53,18 +53,14 @@ function SignUp() {
     };
 
     useEffect(() => {
-        if(success)
-            {
-            setTimeout(()=>{
-                const closeButton = document.getElementById('closeButton');
-                if (closeButton) 
-                  {
-                     closeButton.click()
-                  }
-              },100);
-             
-            }
-     }, [success]);
+        if (success) {
+          const closeButton = document.getElementById('closeSignUpButton');
+          if (closeButton) {
+            closeButton.click();
+          }
+        }
+      }, [success]);
+
     const overrideStyle ={
         display:'flex',
         margin:'0 auto',
@@ -232,7 +228,7 @@ function SignUp() {
                                                 pattern="[0-9]{10}"
                                                 title="Please enter a valid 10-digit phone number"
                                                 type="tel"
-                                                id="contact_number m-0"
+                                                id="contact_number"
                                                 className="form-control"
                                                 placeholder="Contact Number"
                                                 onChange={handleChange}

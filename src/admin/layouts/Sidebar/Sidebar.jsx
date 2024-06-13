@@ -2,6 +2,7 @@ import React  from "react";
 import dashboardStyle from "../../dashboard/dashboard.module.css";
 // import { Link } from "react-router-dom";
 import './sidebar.css';
+import { Link } from "react-router-dom";
 
 
 const Sidebar=()=>{
@@ -36,10 +37,11 @@ const Sidebar=()=>{
 							</li> */}
 							
 								<li className="ul-0 mt-4">Dashboard</li>
-								<li className="ul-1 mt-4">Quizz</li>
-								<li className="ul-1 mt-4">History</li>
+								{/* <li className="ul-1 mt-4">Quizz</li> */}
+								<Link to="/quiz" className="ul-1 mt-4">Quizz</Link>
+								{/* <li className="ul-1 mt-4">History</li> */}
 								<li className="ul-1 mt-4"><i class="bi bi-person"></i>Profile</li>
-								<li className="ul-1 mt-4">Contact Us</li>
+								{/* <li className="ul-1 mt-4">Contact Us</li> */}
 								<li className="ul-1 mt-4"><i class="bi bi-box-arrow-right bg-white"></i>Logout</li>
 							
 							{/* <li className="submenu">

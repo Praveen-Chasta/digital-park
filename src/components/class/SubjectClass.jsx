@@ -125,7 +125,7 @@ const SubjectClass=()=>{
           const loginModal = new window.bootstrap.Modal(document.getElementById('loginPopup'));
           loginModal.show();
         }else{
-          navigate('/instructionDetails', {
+          navigate('/instruction-details', {
             state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
           });
         }

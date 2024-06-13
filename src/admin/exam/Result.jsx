@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {  useLocation } from "react-router-dom";
 import { quizResultReducer, resultReducer } from "./ExamSlice.jsx";
 import useBlockNavigation from "./BlockNavigation.jsx";
+import { profileReducer } from "../../components/Auth/UserProfileSlice.jsx";
 function Result() {
 
   const location = useLocation();
@@ -116,6 +117,25 @@ function Result() {
       setShowAllQuestions(!showAllQuestions);
     };
  
+
+    const getAllList = useCallback(async () => {
+      dispatch(
+        profileReducer({
+        })
+      );
+    }, [dispatch]);
+  
+    useEffect(() => {
+      let mounted = true;
+  
+      if (mounted) {
+        getAllList();
+      }
+  
+      return () => {
+        mounted = false;
+      };
+    }, [getAllList]);
  
   return (
     <>

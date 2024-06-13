@@ -12,6 +12,7 @@ import Result from './admin/exam/Result.jsx';
 import ResultGraph from './admin/exam/resultGraph.jsx';
 import ExamQuestion from './admin/exam/ExamQuestion.jsx';   
 import FAQs from './components/FAQs/FAQs.jsx';
+import QuizPage from './admin/quizz/QuizPage.jsx';
 function App() {
     return ( 
        
@@ -24,11 +25,13 @@ function App() {
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
                     {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}
                     <Route path='/instruction' element={<Instruction/>}/>
-                    <Route path='/instructionDetails' element={<Instruction1/>}/>
+                    <Route path='/instruction-details' element={<Instruction1/>}/>
                     <Route path='/result' element={<Result/>}/>
-                    <Route path= "/resultGraph" element={<ResultGraph/>}/>
+                    <Route path= "/admin-dashboard" element={<ResultGraph/>}/>
+                    
                     <Route path='/exam' element={<ExamQuestion />} />
                     <Route path='/faqs' element={<FAQs />} />
+                    <Route path='/quiz' element={<QuizPage />} />
                 </Routes> 
         </Router>  
     );

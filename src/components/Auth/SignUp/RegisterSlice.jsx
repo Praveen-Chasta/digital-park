@@ -36,10 +36,10 @@ export const RegisterSlice = createSlice({
   name: "register",
   initialState:{
     loader:false,
+    success:false,
   },
   reducers: {
     togglesuccess: (state, action) => {
-      //console.log(action);
       state.success = action?.payload;
     },
   },

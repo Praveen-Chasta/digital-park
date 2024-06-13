@@ -1,5 +1,5 @@
 
-import React, { useState,useCallback, useEffect } from 'react'
+import React, { useState,useCallback, useEffect, useLayoutEffect } from 'react'
 import logo from "../../../asset/images/digital-edu-park-logo.webp"
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik } from "formik";
@@ -21,32 +21,46 @@ function Login() {
   let userInfo = useSelector((state) => state.login.userInfo);
 
 
-  useEffect(() => {
-    // if (success) {
-    //   // If success is true, trigger the click event on the close button
-    //   const closeButton = document.getElementById('closeButton');
-    //   if (closeButton) {
-    //     closeButton.click();
-    //   }
-    // }
 
+  // useEffect(() => {
+  //   // if (success) {
+  //   //   // If success is true, trigger the click event on the close button
+  //   //   const closeButton = document.getElementById('closeButton');
+  //   //   if (closeButton) {
+  //   //     closeButton.click();
+  //   //   }
+  //   // }
+
+  //   if(userInfo.class_id){
+  //     getStartExam();
+  //   }
+
+  //   if(success)
+  //     {
+  
+       
+  //       setTimeout(()=>{
+  //         const closeButton = document.getElementById('closeButton');
+  //         if (closeButton) 
+  //           {
+  //              closeButton.click()
+  //           }
+        
+  //       });
+       
+  //     }
+  // }, [success]);
+
+  useEffect(() => {
+    if (success) {
+      const closeButton = document.getElementById('closeButton');
+      if (closeButton) {
+        closeButton.click();
+      }
+    }
     if(userInfo.class_id){
       getStartExam();
     }
-
-    if(success)
-      {
-
-       
-        setTimeout(()=>{
-          const closeButton = document.getElementById('closeButton');
-          if (closeButton) 
-            {
-               closeButton.click()
-            }
-        });
-       
-      }
   }, [success]);
 
   const [showPassword, setShowPassword] = useState(false);

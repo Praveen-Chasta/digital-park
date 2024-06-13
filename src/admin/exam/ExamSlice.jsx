@@ -24,6 +24,7 @@ const initialState = {
       try {
         const token = await localStorage.getItem('token');
         const response = await axios.post(`${BASE_URL}/questions`, {
+        quiz_id: obj.quiz_id,
         class: obj.class,
         subject: obj.subject,
         chapter: obj.chapter,

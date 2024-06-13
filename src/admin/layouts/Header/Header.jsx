@@ -1,15 +1,18 @@
 import {logo,smlogo,profile01} from "../../imagepath";
 import { Link ,useNavigate} from "react-router-dom";
-import React,{ useCallback, useEffect} from "react";
+import React,{ useRef, useCallback, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dashboardStyle from "../../dashboard/dashboard.module.css";
 import { useState } from "react";
 import { profileReducer } from "../../../components/Auth/UserProfileSlice";
+import { useLayoutEffect } from "react";
 import "./header.css";
 const Header =()=>{
 
   const data = useSelector((state) => state.userProfile.data);
+  // const [ userName , setUserName ] = useState('');
 
+ 
   const dispatch = useDispatch();
   const getAllList = useCallback(async () => {
     dispatch(
@@ -29,24 +32,49 @@ const Header =()=>{
       mounted = false;
     };
   }, [getAllList]);
+//   useLayoutEffect(() => {
+
+//     // getAllList();
+// }, [data.full_name]);
 
   const navigate = useNavigate();
 
 	const initialUser = localStorage.getItem("token") || null;
+	const initialUserName = localStorage.getItem("user_name") || null;
 	const [user, setUser] = useState(initialUser);
+	const [userName, setUserName] = useState(initialUserName);
 
 	useEffect(() => {
 		
 		const token = localStorage.getItem("token");
+    const UserName = localStorage.getItem("user_name");
 		setUser(token || null);
+    setUserName(UserName || null);
+   
 	}, [initialUser]);
 
 
-	const logout = () => {
-		localStorage.removeItem("token");
-		setUser(null);
-		navigate("/");
-	};
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_name");
+  
+    setTimeout(() => {
+      // Get updated values
+      const token = localStorage.getItem("token");
+      const userName = localStorage.getItem("user_name");
+  
+      // Check if both token and userName are null
+      if (token === null && userName === null) {
+        // Navigate to home page
+        navigate("/");
+      }
+  
+      setUser(null);
+      setUserName(null);
+    }, 0); 
+  };
+  
+
 
   return(
         <>
@@ -79,14 +107,16 @@ const Header =()=>{
           <i className="fas fa-bars"></i>
           </Link>
           <ul className={`nav ${dashboardStyle['user-menu']}`}>
-          
+
+          <Link to="/admin-dashboard" className="student-result-heading"> Dashboard</Link>
+
           <li className="nav-item dropdown has-arrow new-user-menus">
           <Link href="#" className={`dropdown-toggle ${dashboardStyle['nav-link']} `} data-bs-toggle="dropdown">
           <div className={dashboardStyle['user-img']}>
             
             <div className={dashboardStyle['user-text']}>
             <h6 className="student-username">Hi 
-            {user ? <> {data.user_name ?? ""} </> : <> {""}</>} </h6>
+            {user ? <> {userName ?? ""} </> : <> {""}</>} </h6>
               {/* <p className={`${dashboardStyle['text-muted']} mb-0`}>Administrator</p> */}
             </div>
             <img className="rounded-circle" src={profile01} width="31" alt="Ryan Taylor"/>
