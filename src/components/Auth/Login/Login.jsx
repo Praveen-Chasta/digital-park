@@ -169,6 +169,7 @@ const notify = () => toast.success("Login Successfully!",
                 .then((data) => {
                   if (data?.payload?.status === true) {
                     dispatch(togglesuccess(true));
+                    
                     setTimeout(() => {
                       navigate("/", {
                         replace: true
