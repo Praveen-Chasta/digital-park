@@ -14,8 +14,9 @@ const initialState = {
     finalSubmit:[],
     quizResult:[],
     result:[],
-    success: false
+    success: false,
     // quizAnswer:[]
+    quizStatus:[]
 };
 
 
@@ -203,6 +204,28 @@ const initialState = {
   //   }
   // );
 
+
+    export const quizAnswerStatusReducer = createAsyncThunk(
+    'quizAnswerStatusReducer',
+    async (obj, { getState }) => {
+      try {
+
+        const token = await localStorage.getItem('token');
+        const response = await axios.post(`${BASE_URL}/quiz-status`, {
+          quiz_id:obj.quiz_id,
+          question: obj.question
+        }, {
+          headers: {
+            'remember-token': token,
+          }
+        });
+        return response.data;
+      } catch (error) {
+        throw new Error(error.response?.data?.message || error.message);
+      }
+    }
+  );
+
   export const ExamSlice = createSlice({
     name: "quizQuestions",
     initialState,
@@ -248,6 +271,10 @@ const initialState = {
       // .addCase(quizAnswerReducer.fulfilled, (state, action) => {
       //   state.quizAnswer = action?.payload.data;
       // });
+      builder
+      .addCase(quizAnswerStatusReducer.fulfilled, (state, action) => {
+        state.quizStatus = action?.payload.data;
+      });
       
    
     },

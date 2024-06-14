@@ -10,7 +10,8 @@ const initialState = {
   email: "",
   success: false,
   initialUser: "",
-  userInfo:[]
+  userInfo:[],
+  successStatus: ''
 };
 
 
@@ -28,7 +29,7 @@ export const loginReducer = createAsyncThunk(
 
       });
 
-      await localStorage.setItem("token", response?.data?.data?.remember_token);
+      await localStorage.setItem("token", response?.data?.data?.remember_token || null);
       return response?.data;
     } catch (error) {
       // dispatch({ type: "LOGIN_FAILURE", });
@@ -46,7 +47,7 @@ export const LoginSlice = createSlice({
     errorMessage: '',
     loader:false,
     userInfo: '',
-    success:''
+    success:'',
   },
   reducers: {
     togglesuccess: (state, action) => {
@@ -71,6 +72,7 @@ export const LoginSlice = createSlice({
     .addCase(loginReducer.fulfilled,(state,{payload})=>{
       state.loader = false;
       state.successMessage = payload.message;
+      state.successStatus = payload.status;
       localStorage.setItem("user_name", payload.data?.user_name);
       state.userInfo = payload.data; // Assuming action.payload contains user data
 

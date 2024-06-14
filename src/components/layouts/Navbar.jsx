@@ -32,8 +32,10 @@ const Navbar=()=>{
   	const navigate = useNavigate();
 
 	const initialUser = localStorage.getItem("token") || null;
-	const [user, setUser] = useState(initialUser);
+	const [user, setUser] = useState(initialUser !== "null" ? initialUser : null);
 
+
+	console.log(user);
 	useEffect(() => {
 		
 		const token = localStorage.getItem("token");

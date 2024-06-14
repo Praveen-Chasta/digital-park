@@ -29,7 +29,7 @@ const  ClassHeader=()=>{
       });
   
     // Ensure to add any dependencies to the dependency array if needed
-  });
+  },[]);
     return (
             <>
             <section className="inner-banner clearfix">

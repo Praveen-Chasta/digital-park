@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { subjectReducer, chapterReducer, noOfQuestionReducer } from "./SubjectClassSlice";
 import { SERVER_URL } from "../../config";
-
+import { debounce } from 'lodash';
 const BASE_URL = SERVER_URL;
 
 const SubjectClass=()=>{
@@ -37,17 +37,17 @@ const SubjectClass=()=>{
     );
   }, [dispatch]);
 
-  useEffect(() => {
-    let mounted = true;
+  // useEffect(() => {
+  //   let mounted = true;
 
-    if (mounted) {
-      getAllList();
-    }
+  //   if (mounted) {
+  //     getAllList();
+  //   }
 
-    return () => {
-      mounted = false;
-    };
-  }, [getAllList]);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getAllList]);
 
   const getAllChapterList = useCallback(async () => {
     dispatch(
@@ -59,17 +59,17 @@ const SubjectClass=()=>{
     );
   }, [dispatch]);
 
-  useEffect(() => {
-    let mounted = true;
+  // useEffect(() => {
+  //   let mounted = true;
 
-    if (mounted) {
-      getAllChapterList();
-    }
+  //   if (mounted) {
+  //     getAllChapterList();
+  //   }
 
-    return () => {
-      mounted = false;
-    };
-  }, [getAllChapterList]);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getAllChapterList]);
 
   const getQuestionNoList = useCallback(async () => {
     dispatch(
@@ -78,17 +78,17 @@ const SubjectClass=()=>{
     );
   }, [dispatch]);
 
-  useEffect(() => {
-    let mounted = true;
+  // useEffect(() => {
+  //   let mounted = true;
 
-    if (mounted) {
-      getQuestionNoList();
-    }
+  //   if (mounted) {
+  //     getQuestionNoList();
+  //   }
 
-    return () => {
-      mounted = false;
-    };
-  }, [getQuestionNoList]);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getQuestionNoList]);
   
   useEffect(() => 
     {
@@ -143,6 +143,16 @@ const SubjectClass=()=>{
 useEffect(() => {
 }, [chapterNoOfQuestion]);
 
+const debouncedGetAllQuestionList = useCallback(debounce(() => {
+  getAllList();
+  getAllChapterList();
+  getQuestionNoList();
+}, 300), [getAllList, getAllChapterList,getQuestionNoList ]);
+
+useEffect(() => {
+  debouncedGetAllQuestionList();
+  return debouncedGetAllQuestionList.cancel;
+}, [debouncedGetAllQuestionList]);
 
     return(
             <>

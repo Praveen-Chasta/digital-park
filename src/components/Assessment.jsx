@@ -1,28 +1,59 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useCallback} from "react";
 import DoubleCheck from "../asset/images/icons/doubble-check.svg";
 import AssessmentGradient from "../asset/images/home/assesment-gradient.svg";
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import { SERVER_URL } from "../config";
 import AssessmentStyle from "./AssessmentStyle.module.css";
+import { categoriesClassReducer } from "./class/SubjectClassSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { debounce } from 'lodash';
+
 const BASE_URL = SERVER_URL;
 
  const Assesment =()=>{
-	const [categoryData, setCategoriesClassData] = useState([]);
 
-				useEffect(() => 
-					{
-							axios.get(`${BASE_URL}/categories-class`)
-							.then(response => 
-								{
-										setCategoriesClassData(response.data.data);
-								})
-							.catch(error => {
-									console.error('Error fetching data: ', error);
-							});
-					}, 
-					[]);
+	const dispatch = useDispatch()
+
+	const categoryData = useSelector((state) => state.subjectClass.classCategories) || [];
+	// const [categoryData, setCategoriesClassData] = useState([]);
+
+
+
+				// useEffect(() => 
+				// 	{
+				// 			axios.get(`${BASE_URL}/categories-class`)
+				// 			.then(response => 
+				// 				{
+				// 						setCategoriesClassData(response.data.data);
+				// 				})
+				// 			.catch(error => {
+				// 					console.error('Error fetching data: ', error);
+				// 			});
+				// 	}, 
+				// 	[]);
 					
+
+	const getClassCategoriesList = useCallback(async () => {
+		try {			
+			dispatch(categoriesClassReducer());
+		} catch (error) {
+			console.error("Failed to fetch quiz questions:", error);
+		}
+		}, [dispatch]);
+	
+
+	const debouncedGetAllQuestionList = useCallback(debounce(() => {
+		getClassCategoriesList();
+	}, 300), [getClassCategoriesList]);
+
+	useEffect(() => {
+	debouncedGetAllQuestionList();
+	return debouncedGetAllQuestionList.cancel;
+	}, [debouncedGetAllQuestionList]);
+
+
+
 					const bgColors = ['bg-blue', 'bg-primary', 'bg-green'];
 					const Colors = ['blue', 'primary', 'green'];
 

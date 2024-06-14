@@ -1,9 +1,9 @@
 import Header from "../layouts/Header/Header.jsx";
 import "./ExamQuestion.css";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useLayoutEffect } from "react";
 import {  useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addResultReducer, getResultReducer, quizQuestionsReducer, finalSubmitReducer, quizResultReducer, resultReducer , startExamReducer, quizAnswerReducer} from "./ExamSlice.jsx"
+import { addResultReducer, getResultReducer, quizQuestionsReducer, finalSubmitReducer, quizResultReducer, resultReducer , startExamReducer, quizAnswerReducer, quizAnswerStatusReducer} from "./ExamSlice.jsx"
 import PageRefreshWarning from "./PageRefreshWarning.jsx";
 import { useNavigate } from 'react-router-dom';
 import useBlockNavigation from "./BlockNavigation.jsx";
@@ -12,11 +12,15 @@ function ExamQuestion(){
     const dispatch = useDispatch();
     
     const location = useLocation();
+
+    const navigate = useNavigate();
     let { id, subjectId, ChapterId,  Difficulty, no_of_question } = location.state || {};
   
   const quizData = useSelector((state) => state.quizQuestions.examQuestions) || [];
-  const startExam = useSelector((state) => state.quizQuestions.startExam);
+  const startExam = useSelector((state) => state.quizQuestions.startExam, 
+  (prev, next) => prev === next);
   // const quizAnswer = useSelector((state) => state.quizQuestions.quizAnswer);
+  const quizStatus = useSelector((state) => state.quizQuestions.quizStatus) || [];
 
   const getQuestionResult = useSelector((state) => state.quizQuestions.getResult) || [];
   const finalSubmit = useSelector((state) => state.quizQuestions.finalSubmit) || [];
@@ -43,6 +47,9 @@ function ExamQuestion(){
   const [questionStatusId, setQuestionStatusId] = useState(4);
   const [currentTime, setCurrentTime] = useState('');
 
+  const [examData, setExamData] =  useState(false);
+
+  console.log("start exam", startExam);
   const initiateExam = useCallback(() => {
     dispatch(
       startExamReducer({
@@ -55,36 +62,71 @@ function ExamQuestion(){
 
       })
     );
-    navigate('/exam', {
-      state: { id, subjectId, ChapterId, Difficulty, no_of_question }  //timeLimit
-    });
+    console.log("000000");
+    // navigate('/exam', {
+    //   state: { id, subjectId, ChapterId, Difficulty, no_of_question }  //timeLimit
+    // });
   }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question]); // timeLimit
 
-  useEffect(() => {
-    const hasRenderedBefore = localStorage.getItem('hasRenderedBefore');
+  // useEffect(() => {
+  //   const hasRenderedBefore = localStorage.getItem('hasRenderedBefore');
     
-    // Check if component has rendered before
-    if (hasRenderedBefore) {
-      // Call initiateExam on reload
-      initiateExam();
-    } else {
-      // Mark that component has rendered
-      localStorage.setItem('hasRenderedBefore', true);
-    }
-  }, []);
+  //   // Check if component has rendered before
+  //   if (hasRenderedBefore) {
+  //     // Call initiateExam on reload
+  //     if (startExam === null || startExam.length === 0) {
+        
+  //     initiateExam();
+  //     }else{
+  //       getAllQuestionList();
+  //     }
+  //   } else {
+  //     // Mark that component has rendered
+  //     localStorage.setItem('hasRenderedBefore', true);
+  //   }
+  // }, []);
   
 
   useEffect(() => {
-    let mounted = true;
+    // let mounted = true;
 
-    if (mounted) {
-      initiateExam();
+    // if (mounted) {  
+    //   if(startExam === null || startExam.length === 0){
+    //   initiateExam();
+    //   }
+    //   else{
+    //     getAllQuestionList();
+    //   }
+    // }
+
+    // return () => {
+    //   mounted = false;
+    // };
+
+
+    console.log(examData);
+    if (examData === false) {
+      
+      console.log("03333", startExam);
+      if(startExam === null || startExam.length === 0){
+        setExamData(true);
+        initiateExam();
+        console.log("22222");
+      }else{
+        setExamData(true);
+      }
+      
     }
-
-    return () => {
-      mounted = false;
-    };
-  }, [initiateExam]);
+    if(examData === true){
+      console.log("0....2525", startExam);
+      if(startExam != null){
+        console.log("11111");
+        setExamData(true);
+        getAllQuestionList();
+      }
+    }
+  
+  },[]);
 
 
   useEffect(() => {
@@ -113,27 +155,21 @@ function ExamQuestion(){
 
   const getAllQuestionList = useCallback(async () => {
     try {
-      // dispatch(
-      //   quizQuestionsReducer({
-      //     //user_type: "admin",
-      //     class: id,
-      //     subject: subjectId,
-      //     chapter: ChapterId,
-      //     difficulty_label: Difficulty
-      //   })
-      // );
+    
       let params = {};
-
-    if (startExam.questions.length > 0) {
+      // if(startExam === null || startExam.length === 0){
+      //   initiateExam();
+      //   }else {
       params.quiz_id = startExam.id;
       params.questions = startExam.questions;
-    } 
 
     dispatch(quizQuestionsReducer(params));
+  // } 
+
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
     }
-  }, [dispatch, startExam.id, startExam.questions]);
+  }, [dispatch]);
 
   useEffect(() => {
     let mounted = true;
@@ -150,55 +186,54 @@ function ExamQuestion(){
 
   const getQuizResult = useCallback(async () => {
     try {
-      dispatch(
-        quizResultReducer({
-          //user_type: "admin",
-          quiz_id:startExam.id,
-        })
-      );
+    
+      let params = {};
+      if (startExam != null) {
+        params.quiz_id = startExam.id;
+      } 
+      dispatch(quizResultReducer(params));
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
     }
-  }, [dispatch,startExam.id]);
+  }, [dispatch]);
 
   const getResult = useCallback(async () => {
     try {
-      dispatch(
-        resultReducer({
-          //user_type: "admin",
-          quiz_id:startExam.id,
-        })
-      );
+    
+      let params = {};
+    
+      if (startExam != null) {
+        params.quiz_id = startExam.id;
+      } 
+      dispatch(resultReducer(params));
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
     }
-  }, [dispatch,startExam.id]);
+  }, [dispatch]);
 
 
   const getResultList = useCallback(async () => {
     try {
-      dispatch(
-        getResultReducer({
-          quiz_id:startExam.id,
-          question:  startExam.questions
-        })
-      );
+    
+      let params = {};
+    
+      if (startExam != null) {
+        params.quiz_id = startExam.id;
+        params.question = startExam.questions;
+      } 
+  
+      dispatch(getResultReducer(params));
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
     }
-  }, [dispatch, startExam.id, startExam.questions]);
+  }, [dispatch]);
 
   useEffect(() => {
-    // let mounted = true;
 
-    // if (mounted) {
       getResultList();
-    // }
+      getResult();
 
-    // return () => {
-    //   mounted = false;
-    // };
-  }, [getResultList]);
+  }, [getResultList, getResult]);
 
 
   
@@ -228,21 +263,38 @@ function ExamQuestion(){
   // }, [getQuizAnswerList]);
 
 
+    const getQuizStatusList = useCallback(async () => {
+    try {
+
+      let params = {};
+    
+      if (startExam != null) {
+        params.quiz_id = startExam.id;
+        params.questions = startExam.questions;
+      } 
+  
+      dispatch(quizAnswerStatusReducer(params));
+    } catch (error) {
+      console.error("Failed to fetch quiz questions:", error);
+    }
+  }, [dispatch]);
+
   const examSubmit = useCallback(async () => {
     try {
-      dispatch(
-        finalSubmitReducer({
-          quiz_id:startExam.id,
-          end_time:currentTime,
-          status:1
-        })
-      );
-        // setSubmitted(true);
+
+        let params = {};
+
+      if (startExam != null) {
+        params.quiz_id = startExam.id;
+        params.end_time= currentTime;
+        params.status= 1;
+      } 
+      dispatch(finalSubmitReducer(params));
 
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
     }
-  }, [dispatch, startExam.id, currentTime]);
+  }, [dispatch]);
 
   const handleNextAddResult = useCallback(() => {
     dispatch(
@@ -256,7 +308,7 @@ function ExamQuestion(){
       
       })
     );
-  }, [dispatch, resultId, startExam.id, QuestionId, selectedOption,isReview, questionStatusId]);
+  }, [dispatch, resultId, QuestionId, selectedOption,isReview, questionStatusId]);
 
 
   useEffect(() => {
@@ -265,14 +317,15 @@ function ExamQuestion(){
       const storedReviewQuestions = localStorage.getItem('quizReviewQuestions');
       const storedCurrentQuestion = localStorage.getItem('quizCurrentQuestion');
       const storedTimeLeft = localStorage.getItem('quizTimeLeft');
-      const storedQuestionStatus = localStorage.getItem('quizQuestionStatus');
+      // const storedQuestionStatus = localStorage.getItem('quizQuestionStatus');
 
-      if (  storedReviewQuestions && storedCurrentQuestion && storedTimeLeft && storedQuestionStatus) {
+      getQuizStatusList();
+      if (  storedReviewQuestions && storedCurrentQuestion && storedTimeLeft) {
         // setAnswers(JSON.parse(storedAnswers));
         setReviewQuestions(JSON.parse(storedReviewQuestions));
         setCurrentQuestion(parseInt(storedCurrentQuestion, 10));
         // setTimeLeft(parseInt(storedTimeLeft, 10));
-        setQuestionStatus(JSON.parse(storedQuestionStatus));
+        // setQuestionStatus(JSON.parse(storedQuestionStatus));
       }
     } catch (error) {
       console.error("Failed to retrieve data from local storage:", error);
@@ -285,7 +338,7 @@ function ExamQuestion(){
       localStorage.setItem('quizReviewQuestions', JSON.stringify(reviewQuestions));
       localStorage.setItem('quizCurrentQuestion', currentQuestion);
       localStorage.setItem('quizTimeLeft', timeLeft);
-      localStorage.setItem('quizQuestionStatus', JSON.stringify(questionStatus));
+      // localStorage.setItem('quizQuestionStatus', JSON.stringify(questionStatus));
     } catch (error) {
       console.error("Failed to save data to local storage:", error);
     }
@@ -427,7 +480,7 @@ function ExamQuestion(){
         getQuizResult();
         getResult();
 
-      }}, [dispatch,resultId, startExam.id, QuestionId,selectedOption, isReview, questionStatusId]);
+      }}, [dispatch,resultId,  QuestionId,selectedOption, isReview, questionStatusId]);
       
    
       const handleResultId = () => {
@@ -441,16 +494,19 @@ function ExamQuestion(){
 
         }
       }
-      const navigate = useNavigate();
+     
       
-      const quiz_id=  startExam.id;
-    // useEffect(() => {
-      if (submitted === true) {
-          navigate('/result', {
-              state: { quiz_id }
-          });
+      if (startExam != null) {
+        const quiz_id=  startExam.id;
+        // useEffect(() => {
+          if (submitted === true) {
+              navigate('/result', {
+                  state: { quiz_id }
+              });
+          }
+      // }, [submitted, navigate, quiz_id]);
       }
-  // }, [submitted, navigate, quiz_id]);
+    
  
     const handleInstruction =()=>{
       navigate('/instruction', {
@@ -593,7 +649,7 @@ function ExamQuestion(){
                                         <p>1</p>
                                     </div> */}
                                     {quizData.map((_, index) => {
-                                        const status = questionStatus[index] ? questionStatus[index].toLowerCase().replace(' ', '-') : '4';
+                                        const status = quizStatus[index] ? quizStatus[index] : '4';
 
                                         return (
                                             <p
