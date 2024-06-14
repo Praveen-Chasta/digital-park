@@ -14,23 +14,22 @@ function ExamQuestion(){
     const location = useLocation();
 
     const navigate = useNavigate();
-    let { id, subjectId, ChapterId,  Difficulty, no_of_question } = location.state || {};
-  
-  const quizData = useSelector((state) => state.quizQuestions.examQuestions) || [];
-  const startExam = useSelector((state) => state.quizQuestions.startExam, 
-  (prev, next) => prev === next);
+
   // const quizAnswer = useSelector((state) => state.quizQuestions.quizAnswer);
   const quizStatus = useSelector((state) => state.quizQuestions.quizStatus) || [];
+    let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
+  
+  const quizData = useSelector((state) => state.quizQuestions.examQuestions) || [];
+  const startExam = useSelector((state) => state.quizQuestions.startExam);
 
   const getQuestionResult = useSelector((state) => state.quizQuestions.getResult) || [];
   const finalSubmit = useSelector((state) => state.quizQuestions.finalSubmit) || [];
   const quizResult = useSelector((state) => state.quizQuestions.quizResult) || [];
   
-  // timeLimit = timeLimit * 60;
-  // const autoSubmitDelay = 30000; 
-  // auto-submit delay in milliseconds (30 seconds)
-  const initialTimeLimit = 15 * 60; // 15 minutes in seconds
-  const [timeLeft, setTimeLeft] = useState(initialTimeLimit);
+  console.log("First", timeLimit)
+  let time
+  time = timeLimit * 60;
+  const autoSubmitDelay = 30000; // auto-submit delay in milliseconds (30 seconds)
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [QuestionId, setQuestionId] = useState(quizData[currentQuestion]?.id ?? 0);
@@ -39,7 +38,7 @@ function ExamQuestion(){
   const [selectedOption, setSelectedOption] = useState("");
   const [answers, setAnswers] = useState({});
   const [reviewQuestions, setReviewQuestions] = useState([]);
-  // const [timeLeft, setTimeLeft] = useState(timeLimit);
+  const [timeLeft, setTimeLeft] = useState(time);
   const [submitted, setSubmitted] = useState(false);
   const [questionStatus, setQuestionStatus] = useState(
     quizData.map(() => '4')
@@ -152,6 +151,36 @@ function ExamQuestion(){
     return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
   };
 
+
+  // const getAllQuestionList = useCallback(async () => {
+  //   try {
+  //     if (startExam && startExam.questions && startExam.questions.length > 0) {
+  //       let params = {
+  //         quiz_id: startExam.id,
+  //         questions: startExam.questions
+  //       };
+  
+  //       dispatch(quizQuestionsReducer(params));
+  //     } else {
+  //       console.log('startExam.questions is not yet populated or is empty.');
+  //       // Handle the case where questions are not available yet
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch quiz questions:", error);
+  //   }
+  // }, [dispatch, startExam]);
+  
+  // useEffect(() => {
+  //   let mounted = true;
+  
+  //   if (mounted) {
+  //     getAllQuestionList();
+  //   }
+  
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getAllQuestionList]);
 
   const getAllQuestionList = useCallback(async () => {
     try {
@@ -296,6 +325,8 @@ function ExamQuestion(){
     }
   }, [dispatch]);
 
+  console.log("Initial timeLimit:", timeLimit);
+
   const handleNextAddResult = useCallback(() => {
     dispatch(
       addResultReducer({
@@ -313,7 +344,7 @@ function ExamQuestion(){
 
   useEffect(() => {
     try {
-      // const storedAnswers = localStorage.getItem('quizAnswers');
+      const storedAnswers = localStorage.getItem('quizAnswers');
       const storedReviewQuestions = localStorage.getItem('quizReviewQuestions');
       const storedCurrentQuestion = localStorage.getItem('quizCurrentQuestion');
       const storedTimeLeft = localStorage.getItem('quizTimeLeft');
@@ -334,7 +365,7 @@ function ExamQuestion(){
 
   useEffect(() => {
     try {
-      // localStorage.setItem('quizAnswers', JSON.stringify(answers));
+      localStorage.setItem('quizAnswers', JSON.stringify(answers));
       localStorage.setItem('quizReviewQuestions', JSON.stringify(reviewQuestions));
       localStorage.setItem('quizCurrentQuestion', currentQuestion);
       localStorage.setItem('quizTimeLeft', timeLeft);
@@ -344,63 +375,44 @@ function ExamQuestion(){
     }
   }, [answers, reviewQuestions, currentQuestion, timeLeft, questionStatus]);
 
-  // useEffect(() => {
-  //   let timer;
-  //   if (timeLeft > 0 && !submitted) {
-  //     timer = setTimeout(() => {
-  //       setTimeLeft(prevTime => prevTime - 1);
-  //     }, 1000);
-  //   } else if (timeLeft === 0 && !submitted) {
-  //     handleSubmit();
-  //   }
-
-  //   return () => clearTimeout(timer);
-  // }, [timeLeft, submitted]);
-
   useEffect(() => {
     let timer;
-    if (timeLeft > 0) {
+    if (timeLeft > 0 && !submitted) {
       timer = setTimeout(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
+        setTimeLeft(prevTime => prevTime - 1);
       }, 1000);
-    } else {
-      // handle time-up logic here
-      handleSubmitTimer();
+    } else if (timeLeft === 0 && !submitted) {
+      handleSubmit();
     }
-  
-    return () => clearTimeout(timer); // cleanup on component unmount
-  }, [timeLeft]);
-  
-  const handleSubmitTimer = () => {
-    // your submit logic here
-    console.log('Time is up! Submitting the exam.');
-  };
 
-  // useEffect(() => {
-  //   let autoSubmitTimer;
+    return () => clearTimeout(timer);
+  }, [timeLeft, submitted]);
 
-  //   const checkNetworkStatus = () => {
-  //     try {
-  //       if (!navigator.onLine) {
-  //         autoSubmitTimer = setTimeout(() => {
-  //           if (!submitted) {
-  //             handleSubmit();
-  //           }
-  //         }, autoSubmitDelay);
-  //       } else {
-  //         clearTimeout(autoSubmitTimer);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error checking network status:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    let autoSubmitTimer;
 
-  //   checkNetworkStatus();
+    const checkNetworkStatus = () => {
+      try {
+        if (!navigator.onLine) {
+          autoSubmitTimer = setTimeout(() => {
+            if (!submitted) {
+              handleSubmit();
+            }
+          }, autoSubmitDelay);
+        } else {
+          clearTimeout(autoSubmitTimer);
+        }
+      } catch (error) {
+        console.error("Error checking network status:", error);
+      }
+    };
 
-  //   const interval = setInterval(checkNetworkStatus, 5000);
+    checkNetworkStatus();
 
-  //   return () => clearInterval(interval);
-  // }, [submitted, autoSubmitDelay]);
+    const interval = setInterval(checkNetworkStatus, 5000);
+
+    return () => clearInterval(interval);
+  }, [submitted, autoSubmitDelay]);
 
   const handleAnswer = (questionId, answer) => {
     setAnswers(prevAnswers => ({
@@ -510,12 +522,14 @@ function ExamQuestion(){
  
     const handleInstruction =()=>{
       navigate('/instruction', {
-        state: { id, subjectId, ChapterId,  Difficulty, no_of_question } //timeLimit
+        state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
       });
      }
      const buttonStyle = {
       background: currentQuestion === 0 ? 'rgba(167, 205, 217, 1)' : 'rgba(0, 164, 216, 1)'
     };
+
+    console.log("Time Left", timeLeft)
     
     return (
         <>
@@ -564,7 +578,7 @@ function ExamQuestion(){
                                         id={`question-${quizData[currentQuestion].id}-option-${index}`}
                                         name={`question-${quizData[currentQuestion].id}-option-${index}`}
                                         value={option}
-                                        checked={answers[quizData[currentQuestion].id] === option || quizData[currentQuestion].answer === `option${index}`}
+                                        checked={answers[quizData[currentQuestion].id] === option }    // || quizData[currentQuestion].answer === `option${index}`
                                         onChange={() =>{ 
                                           handleAnswer(quizData[currentQuestion].id, option); 
                                           getResultList(); 

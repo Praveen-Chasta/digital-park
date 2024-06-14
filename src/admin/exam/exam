@@ -21,6 +21,7 @@ function ExamQuestion(){
   const finalSubmit = useSelector((state) => state.quizQuestions.finalSubmit) || [];
   const quizResult = useSelector((state) => state.quizQuestions.quizResult) || [];
   
+  console.log("First", timeLimit)
   timeLimit = timeLimit * 60;
   const autoSubmitDelay = 30000; // auto-submit delay in milliseconds (30 seconds)
 
@@ -94,6 +95,36 @@ function ExamQuestion(){
   };
 
 
+  // const getAllQuestionList = useCallback(async () => {
+  //   try {
+  //     if (startExam && startExam.questions && startExam.questions.length > 0) {
+  //       let params = {
+  //         quiz_id: startExam.id,
+  //         questions: startExam.questions
+  //       };
+  
+  //       dispatch(quizQuestionsReducer(params));
+  //     } else {
+  //       console.log('startExam.questions is not yet populated or is empty.');
+  //       // Handle the case where questions are not available yet
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch quiz questions:", error);
+  //   }
+  // }, [dispatch, startExam]);
+  
+  // useEffect(() => {
+  //   let mounted = true;
+  
+  //   if (mounted) {
+  //     getAllQuestionList();
+  //   }
+  
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getAllQuestionList]);
+
   const getAllQuestionList = useCallback(async () => {
     try {
       // dispatch(
@@ -163,7 +194,7 @@ function ExamQuestion(){
       dispatch(
         getResultReducer({
           quiz_id:startExam.id,
-          question:  startExam.questions.length > 0 ? startExam.questions : [""]
+          question:  startExam.question
         })
       );
     } catch (error) {
@@ -199,6 +230,8 @@ function ExamQuestion(){
       console.error("Failed to fetch quiz questions:", error);
     }
   }, [dispatch, startExam.id, currentTime]);
+
+  console.log("Initial timeLimit:", timeLimit);
 
   const handleNextAddResult = useCallback(() => {
     dispatch(
@@ -445,7 +478,7 @@ function ExamQuestion(){
                                         id={`question-${quizData[currentQuestion].id}-option-${index}`}
                                         name={`question-${quizData[currentQuestion].id}-option-${index}`}
                                         value={option}
-                                        checked={answers[quizData[currentQuestion].id] === option || quizData[currentQuestion].answer === `option${index}`}
+                                        checked={answers[quizData[currentQuestion].id] === option }    // || quizData[currentQuestion].answer === `option${index}`
                                         onChange={() =>{ 
                                           handleAnswer(quizData[currentQuestion].id, option); 
                                           getResultList(); 

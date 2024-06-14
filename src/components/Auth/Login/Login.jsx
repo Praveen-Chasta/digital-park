@@ -184,6 +184,7 @@ const notifyError = () => toast.error("Login Failed!",
                 .then((data) => {
                   if (data?.payload?.status === true) {
                     dispatch(togglesuccess(true));
+                    
                     setTimeout(() => {
                       navigate("/", {
                         replace: true
