@@ -3,6 +3,9 @@ import logo from "../../../asset/images/digital-edu-park-logo.webp"
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpReducer, togglesuccess } from './RegisterSlice';
+import { loginReducer } from '../Login/LoginSlice';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
@@ -68,8 +71,18 @@ function SignUp() {
         justifyContent:'center',
         alignItem:'center',
       }
+
+    const notify = () => {
+        setTimeout(() => {
+            toast.success("Login Successfully!", {
+                position: "top-center",
+            });
+        }, 3000); // 2-second delay
+    };
+
     return (
         <div className="modal fade" id="signUpPopup" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
             <div className="modal-dialog modal-lg p-5">
                 <div className="modal-content">
                     <div className="modal-body">
@@ -109,14 +122,28 @@ function SignUp() {
                                         class: values.class,
                                     })
                                 ).then((data) => {
-                                    // console.log(data);
                                     if (data?.payload?.status === true) {
                                         dispatch(togglesuccess(true));
-                                        setTimeout(() => {
-                                            navigate("/", {
-                                                replace: true,
-                                            });
-                                        }, 500);
+                                        // Automatically log in the user after successful sign-up
+                                        dispatch(
+                                            loginReducer({
+                                                email: values.email,
+                                                password: values.password,
+                                            })
+                                        ).then((loginData) => {
+                                            if (loginData?.payload?.status === true) {
+                                                setTimeout(() => {
+                                                    navigate("/", {
+                                                        replace: true,
+                                                    });
+                                                }, 500);
+                                            } else {
+                                                setError(loginData?.payload?.error.message);
+                                                setTimeout(() => {
+                                                    setError("");
+                                                }, 1000);
+                                            }
+                                        });
                                     } else {
                                         dispatch(togglesuccess(false));
                                         setError(data?.payload?.error.message);
@@ -281,12 +308,13 @@ function SignUp() {
                                         </div>
                                     </div>
 
-                                    <button type="submit"  disabled={loader ? true : false}  className={`btn btn-primary ${loader ? "pb-4" : ""}`} >
+                                    <button type="submit"  disabled={loader ? true : false}  className={`btn btn-primary ${loader ? "pb-4" : ""}`} onClick={notify}>
                                     {
                                         loader ? <PropagateLoader color='#fff' cssoverride = {overrideStyle} /> : 'Sign Up'
                                     }
 
                                     </button>
+                                    <ToastContainer />
                                     {/* <p>Already have an account? <Link  >Log In</Link></p> */}
                                     <p>Already have an account? <Link data-bs-toggle="modal" data-bs-target="#loginPopup" aria-label="Login">Login</Link></p>
 

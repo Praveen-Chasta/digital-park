@@ -20,7 +20,7 @@ function App() {
                 <Routes> 
                     <Route path="/" element={<Home/>}></Route> 
                     <Route path="/about"  element={<About/>}/>
-                    <Route path="/classes/:id"  element={<ClassComponent/>}/>
+                    <Route exact path="/classes/:id"  element={<ClassComponent/>} />
                     {/* <Route path="/classes"  element={<ClassComponent/>}/> */}
                     <Route path="/classHeader"  element={<ClassHeader/>}/>
                     {/* <Route path="/dashboard"  element={<AdminDashboard/>}/> */}

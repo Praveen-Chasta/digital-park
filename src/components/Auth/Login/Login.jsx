@@ -6,6 +6,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { loginReducer, togglesuccess,messageClear } from './LoginSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { PropagateLoader } from 'react-spinners';
 import {startExamReducer} from "../../../admin/exam/ExamSlice.jsx"
 import './login.css';
@@ -14,6 +16,7 @@ function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const dispatch = useDispatch();
   const {loader} = useSelector(state=>state.login);
@@ -51,17 +54,19 @@ function Login() {
   //     }
   // }, [success]);
 
-  useEffect(() => {
-    if (success) {
-      const closeButton = document.getElementById('closeButton');
-      if (closeButton) {
-        closeButton.click();
-      }
-    }
-    if(userInfo.class_id){
-      getStartExam();
-    }
-  }, [success]);
+  // useEffect(() => {
+  //   if (success) {
+  //     const closeButton = document.getElementById('closeButton');
+  //     if (closeButton) {
+  //       closeButton.click();
+  //     }
+  //   }
+  //   if(userInfo.class_id){
+  //     getStartExam();
+  //   }
+  // }, [success]);
+
+  
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -83,7 +88,7 @@ const getStartExam = useCallback(async () => {
   try {
     let params = {};
 
-    if (userInfo.quiz_id !== undefined) {
+    if (userInfo && userInfo.quiz_id !== undefined) {
       params.class=  userInfo.class_id;
       params.subject=  userInfo.subjectId;
       params.chapter=  userInfo.ChapterId;
@@ -94,13 +99,41 @@ const getStartExam = useCallback(async () => {
 
     dispatch(startExamReducer(params));
     navigate('/exam', {
-      state: { id: userInfo.class_id , subjectId: userInfo.subjectId, ChapterId:userInfo.ChapterId,
-         timeLimit:userInfo.duration, Difficulty:userInfo.Difficulty, no_of_question:userInfo.no_of_question}
+      state: 
+        { 
+              id: userInfo.class_id , 
+               subjectId: userInfo.subjectId, 
+               ChapterId:userInfo.ChapterId,
+               timeLimit:userInfo.duration, 
+               Difficulty:userInfo.Difficulty, 
+               no_of_question:userInfo.no_of_question
+        }
     });
   } catch (error) {
     console.error("Failed to fetch quiz questions:", error);
   }
 }, [dispatch,]);
+
+
+
+useEffect(() => {
+  if (success) {
+    const closeButton = document.getElementById('closeButton');
+    if (closeButton) {
+      closeButton.click();
+    }
+    if (userInfo && userInfo.class_id) {
+      getStartExam();
+    } else {
+      navigate("/", { replace: true });
+    }
+  }
+}, [success, userInfo, getStartExam, navigate]);
+
+const notify = () => toast.success("Login Successfully!",
+  {
+    position: "top-center",
+  });
 
   return (
 
@@ -132,7 +165,8 @@ const getStartExam = useCallback(async () => {
                     email: values.email,
                     password: values.password,
                   })
-                ).then((data) => {
+                ) 
+                .then((data) => {
                   if (data?.payload?.status === true) {
                     dispatch(togglesuccess(true));
                     setTimeout(() => {
@@ -148,6 +182,22 @@ const getStartExam = useCallback(async () => {
                     }, 1000);
                   }
                 });
+                //.then((data) => {
+                //   if (data?.payload?.status === true) {
+                //     dispatch(togglesuccess(true));
+                //     setTimeout(() => {
+                //       navigate("/", {
+                //         replace: true
+                //       });
+                //     }, 1000);
+                //   } else {
+                //     dispatch(togglesuccess(false));
+                //     setError(data?.payload?.error.message);
+                //     setTimeout(() => {
+                //       setError("");
+                //     }, 1000);
+                //   }
+                // });
               }}
             >
               {({
@@ -210,11 +260,12 @@ const getStartExam = useCallback(async () => {
                   </div>
 
 
-                  <button  disabled={loader ? true : false}   className={`btn btn-primary ${loader ? "pb-4" : ""}`} type='submit' >
+                  <button  disabled={loader ? true : false}   className={`btn btn-primary ${loader ? "pb-4" : ""}`} type='submit' onClick={notify}>
                       {
                         loader ? <PropagateLoader color='#fff' cssoverride = {overrideStyle} /> : 'Login'
                       }
                     </button>
+                    <ToastContainer />
                   {/* <p>Don't have an account? <Link  >Sign Up</Link></p> */}
                   <p>Don't have an account? <Link data-bs-target="#signUpPopup" data-bs-toggle="modal" aria-label="Sign Up" >Sign Up</Link></p>
 
@@ -234,6 +285,12 @@ const getStartExam = useCallback(async () => {
                       }
                     >
                       {error}
+                    </div>
+                  )}
+
+                  {successMessage && (
+                    <div className="col-sm-12 col-md-12 alert alert-success text-center mt-2 text-capitalize">
+                      {successMessage}
                     </div>
                   )}
 
