@@ -18,7 +18,7 @@ function App() {
        
         <Router>
                 <Routes> 
-                    <Route path="/" element={<Home/>}></Route> 
+                    <Route exact path="/" element={<Home/>}></Route> 
                     <Route path="/about"  element={<About/>}/>
                     <Route exact path="/classes/:id"  element={<ClassComponent/>} />
                     {/* <Route path="/classes"  element={<ClassComponent/>}/> */}
@@ -29,7 +29,7 @@ function App() {
                     <Route path='/result' element={<Result/>}/>
                     <Route path= "/admin-dashboard" element={<ResultGraph/>}/>
                     
-                    <Route path='/exam' element={<ExamQuestion />} />
+                    <Route exact path='/exam' element={<ExamQuestion />} />
                     <Route path='/faqs' element={<FAQs />} />
                     <Route path='/quiz' element={<QuizPage />} />
                 </Routes> 
