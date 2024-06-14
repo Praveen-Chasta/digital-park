@@ -1739,6 +1739,7 @@ button.bg-danger:hover {
 .dropdown-item.active,
 .dropdown-item:active {
   background-color: #3d5ee1;
+  color : #FFFFFF;
 }
 
 .navbar-nav .open .dropdown-menu {
@@ -2624,9 +2625,9 @@ div.dataTables_wrapper div.dataTables_length select {
   padding: 10px 15px;
 }
 
-.user-menu .dropdown-menu .dropdown-item:hover {
+/* .user-menu .dropdown-menu .dropdown-item:hover {
   color: #3d5ee1;
-}
+} */
 
 .header .dropdown-menu>li>a:focus,
 .header .dropdown-menu>li>a:hover {
