@@ -13,6 +13,7 @@ import ResultGraph from './admin/exam/resultGraph.jsx';
 import ExamQuestion from './admin/exam/ExamQuestion.jsx';   
 import FAQs from './components/FAQs/FAQs.jsx';
 import QuizPage from './admin/quizz/QuizPage.jsx';
+import UserProfile from './admin/quizz/UserProfile.jsx';
 function App() {
     return ( 
        
@@ -32,6 +33,7 @@ function App() {
                     <Route exact path='/exam' element={<ExamQuestion />} />
                     <Route path='/faqs' element={<FAQs />} />
                     <Route path='/quiz' element={<QuizPage />} />
+                    <Route path='/profile' element={<UserProfile />} />
                 </Routes> 
         </Router>  
     );

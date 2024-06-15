@@ -1,0 +1,45 @@
+.quiz-main-container .container-fluid{
+    margin-left: 124px;
+    margin-top: 52px;
+    margin-right: 50px;
+    background-color: #EBFAFF;
+}
+
+.container{
+    width:1220px;
+}
+
+.quiz-heading-container h1,h3{
+  font-size: 22px;
+  font-weight: 500;
+  font-family: "Readex Pro";
+  margin-top: 40px;
+}
+
+.quiz-dropdown-container{
+    margin-top: 50px;
+}
+
+.select-wide{
+    /* width:220px; */
+    height:40px;
+    margin-right: 25px;
+}
+
+.select-wide-1{
+    /* width:280px; */
+    height:40px;
+    margin-right: 25px;
+}
+
+.quiz-search-button{
+    background-color: #00A4D8;
+    color:#ffffff;
+    border: 0;
+    font-family: "Readex Pro";
+    font-size: 18px;
+    font-weight: 700;
+    width: 156px;
+    height: 40px;
+    border-radius: 5px;
+}

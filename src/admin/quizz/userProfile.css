@@ -1,0 +1,28 @@
+.user-profile-main-container{
+    background-color: #EBFAFF;
+    height:100vh;
+}
+
+.user-profile-container{
+    padding-top: 80px;
+    padding-left: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-profile-img{
+    height:auto;
+    width:20vw;
+}
+
+.user-profile-details-container{
+    padding-top: 80px;
+    padding-left: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
