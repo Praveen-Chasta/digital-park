@@ -1,14 +1,67 @@
-.sidebar-un-list{
+.sidebar-container{
+  bottom: 0;
+  left: 0;
+  margin-top: 0;
+  position: fixed;
+  top: 60px;
+  transition: all 0.2s ease-in-out 0s;
+  width: 259px;
+  z-index: 1001;
+  background: rgba(47, 48, 68, 1);
+}
+
+.sidebar-ul-list{
+  margin-left: 50px;
+}
+
+.sidebar-ul-0{
+ 
+  font-family: "Readex Pro";
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 21.25px;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.sidebar-ul-list li a {
+  color: rgba(171, 187, 193, 1) ;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.sidebar-ul-list li a:hover {
+  color: #FFFFFF; /* Text color on hover */
+  font-size: 20px;
+  transition: .3s ease;
+}
+
+/* .sidebar-ul-list li a.active-link {
+  color: #FFFFFF; 
+} */
+
+.active{
+  color: #FFFFFF; 
+}
+
+
+
+
+
+
+/* .sidebar-un-list{
     margin-left: 20px;
     background-color: aliceblue;
 }
 
 .sidebar-un-list li{
-    color: white;
+  color: #FFFFFF;
 }
 
-.ul-0{
-    color: #FFFFFF;
+.sidebar-ul-0{
+    color: rgba(171, 187, 193, 1) !important;
     font-family: "Readex Pro";
     font-size: 17px;
     font-weight: 400;
@@ -17,12 +70,26 @@
     margin-left: 20px;
 }
 
-.ul-1{
-    color: rgba(171, 187, 193, 1);
-    font-family: "Readex Pro";
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 21.25px;
-    text-align: left;
-    margin-left: 20px;
+
+.sidebar-ul-1{
+  color: rgba(171, 187, 193, 1) !important;
+  font-family: "Readex Pro";
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 21.25px;
+  text-align: left;
+
 }
+
+.sidebar-ul-list .sidebar-ul-0:hover,
+.sidebar-ul-list .sidebar-ul-1:hover {
+  color: #FFFFFF; 
+  background-color: transparent;
+}
+
+.sidebar-ul-list .active-link {
+  color: #FFFFFF; 
+  background-color: transparent;
+}
+
+ */
