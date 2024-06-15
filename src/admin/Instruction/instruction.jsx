@@ -33,7 +33,7 @@ const Instruction =()=>
           duration: timeLimit
         })
       );
-    }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
+    }, []);
     
     useEffect(() => {
       initiateExam(); // Initialize exam when component mounts
@@ -62,10 +62,9 @@ const Instruction =()=>
       navigate('/exam', {
         state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
       });
-    }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit, startExam, navigate]);
+    }, [startExam]);
     
-    // The rest of your component logic...
-    
+
     
   const handlePrevious = ()=>{
     navigate('/instruction-details', {

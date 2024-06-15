@@ -9,29 +9,29 @@ import { useLayoutEffect } from "react";
 import "./header.css";
 const Header =()=>{
 
-  const data = useSelector((state) => state.userProfile.data);
+  // const data = useSelector((state) => state.userProfile.data);
   // const [ userName , setUserName ] = useState('');
 
  
-  const dispatch = useDispatch();
-  const getAllList = useCallback(async () => {
-    dispatch(
-      profileReducer({
-      })
-    );
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // const getAllList = useCallback(async () => {
+  //   dispatch(
+  //     profileReducer({
+  //     })
+  //   );
+  // }, [dispatch]);
 
-  useEffect(() => {
-    let mounted = true;
+  // useEffect(() => {
+  //   let mounted = true;
 
-    if (mounted) {
-      getAllList();
-    }
+  //   if (mounted) {
+  //     getAllList();
+  //   }
 
-    return () => {
-      mounted = false;
-    };
-  }, [getAllList]);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getAllList]);
 //   useLayoutEffect(() => {
 
 //     // getAllList();
