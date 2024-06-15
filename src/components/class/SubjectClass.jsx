@@ -161,7 +161,7 @@ useEffect(() => {
                   <div className="accordion" id="accordionQuiz">
                   <div className="row">
                       <div className="col-lg-6 col-md-6 col-12">
-                      <h2>Subject Wise Quiz</h2>
+                      <h3>Subject Wise Quiz</h3>
                       <h5>Select Difficulty Level :</h5>
                         <ul className="SelectLevel clearfix">
                           {/* { label.map((data,index)=>
