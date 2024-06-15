@@ -21,6 +21,7 @@ function Login() {
   const dispatch = useDispatch();
   const {loader} = useSelector(state=>state.login);
   let success = useSelector((state) => state.login.success);
+  let successStatus = useSelector((state) => state.login.successStatus);
   let userInfo = useSelector((state) => state.login.userInfo);
 
 
@@ -128,11 +129,25 @@ useEffect(() => {
       navigate("/", { replace: true });
     }
   }
+
+  if (successStatus === true) {
+    notify();
+  }
+
+
 }, [success, userInfo, getStartExam, navigate]);
+
+
 
 const notify = () => toast.success("Login Successfully!",
   {
     position: "top-center",
+  });
+
+  
+const notifyError = () => toast.error("Login Failed!",
+  {
+    position: "top-left",
   });
 
   return (
@@ -177,6 +192,7 @@ const notify = () => toast.success("Login Successfully!",
                     }, 1000);
                   } else {
                     dispatch(togglesuccess(false));
+                    notifyError();
                     setError(data?.payload?.error.message);
                     setTimeout(() => {
                       setError("");
@@ -261,7 +277,7 @@ const notify = () => toast.success("Login Successfully!",
                   </div>
 
 
-                  <button  disabled={loader ? true : false}   className={`btn btn-primary ${loader ? "pb-4" : ""}`} type='submit' onClick={notify}>
+                  <button  disabled={loader ? true : false}   className={`btn btn-primary ${loader ? "pb-4" : ""}`} type='submit'>
                       {
                         loader ? <PropagateLoader color='#fff' cssoverride = {overrideStyle} /> : 'Login'
                       }

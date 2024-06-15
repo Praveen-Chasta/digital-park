@@ -11,6 +11,7 @@ const initialState = {
     chapters: [],
     no_of_question:[],
     success: false,
+    classCategories:[]
 };
 
 export const subjectReducer = createAsyncThunk(
@@ -61,6 +62,19 @@ export const noOfQuestionReducer = createAsyncThunk(
 );
 
 
+  export const categoriesClassReducer = createAsyncThunk(
+    "categoriesClassReducer",
+    async (obj, { getState }) => {
+      try {
+        const response = await axios.get(`${BASE_URL}/categories-class`);
+        // console.log("slice data",response?.data.data)
+        return response?.data;
+      } catch (error) {
+        return error?.message;
+      }
+    }
+  );
+
   export const SubjectClassSlice = createSlice({
     name: "subjectClass",
     initialState,
@@ -83,8 +97,15 @@ export const noOfQuestionReducer = createAsyncThunk(
       // console.log("dddd", action?.payload?.data);
         state.no_of_question = action?.payload?.data;
     });
+    builder
+    .addCase(categoriesClassReducer.fulfilled, (state, action) => {
+      // console.log("dddd", action?.payload?.data);
+        state.classCategories = action?.payload?.data;
+    });
     },
   });
+
+
   
   export const { reducerName } = SubjectClassSlice.actions;
   

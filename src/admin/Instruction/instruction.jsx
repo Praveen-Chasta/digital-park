@@ -12,79 +12,61 @@ import useBlockNavigation from "../exam/BlockNavigation.jsx";
 const Instruction =()=>
   {
     
-
     const location = useLocation();
     let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
-
+    
     const startExam = useSelector((state) => state.quizQuestions.startExam);
-
-    useBlockNavigation();
-  
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
-  // const initiateExam = useCallback(() => {
-  //   dispatch(
-  //     startExamReducer({
-  //       class: id,
-  //       subject: subjectId,
-  //       chapter: ChapterId,
-  //       difficulty_level:Difficulty,
-  //       no_of_question:no_of_question,
-  //       duration:timeLimit
-
-  //     })
-  //   );
-  // }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
-
-  // useEffect(() => {
-    // let mounted = true;
-
-    // if (mounted) {
-      // initiateExam();
-    // }
-
-    // return () => {
-    //   mounted = false;
-    // };
-  // }, [initiateExam]);
-  
-  const handleStartExam = useCallback(() => {
-    dispatch(
-      quizQuestionsReducer({
-        class: id,
-        subject: subjectId,
-        chapter: ChapterId,
-        difficulty_level:Difficulty,
-        no_of_question:no_of_question,
-        duration:timeLimit
-
-      })
-    );
-    // let params = {};
-
-    // if (startExam.questions.length == 0) {
-    //   params.class = startExam.class_id;
-    //   params.subject= startExam.subject_id;
-    //   params.chapter= startExam.chapter_id;
-    //   params.difficulty_level=startExam.difficulty_level;
-    //   params.no_of_question=startExam.no_of_question;
-    //   params.duration=startExam.duration;
- 
-    // } else{
-    //   params.quiz_id = startExam.id;
-    //   params.questions = startExam.questions;
-    // }
-
-    // dispatch(quizQuestionsReducer(params));
-    // getAllQuestionsList();
-    navigate('/exam', {
-      state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
-    });
-  }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
-
-
+    
+    useBlockNavigation(); // Assuming this hook prevents navigation during exam
+    
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    
+    const initiateExam = useCallback(() => {
+      dispatch(
+        startExamReducer({
+          class: id,
+          subject: subjectId,
+          chapter: ChapterId,
+          difficulty_level: Difficulty,
+          no_of_question: no_of_question,
+          duration: timeLimit
+        })
+      );
+    }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit]);
+    
+    useEffect(() => {
+      initiateExam(); // Initialize exam when component mounts
+    }, [initiateExam]);
+    
+    const handleStartExam = useCallback(() => {
+      let params = {};
+    
+      if (startExam === null) {
+        // If startExam is null, initiate a new exam
+        params.class = id;
+        params.subject = subjectId;
+        params.chapter = ChapterId;
+        params.difficulty_level = Difficulty;
+        params.no_of_question = no_of_question;
+        params.duration = timeLimit;
+      } else {
+        // If startExam exists, resume the existing exam
+        params.quiz_id = startExam.id;
+        params.questions = startExam.questions;
+      }
+    
+      dispatch(quizQuestionsReducer(params)); // Dispatch action to update quiz questions state
+    
+      // Navigate to the exam page, passing necessary state
+      navigate('/exam', {
+        state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
+      });
+    }, [dispatch, id, subjectId, ChapterId, Difficulty, no_of_question, timeLimit, startExam, navigate]);
+    
+    // The rest of your component logic...
+    
+    
   const handlePrevious = ()=>{
     navigate('/instruction-details', {
       state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }

@@ -13,6 +13,7 @@ import {  useLocation } from "react-router-dom";
 import { quizResultReducer, resultReducer } from "./ExamSlice.jsx";
 import useBlockNavigation from "./BlockNavigation.jsx";
 import { profileReducer } from "../../components/Auth/UserProfileSlice.jsx";
+import { debounce } from 'lodash';
 function Result() {
 
   const location = useLocation();
@@ -36,17 +37,17 @@ function Result() {
     }
   }, [dispatch, quiz_id]);
 
-  useEffect(() => {
-    let mounted = true;
+  // useEffect(() => {
+  //   let mounted = true;
 
-    if (mounted) {
-      getQuizResult();
-    }
+  //   if (mounted) {
+  //     getQuizResult();
+  //   }
 
-    return () => {
-      mounted = false;
-    };
-  }, [getQuizResult]);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getQuizResult]);
   
 
   const getResult = useCallback(async () => {
@@ -62,17 +63,29 @@ function Result() {
     }
   }, [dispatch, quiz_id]);
 
-  useEffect(() => {
-    let mounted = true;
+  // useEffect(() => {
+  //   let mounted = true;
 
-    if (mounted) {
-      getResult();
-    }
+  //   if (mounted) {
+  //     getResult();
+  //   }
 
-    return () => {
-      mounted = false;
-    };
-  }, [getResult]);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, [getResult]);
+
+  
+	const debouncedGetAllQuestionList = useCallback(debounce(() => {
+		getQuizResult();
+    getResult();
+	}, 300), [getQuizResult, getResult]);
+
+	useEffect(() => {
+	debouncedGetAllQuestionList();
+	return debouncedGetAllQuestionList.cancel;
+	}, [debouncedGetAllQuestionList]);
+
 
     let total_no_of_question = result.total_no_of_question ?? 0;
     let no_of_right_answer= result.no_of_right_answer ?? 0;
