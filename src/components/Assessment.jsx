@@ -78,10 +78,10 @@ const BASE_URL = SERVER_URL;
 																</div>
 																<div className="card-body">
 																	<ul className="d-flex flex-column gap-2 check__list fw-medium" style={{'--double-check':`url(${DoubleCheck});`}}>
-																			{data.class.map((classData) => (
+																			{data.class.map((classData, classIndex) => (
 																					// <li key={classData.id}>{classData.class_name}	</li>
 																					
-																					<Link key={classData.id}  className={AssessmentStyle['fontStyle']}
+																					<Link key={classIndex}  className={AssessmentStyle['fontStyle']}
 																					to={`/classes/${classData?.class_id}`} 
 																					>{classData.class_name} </Link>
 						

@@ -212,7 +212,7 @@ function ExamQuestion(){
     } catch (error) {
       console.error("Failed to fetch quiz questions:", error);
     }
-  }, []);
+  }, [startExam]);
 
 
   const handleNextAddResult = useCallback(() => {
