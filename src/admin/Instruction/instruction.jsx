@@ -1,4 +1,4 @@
-import React, {  useCallback, useEffect } from "react";
+import React, {  useCallback, useEffect, useState } from "react";
 import Header from "../layouts/Header/Header.jsx";
 import Sidebar from "../layouts/Sidebar/Sidebar.jsx";
 // import dashboardStyle from "../dashboard/dashboard.module.css"
@@ -8,61 +8,101 @@ import { startExamReducer , quizQuestionsReducer} from "../exam/ExamSlice.jsx";
 import "./instruction.module.css";
 import "./instruction.css";
 import useBlockNavigation from "../exam/BlockNavigation.jsx";
-
+import { SERVER_URL } from "../../config/index.js";
+import axios from "axios";
+const BASE_URL = SERVER_URL;
 const Instruction =()=>
   {
     
     const location = useLocation();
     let { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question } = location.state || {};
-    
-    const startExam = useSelector((state) => state.quizQuestions.startExam);
+
+    let [ startExam, setStartExam] =  useState([]);
     
     useBlockNavigation(); // Assuming this hook prevents navigation during exam
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
-    const initiateExam = useCallback(() => {
-      dispatch(
-        startExamReducer({
+        
+    const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+
+    useEffect(() => {
+      initiateExam(); 
+      
+      const timer = setTimeout(() => {
+        setIsButtonEnabled(true);
+      }, 2000);
+  
+      return () => clearTimeout(timer);// Initialize exam when component mounts
+    }, []);
+
+    const initiateExam = async () =>{
+      try {
+        const token = await localStorage.getItem('token');
+        const response = await axios.post(`${BASE_URL}/start-exam`, {
           class: id,
-          subject: subjectId,
+          subject:subjectId,
           chapter: ChapterId,
           difficulty_level: Difficulty,
           no_of_question: no_of_question,
-          duration: timeLimit
-        })
-      );
-    }, []);
+          duration:timeLimit
+        }, {
+          headers: {
+            'remember-token': token,
+          }
+        });
+
+        setStartExam(response.data);
+
+        return response.data;
+      } catch (error) {
+        throw new Error(error.response?.data?.message || error.message);
+      }
+    }
+
     
-    useEffect(() => {
-      initiateExam(); // Initialize exam when component mounts
-    }, [initiateExam]);
+    const handleStartExam = async () => {
+      let params= {};
     
-    const handleStartExam = useCallback(() => {
-      let params = {};
-    
-      if (startExam === null) {
+      if (startExam.data === null) {
         // If startExam is null, initiate a new exam
         params.class = id;
         params.subject = subjectId;
         params.chapter = ChapterId;
-        params.difficulty_level = Difficulty;
+        params.difficulty_label = Difficulty;
         params.no_of_question = no_of_question;
         params.duration = timeLimit;
       } else {
         // If startExam exists, resume the existing exam
-        params.quiz_id = startExam.id;
-        params.questions = startExam.questions;
+        params.quiz_id = startExam?.data?.id;
+        params.questions = startExam?.data?.questions;
       }
     
-      dispatch(quizQuestionsReducer(params)); // Dispatch action to update quiz questions state
-    
-      // Navigate to the exam page, passing necessary state
-      navigate('/exam', {
-        state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question }
-      });
-    }, [startExam]);
+      // dispatch(quizQuestionsReducer(params)); // Dispatch action to update quiz questions state
+      
+      try {
+        const token = await localStorage.getItem('token');
+        const response = await axios.post(`${BASE_URL}/questions`, 
+          params
+        
+        , {
+          headers: {
+            'remember-token': token,
+          }
+        });
+        // console.log("slice data")
+
+        // setQuizData( response?.data?.data);
+        const quizData = response?.data?.data;
+        navigate('/exam', {
+          state: { id, subjectId, ChapterId, timeLimit, Difficulty, no_of_question, quizData, startExam }
+        });
+        // return response?.data;
+      } catch (error) {
+        return error?.message;
+      }
+      
+    };
     
 
     
@@ -140,7 +180,26 @@ const Instruction =()=>
               {/* <button className="border-0"> <Link to={`/dashboard/exam/${id}/${subjectId}/${ChapterId}/${timeLimit}/${Difficulty}/${no_of_question}`} 
               class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}} onClick={handleStartExam}>I'm ready to Begin</Link></button> */}
             
-              <button className="border-0"  onClick={handleStartExam}> <Link class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}}> I'm ready to Begin</Link></button>
+              {/* <button className="border-0"  onClick={handleStartExam}> <Link class="instruction-ready-button" style={{"padding":"10px","padding-top":"13px",'color':"white",'text-align':'center',}}> I'm ready to Begin</Link></button> */}
+            
+              <button 
+                className="border-0" 
+                onClick={handleStartExam} 
+                disabled={!isButtonEnabled}
+              > 
+                <Link 
+                  className="instruction-ready-button" 
+                  style={{
+                    padding: "10px",
+                    paddingTop: "13px",
+                    color: "white",
+                    textAlign: "center",
+                    pointerEvents: isButtonEnabled ? 'auto' : 'none' // Disable link interaction when button is disabled
+                  }}
+                > 
+                  I'm ready to Begin
+                </Link>
+              </button>
             
             </div>
                {/* <button >Start</button> */}
