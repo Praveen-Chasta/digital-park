@@ -27,6 +27,7 @@ function QuizPage() {
   const [subjects, setSubjects] = useState([]);
   const [chapters, setChapters] = useState([]);
   const [quizzes, setQuizzes] = useState([]);
+  // const [quiz, setSingleQuiz] = useEffect([]);
   const [selectedClass, setSelectedClass] = useState('');
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapter, setSelectedChapter] = useState('');
@@ -53,6 +54,33 @@ function QuizPage() {
   //     console.log(response)
   //   })
   // }, [BASE_URL]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('User is not authenticated');
+      console.error('User is not authenticated');
+      return;
+    }
+
+    // Fetch quizzes from API
+    axios.get(`${BASE_URL}/quize-details`, {
+      headers: {
+        'remember-token': token,
+      },
+      body :{
+        "quiz_id" : 12
+      }
+    })
+      .then(res => {
+        console.log('API Response:', res);
+        // Check if the data property exists and is an array
+      })
+      .catch(error => {
+        console.error('Error fetching quizzes:', error);
+        setError('Error fetching quizzes');
+      });
+  }, []);
 
 
   useEffect(() => {
@@ -173,7 +201,7 @@ function QuizPage() {
                                 <td className="align-middle">{quiz.DifficultyLevelName}</td>
                                 <td className="align-middle">{quiz.Duration}</td>
                                 <td className="align-middle">
-                                  <button className="btn"><i className="bi bi-eye"></i> Action</button>
+                                  <button className=""><i className="bi bi-eye"></i> Action</button>
                                 </td>
                               </tr>
                           )

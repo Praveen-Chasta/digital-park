@@ -15,6 +15,8 @@ import FAQs from './components/FAQs/FAQs.jsx';
 import QuizPage from './admin/quizz/QuizPage.jsx';
 import UserProfile from './admin/quizz/UserProfile.jsx';
 import Exam from './admin/exam/Exam.jsx';
+import SingleQuizDetails from './admin/quizz/SingleQuizDetails.jsx';
+
 function App() {
     return ( 
        
@@ -36,6 +38,7 @@ function App() {
                     <Route path='/faqs' element={<FAQs />} />
                     <Route path='/quiz' element={<QuizPage />} />
                     <Route path='/profile' element={<UserProfile />} />
+                    <Route path="/singleQuiz" element={<SingleQuizDetails/>} />
                 </Routes> 
         </Router>  
     );
