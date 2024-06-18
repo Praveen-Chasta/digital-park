@@ -8,7 +8,10 @@ const BASE_URL = SERVER_URL;
 // console.log(BASE_URL);
 const initialState = {
     examQuestions:[],
-    startExam:[],
+    startExam: null,
+    examQuestions: null,
+    loading: false,
+    error: null,
     addResult:[],
     getResult:[],
     finalSubmit:[],
@@ -238,10 +241,18 @@ const initialState = {
         //   console.log("dddd", action?.payload?.data);
           state.examQuestions = action?.payload.data;
         });
-      builder
+        builder
+        .addCase(startExamReducer.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+        })
         .addCase(startExamReducer.fulfilled, (state, action) => {
-        //   console.log("dddd", action?.payload?.data);
-          state.startExam = action?.payload.data;
+          state.loading = false;
+          state.startExam = action.payload.data; // Ensure this matches your API response structure
+        })
+        .addCase(startExamReducer.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.error.message;
         });
       builder
         .addCase(addResultReducer.fulfilled, (state, action) => {

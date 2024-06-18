@@ -11,7 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PropagateLoader } from 'react-spinners';
 import {startExamReducer} from "../../../admin/exam/ExamSlice.jsx"
 import './login.css';
-
+import axios from 'axios';
+import { SERVER_URL } from '../../../config/index.js';
+const BASE_URL =SERVER_URL;
 function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -23,51 +25,6 @@ function Login() {
   let success = useSelector((state) => state.login.success);
   let successStatus = useSelector((state) => state.login.successStatus);
   let userInfo = useSelector((state) => state.login.userInfo);
-
-
-
-  // useEffect(() => {
-  //   // if (success) {
-  //   //   // If success is true, trigger the click event on the close button
-  //   //   const closeButton = document.getElementById('closeButton');
-  //   //   if (closeButton) {
-  //   //     closeButton.click();
-  //   //   }
-  //   // }
-
-  //   if(userInfo.class_id){
-  //     getStartExam();
-  //   }
-
-  //   if(success)
-  //     {
-  
-       
-  //       setTimeout(()=>{
-  //         const closeButton = document.getElementById('closeButton');
-  //         if (closeButton) 
-  //           {
-  //              closeButton.click()
-  //           }
-        
-  //       });
-       
-  //     }
-  // }, [success]);
-
-  // useEffect(() => {
-  //   if (success) {
-  //     const closeButton = document.getElementById('closeButton');
-  //     if (closeButton) {
-  //       closeButton.click();
-  //     }
-  //   }
-  //   if(userInfo.class_id){
-  //     getStartExam();
-  //   }
-  // }, [success]);
-
-  
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -85,37 +42,120 @@ const overrideStyle ={
 
 
 
-const getStartExam = useCallback(async () => {
-  try {
-    let params = {};
+// const getStartExam = useCallback(async () => {
+//   try {
+//     let params = {};
 
-    if (userInfo && userInfo.quiz_id !== undefined) {
-      params.class=  userInfo.class_id;
-      params.subject=  userInfo.subjectId;
-      params.chapter=  userInfo.ChapterId;
-      params.difficulty_level= userInfo.Difficulty;
-      params.no_of_question= userInfo.no_of_question;
-      params.duration= userInfo.duration;
-    }
+//     if (userInfo && userInfo.quiz_id !== undefined) {
+//       params.class=  userInfo.class_id;
+//       params.subject=  userInfo.subjectId;
+//       params.chapter=  userInfo.ChapterId;
+//       params.difficulty_level= userInfo.Difficulty;
+//       params.no_of_question= userInfo.no_of_question;
+//       params.duration= userInfo.duration;
+//     }
 
-    dispatch(startExamReducer(params));
-    navigate('/exam', {
-      state: 
-        { 
-              id: userInfo.class_id , 
-               subjectId: userInfo.subjectId, 
-               ChapterId:userInfo.ChapterId,
-               timeLimit:userInfo.duration, 
-               Difficulty:userInfo.Difficulty, 
-               no_of_question:userInfo.no_of_question
-        }
-    });
-  } catch (error) {
-    console.error("Failed to fetch quiz questions:", error);
-  }
-}, [dispatch,]);
+//     dispatch(startExamReducer(params));
+//     navigate('/exam', {
+//       state: 
+//         { 
+//               id: userInfo.class_id , 
+//                subjectId: userInfo.subjectId, 
+//                ChapterId:userInfo.ChapterId,
+//                timeLimit:userInfo.duration, 
+//                Difficulty:userInfo.Difficulty, 
+//                no_of_question:userInfo.no_of_question
+//                quizData, startExam
+//         }
+//     });
+//   } catch (error) {
+//     console.error("Failed to fetch quiz questions:", error);
+//   }
+// }, [dispatch,]);
 
 
+let [ startExam, setStartExam] =  useState([]);
+    
+
+console.log("dbvkhdb",startExam);
+    // const initiateExam = async () =>{
+    //   try {
+
+    //         let params = {};
+
+    // if (userInfo && userInfo.quiz_id !== undefined) {
+    //   params.class=  userInfo.class_id;
+    //   params.subject=  userInfo.subjectId;
+    //   params.chapter=  userInfo.ChapterId;
+    //   params.difficulty_level= userInfo.Difficulty;
+    //   params.no_of_question= userInfo.no_of_question;
+    //   params.duration= userInfo.duration;
+    // }
+    //     const token = await localStorage.getItem('token');
+    //     const response = await axios.post(`${BASE_URL}/start-exam`, 
+    //       params, {
+    //       headers: {
+    //         'remember-token': token,
+    //       }
+    //     });
+
+    //     setStartExam(response.data);
+    //     return response.data;
+    //   } catch (error) {
+    //     throw new Error(error.response?.data?.message || error.message);
+    //   }
+    // }
+
+    
+    const getStartExam = async () => {
+      let params= {};
+    
+      if (userInfo && userInfo.quiz_id !== undefined) {
+        // If startExam is null, initiate a new exam
+        params.class=  userInfo.class_id;
+        params.subject=  userInfo.subjectId;
+        params.chapter=  userInfo.ChapterId;
+        params.difficulty_level= userInfo.Difficulty;
+        params.no_of_question= userInfo.no_of_question;
+        params.duration= userInfo.duration;
+      } else {
+        // If startExam exists, resume the existing exam
+        params.quiz_id = userInfo.quiz_id;
+        params.questions = userInfo.questions;
+      }
+    
+      // dispatch(quizQuestionsReducer(params)); // Dispatch action to update quiz questions state
+      
+      try {
+        const token = userInfo.remember_token;
+        const response = await axios.post(`${BASE_URL}/questions`, 
+          params
+        
+        , {
+          headers: {
+            'remember-token': token,
+          }
+        });
+        // console.log("slice data")
+
+        // setQuizData( response?.data?.data);
+        const quizData = response?.data?.data;
+        navigate('/exam', {
+          state: { id: userInfo.class_id , 
+                           subjectId: userInfo.subjectId, 
+                           ChapterId:userInfo.ChapterId,
+                           timeLimit:userInfo.duration, 
+                           Difficulty:userInfo.Difficulty, 
+                           no_of_question:userInfo.no_of_question,
+             quizData, startExam }
+        });
+        // return response?.data;
+      } catch (error) {
+        return error?.message;
+      }
+      
+    };
+    
 
 useEffect(() => {
   if (success) {

@@ -35,7 +35,6 @@ const Navbar=()=>{
 	const [user, setUser] = useState(initialUser !== "null" ? initialUser : null);
 
 
-	console.log(user);
 	useEffect(() => {
 		
 		const token = localStorage.getItem("token");
@@ -45,6 +44,7 @@ const Navbar=()=>{
 
 	const logout = () => {
 		localStorage.removeItem("token");
+		localStorage.removeItem("user_name");
 		setUser(null);
 		navigate("/");
 	};

@@ -15,10 +15,10 @@ const BASE_URL = SERVER_URL;
 
 	const dispatch = useDispatch()
 
-	const categoryData = useSelector((state) => state.subjectClass.classCategories) || [];
-	// const [categoryData, setCategoriesClassData] = useState([]);
+	// const categoryData = useSelector((state) => state.subjectClass.classCategories) || [];
+	let [categoryData, setCategoryData] = useState([]);
 
-
+	let stateResponse = useSelector((state)=>state)
 
 				// useEffect(() => 
 				// 	{
@@ -40,19 +40,21 @@ const BASE_URL = SERVER_URL;
 		} catch (error) {
 			console.error("Failed to fetch quiz questions:", error);
 		}
-		}, [dispatch]);
+		}, []);
+
+
+		useEffect(()=>{
+			let {subjectClass}=  stateResponse
+			let {classCategories}=  subjectClass
+
+			
+			if (classCategories.length === 0 ) {
+				getClassCategoriesList();
+			}else{
+				setCategoryData(classCategories)
+			}
+		},[stateResponse.subjectClass.classCategories])
 	
-
-	const debouncedGetAllQuestionList = useCallback(debounce(() => {
-		getClassCategoriesList();
-	}, 300), [getClassCategoriesList]);
-
-	useEffect(() => {
-	debouncedGetAllQuestionList();
-	return debouncedGetAllQuestionList.cancel;
-	}, [debouncedGetAllQuestionList]);
-
-
 
 					const bgColors = ['bg-blue', 'bg-primary', 'bg-green'];
 					const Colors = ['blue', 'primary', 'green'];
@@ -76,10 +78,10 @@ const BASE_URL = SERVER_URL;
 																</div>
 																<div className="card-body">
 																	<ul className="d-flex flex-column gap-2 check__list fw-medium" style={{'--double-check':`url(${DoubleCheck});`}}>
-																			{data.class.map((classData) => (
+																			{data.class.map((classData, classIndex) => (
 																					// <li key={classData.id}>{classData.class_name}	</li>
 																					
-																					<Link key={classData.id}  className={AssessmentStyle['fontStyle']}
+																					<Link key={classIndex}  className={AssessmentStyle['fontStyle']}
 																					to={`/classes/${classData?.class_id}`} 
 																					>{classData.class_name} </Link>
 						
