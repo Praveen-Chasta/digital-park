@@ -37,7 +37,7 @@ function ExamPage({ id, subjectId, ChapterId, timeLimit, Difficulty, no_of_quest
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
-  const [QuestionId, setQuestionId] = useState(quizData[currentQuestion]?.id ?? 0);
+  const [QuestionId, setQuestionId] = useState(0);
   const [isReview, setIsReview] = useState(0);
   const [resultId, setResultId] = useState();
   const [selectedOption, setSelectedOption] = useState("");
@@ -269,7 +269,8 @@ function ExamPage({ id, subjectId, ChapterId, timeLimit, Difficulty, no_of_quest
 
   const handleClearAnswer = () => {
     const updatedAnswers = { ...answers };
-    delete updatedAnswers[quizData[currentQuestion]?.id];
+    console.log("updatedAnswers", updatedAnswers);
+    delete updatedAnswers[quizData[currentQuestion]?.result_id];
     setAnswers(updatedAnswers);
     const updatedStatus = [...questionStatus];
     updatedStatus[currentQuestion] = '2';
@@ -435,7 +436,7 @@ function ExamPage({ id, subjectId, ChapterId, timeLimit, Difficulty, no_of_quest
       })
       
     
-    },[stateResponse.quizQuestions.startExam])
+    },[stateResponse.quizQuestions.startExam, ])
 
 
 
@@ -471,8 +472,8 @@ function ExamPage({ id, subjectId, ChapterId, timeLimit, Difficulty, no_of_quest
                                 <hr/>
                                 {quizData[currentQuestion] ? (
                                 <p className="exam-question-paragraph"  onChange={() => {
-                                  setQuestionId(quizData[currentQuestion].question_id); 
-                                  setResultId(quizData[currentQuestion].id); }}>{quizData[currentQuestion].question}</p>                                 
+                                  setQuestionId(quizData[currentQuestion].id); 
+                                  setResultId(quizData[currentQuestion].result_id); }}>{quizData[currentQuestion].question}</p>                                 
                             ) : (
                                 <p className="exam-question-paragraph">Question not available</p>
                             )}
@@ -486,17 +487,17 @@ function ExamPage({ id, subjectId, ChapterId, timeLimit, Difficulty, no_of_quest
                                         type="radio" style={{"marginRight":"20px"}}
                                         id={`question-${quizData[currentQuestion].id}-option-${index}`}
                                         name={`question-${quizData[currentQuestion].id}-option-${index}`}
-                                        value={`option${index}`}
-                                        checked={answers[quizData[currentQuestion].id] === `option${index}` }    // || quizData[currentQuestion].answer === `option${index}`
+                                        value={`option${index+1}`}
+                                        checked={answers[quizData[currentQuestion].id] === `option${index+1}` }    // || quizData[currentQuestion].answer === `option${index}`
                                         onChange={() =>{ 
-                                          handleAnswer(quizData[currentQuestion].id, `option${index}`); 
+                                          handleAnswer(quizData[currentQuestion].id, `option${index+1}`); 
                                           // handleNextAddResult();
                                           // getResultList(); 
-                                          getQuizStatusList();
-                                          getQuizAnswerList();
+                                          // getQuizStatusList();
+                                          // getQuizAnswerList();
                                           setSelectedOption(`option${index+1}`);
-                                          setQuestionId(quizData[currentQuestion].question_id);
-                                          setResultId(quizData[currentQuestion].id);}}
+                                          setQuestionId(quizData[currentQuestion].id);
+                                          setResultId(quizData[currentQuestion].result_id);}}
                                     />
                                     <label htmlFor={`question-${quizData[currentQuestion].id}-option-${index}`} >{option}</label>
                                     </div>
@@ -517,8 +518,8 @@ function ExamPage({ id, subjectId, ChapterId, timeLimit, Difficulty, no_of_quest
                                       // getResultList(); 
                                       getQuizStatusList();
                                       getQuizAnswerList();
-                                      setResultId(quizData[currentQuestion].id); 
-                                      setQuestionId(quizData[currentQuestion].question_id); 
+                                      setResultId(quizData[currentQuestion].result_id); 
+                                      setQuestionId(quizData[currentQuestion].id); 
 
                                       reviewQuestions.includes(quizData[currentQuestion].id) ? setIsReview(0) : setIsReview(1);}}
                                     >
@@ -533,8 +534,8 @@ function ExamPage({ id, subjectId, ChapterId, timeLimit, Difficulty, no_of_quest
                                   // getResultList(); 
                                   getQuizStatusList();
                                   getQuizAnswerList();
-                                  setResultId(quizData[currentQuestion].id); 
-                                  setQuestionId(quizData[currentQuestion].question_id);
+                                  setResultId(quizData[currentQuestion].result_id); 
+                                  setQuestionId(quizData[currentQuestion].id);
                                   }}>Clear Response</button>
                                 <button className="button-5" onClick={() => {
                                   handleNavigation('prev');   

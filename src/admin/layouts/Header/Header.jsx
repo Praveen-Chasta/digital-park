@@ -7,13 +7,14 @@ import { useState } from "react";
 import { profileReducer } from "../../../components/Auth/UserProfileSlice";
 import { useLayoutEffect } from "react";
 import "./header.css";
+import { logoutReducer } from "../../../components/Auth/Login/LoginSlice";
 const Header =()=>{
 
   // const data = useSelector((state) => state.userProfile.data);
   // const [ userName , setUserName ] = useState('');
 
  
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const getAllList = useCallback(async () => {
   //   dispatch(
   //     profileReducer({
@@ -54,26 +55,54 @@ const Header =()=>{
 	}, [initialUser]);
 
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user_name");
+  // const logout = async () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user_name");
+  //   dispatch(logout());
+  //   setTimeout(() => {
+  //     // Get updated values
+  //     const token = localStorage.getItem("token");
+  //     const userName = localStorage.getItem("user_name");
   
-    setTimeout(() => {
-      // Get updated values
-      const token = localStorage.getItem("token");
-      const userName = localStorage.getItem("user_name");
+     
+  //     // Check if both token and userName are null
+  //     if (token === null && userName === null) {
+  //       // Navigate to home page
+  //       navigate("/");
+  //     }
   
-      // Check if both token and userName are null
-      if (token === null && userName === null) {
-        // Navigate to home page
-        navigate("/");
-      }
+  //     setUser(null);
+  //     setUserName(null);
+  //   }, 0); 
+  // };
   
-      setUser(null);
-      setUserName(null);
-    }, 0); 
-  };
+  const logout = async () => {
+    try {
+        // Remove token and user_name from local storage
+        dispatch(logoutReducer());
+        dispatch(logoutReducer());
+        localStorage.removeItem("token");
+        localStorage.removeItem("user_name");
   
+
+    
+        setTimeout(() => {
+            const token = localStorage.getItem("token");
+            const userName = localStorage.getItem("user_name");
+
+            if (token === null && userName === null) {
+                navigate("/");
+            }
+
+            setUser(null);
+            setUserName(null);
+        }, 0);
+    } catch (error) {
+        console.error("Error during logout process", error);
+    }
+};
+
+
 
 
   return(

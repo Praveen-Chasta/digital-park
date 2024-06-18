@@ -3,7 +3,6 @@ import axios from "axios";
 
 import { SERVER_URL } from "../../../config"
 import { ErrorMessage } from "formik";
-
 const BASE_URL = SERVER_URL;
 
 const initialState = {
@@ -39,6 +38,27 @@ export const loginReducer = createAsyncThunk(
 );
 
 
+
+export const logoutReducer = createAsyncThunk(
+  "logoutReducer",
+  async (obj, { getState }) => {
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${BASE_URL}/logout`, {}, {
+          headers: {
+              'remember-token': token,
+          },
+      });
+      return response?.data;
+    } catch (error) {
+      // dispatch({ type: "LOGIN_FAILURE", });
+      return error?.message;
+    }
+  }
+);
+
+
 export const LoginSlice = createSlice({
   name: "login",
   initialState:
@@ -56,7 +76,7 @@ export const LoginSlice = createSlice({
     [loginReducer.fulfilled]: (state, action) => {
       state.initialUser = action?.payload?.data.remember_token;
       state.userInfo = action?.payload?.data?.data;
-    },
+    }
     
    
   },
@@ -77,10 +97,21 @@ export const LoginSlice = createSlice({
       state.userInfo = payload.data; // Assuming action.payload contains user data
 
   })
+  builder
+      .addCase(logoutReducer.fulfilled,(state,{payload})=>{
+        state.initialUser = null;
+        state.successMessage = '';
+        state.errorMessage= '';
+        state.loader=false;
+        state.userInfo= '';
+        state.success='';
+      })
+
+ 
 
   }
 
 });
 
-export const { togglesuccess } = LoginSlice.actions;
+export const { togglesuccess, logout} = LoginSlice.actions;
 export default LoginSlice.reducer;
