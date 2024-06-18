@@ -1,0 +1,24 @@
+.singleQuiz-main-container{
+    background-color: #EBFAFF;
+    min-height: 100vh;
+}
+
+
+.date{
+    text-align: right;
+}
+
+
+.username-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 80px;
+    margin-bottom: 20px;
+}

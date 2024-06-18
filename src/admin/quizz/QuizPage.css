@@ -3,6 +3,7 @@
     margin-top: 52px;
     margin-right: 50px;
     background-color: #EBFAFF;
+    height: 100vh;
 }
 
 .container{
@@ -32,6 +33,13 @@
     margin-right: 25px;
 }
 
+.quiz-top-dropdown-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
 .quiz-search-button{
     background-color: #00A4D8;
     color:#ffffff;
@@ -42,4 +50,17 @@
     width: 156px;
     height: 40px;
     border-radius: 5px;
+}
+
+.quiz-entry-main-student-container{
+    background-color: #ffffff;
+    padding: 25px;
+    margin-top:160px;
+}
+
+
+.quizz-entries-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

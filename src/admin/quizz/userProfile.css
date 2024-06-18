@@ -5,11 +5,18 @@
 
 .user-profile-container{
     padding-top: 80px;
-    padding-left: 200px;
+    padding-left: 280px;
+    padding-right: 50px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.user-profile-container h1, h3{
+    font-size: 22px;
+    font-weight: 500;
+    font-family: "Readex Pro";
+    margin-top: 40px;
 }
 
 .user-profile-img{
@@ -18,11 +25,52 @@
 }
 
 .user-profile-details-container{
-    padding-top: 80px;
-    padding-left: 200px;
+    padding-top: 40px;
+    padding-left: 10px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #FFFFFF;
+    margin-left: 280px;
+    margin-right: 30px;
+    border-radius: 8px;
 }
 
+.user-profile-heading{
+    font-size: 30px;
+    font-weight: 500;
+    font-family: "Readex Pro";
+    text-align: left;
+}
+
+.profile-label{
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-family: "Readex Pro";
+    margin-top: 10px;
+}
+
+.profile-input{
+    height:50px;
+    border:1px solid grey;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+    padding-left: 10px;
+}
+
+.profile-submit-button{
+    background-color: #00A4D8;
+    color:#ffffff;
+    border: 0;
+    font-family: "Readex Pro";
+    font-size: 18px;
+    font-weight: 700;
+    width: 156px;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
