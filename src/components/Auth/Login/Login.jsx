@@ -77,7 +77,6 @@ const overrideStyle ={
 let [ startExam, setStartExam] =  useState([]);
     
 
-console.log("dbvkhdb",startExam);
     // const initiateExam = async () =>{
     //   try {
 
@@ -111,15 +110,6 @@ console.log("dbvkhdb",startExam);
       let params= {};
     
       if (userInfo && userInfo.quiz_id !== undefined) {
-        // If startExam is null, initiate a new exam
-        params.class=  userInfo.class_id;
-        params.subject=  userInfo.subjectId;
-        params.chapter=  userInfo.ChapterId;
-        params.difficulty_level= userInfo.Difficulty;
-        params.no_of_question= userInfo.no_of_question;
-        params.duration= userInfo.duration;
-      } else {
-        // If startExam exists, resume the existing exam
         params.quiz_id = userInfo.quiz_id;
         params.questions = userInfo.questions;
       }
@@ -163,7 +153,9 @@ useEffect(() => {
     if (closeButton) {
       closeButton.click();
     }
-    if (userInfo && userInfo.class_id) {
+
+    console.log(userInfo);
+    if (userInfo && userInfo.quiz_id) {
       getStartExam();
     } else {
       navigate("/", { replace: true });
