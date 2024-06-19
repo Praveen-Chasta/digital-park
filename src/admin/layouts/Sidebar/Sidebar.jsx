@@ -6,7 +6,8 @@ import './sidebar.css';
 
 
 const Sidebar=()=>{
-
+    
+	
 	const navigate = useNavigate();
 	const data = useSelector((state) => state.userProfile.data);
 
@@ -14,6 +15,11 @@ const Sidebar=()=>{
 	const initialUserName = localStorage.getItem("user_name") || null;
 	const [user, setUser] = useState(initialUser);
 	const [userName, setUserName] = useState(initialUserName);
+	const [activeItem, setActiveItem] = useState(null);
+	  
+		const handleItemClick = (item) => {
+		  setActiveItem(item);
+		};
 	
 	 
 	useEffect(() => {
@@ -124,21 +130,21 @@ const Sidebar=()=>{
           </div>
         </div> */}
 		<div className="sidebar-container">
-		<ul className="sidebar-ul-list">
-			<li className="sidebar-ul-0 mt-4">
-				<NavLink to="/admin-dashboard" >Dashboard</NavLink>
-			</li>
-			<li className="sidebar-ul-0 mt-4">
-				<NavLink to="/quiz" >Quizz</NavLink>
-			</li>
-			<li className="sidebar-ul-0 mt-4">
-				<NavLink to="/profile" >Profile</NavLink>
-			</li>
-			<li className="sidebar-ul-0 mt-4">
-				<Link to="/" onClick={logout}>Logout</Link>
-			</li>
-    	</ul>
-		</div>
+			<ul className="sidebar-ul-list">
+				<li onClick={() => handleItemClick('Dashboard')}>
+					<NavLink to="/admin-dashboard" className={`${activeItem === 'admin-dashboard' ? 'active' : 'sidebar-ul-0 mt-4'}`}>Dashboard</NavLink>
+				</li>
+				<li onClick={() => handleItemClick('Quiz')}>
+					<NavLink to="/quiz" className={`${activeItem === 'quiz' ? 'active' : 'sidebar-ul-0 mt-4'}`}>Quiz</NavLink>
+				</li>
+				<li	onClick={() => handleItemClick('Profile')}>
+					<NavLink to="/profile" className={`${activeItem === 'profile' ? 'active' : 'sidebar-ul-0 mt-4 '}`}>Profile</NavLink>
+				</li>
+				<li className="sidebar-ul-0 mt-4">
+					<Link to="/" onClick={logout}>Logout</Link>
+				</li>
+			</ul>
+    </div>
         </>
         )
 }

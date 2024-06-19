@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../layouts/Header/Header';
 import Sidebar from '../layouts/Sidebar/Sidebar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useNavigate } from 'react-router-dom';
 import './QuizPage.css';
 import axios from 'axios';
 import { SERVER_URL } from "../../config";
@@ -37,6 +40,7 @@ function QuizPage() {
   const [error, setError] = useState('');
 
   const BASE_URL = SERVER_URL;
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   const token = localStorage.getItem('token');
@@ -69,11 +73,11 @@ function QuizPage() {
         'remember-token': token,
       },
       body :{
-        "quiz_id" : 12
+        quiz_id : "12"
       }
     })
       .then(res => {
-        console.log('API Response:', res);
+        console.log('API Response:', res.status);
         // Check if the data property exists and is an array
       })
       .catch(error => {
@@ -96,7 +100,7 @@ function QuizPage() {
       }
     })
     .then(response => {
-      console.log(response.data)
+      // console.log(response.data)
       if (response.data.status) {
         // Convert the response data
         const transformedData = response.data.data.map(item => convertKeysToPascalCase(item));
@@ -126,7 +130,13 @@ function QuizPage() {
       setCurrentPageIndex(currentPageIndex + 1);
     }
   };
-  console.log(quizzes)
+  // console.log(quizzes)
+
+  const showResult = (quizId) => {
+    console.log(quizId)
+    navigate(`/quize-details/${quizId}`);
+    
+  }
 
   return (
     <>
@@ -144,12 +154,12 @@ function QuizPage() {
                       <h3>Dashboard <span>/ Quiz</span></h3>
                     </div>
                     <div className="quiz-dropdown-container d-flex align-item-center">
-                      <select className="select-wide col-xl-3" value={selectedClass} onChange={e => setSelectedClass(e.target.value)}>
+                      {/* <select className="select-wide col-xl-3" value={selectedClass} onChange={e => setSelectedClass(e.target.value)}>
                         <option value="">Select Class</option>
                         {quizzes.map(cls => (
                           <option key={cls.Id} value={cls.Id}>{cls.ClassName}</option>
                         ))}
-                      </select>
+                      </select> */}
                       <select className="select-wide col-xl-3" value={selectedSubject} onChange={e => setSelectedSubject(e.target.value)}>
                         <option value="">Select Subject</option>
                         {quizzes.map(subject => (
@@ -201,7 +211,7 @@ function QuizPage() {
                                 <td className="align-middle">{quiz.DifficultyLevelName}</td>
                                 <td className="align-middle">{quiz.Duration}</td>
                                 <td className="align-middle">
-                                  <button className=""><i className="bi bi-eye"></i> Action</button>
+                                   <button onClick={() => showResult(quiz.Id)}><i className="bi bi-eye"></i></button>
                                 </td>
                               </tr>
                           )

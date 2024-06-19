@@ -40,13 +40,17 @@
 
 /* .sidebar-ul-list li a.active-link {
   color: #FFFFFF; 
-} */
+} */ 
 
-.active{
+.sidebar-ul-list .active{
   color: #FFFFFF; 
+  font-size: 20px;
+  
 }
 
-
+/* .sidebar-ul-list li a .active {
+  color: red; 
+} */
 
 
 
